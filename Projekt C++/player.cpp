@@ -12,14 +12,29 @@ sf::CircleShape Player::draw() {
 
 void Player::move(float dt) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		x -= 400 * dt;
+		speed_x -= acceleration * dt;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		x += 400 * dt;
+		speed_x += acceleration * dt;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		y -= 400 * dt;
+		speed_y -= acceleration * dt;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		y += 400 * dt;
+		speed_y += acceleration * dt;
+
+	if (speed_x > 0)
+		speed_x -= friction * dt;
+
+	else if (speed_x < 0)
+		speed_x += friction * dt;
+
+	if (speed_y > 0)
+		speed_y -= friction * dt;
+
+	else if (speed_y < 0)
+		speed_y += friction * dt;
+
+	x += speed_x * dt;
+	y += speed_y * dt;
 }
