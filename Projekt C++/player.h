@@ -12,11 +12,15 @@ public:
 
     sf::CircleShape draw();
 
-private:
-    int x = 100;
-    int y = 100;
+    void move(float dt);
 
-    sf::CircleShape player_shape = sf::CircleShape::CircleShape(100.f);
+private:
+    float x = 100;
+    float y = 100;
+    float speed = 0;
+    float acceleration = 0;
+
+    sf::CircleShape player_shape = sf::CircleShape::CircleShape(50.f);
     //shape.setFillColor(sf::Color::Green);
 
 };

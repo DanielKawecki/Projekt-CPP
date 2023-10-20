@@ -1,13 +1,17 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "application.h"
+#include "player.h"
 
 int main()
 {
     MyApplication App;
+    Player Player;
 
     sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
 
-    //App.add_to_vecor(shape);
+    App.getDeltaTime();
+    //App.add_to_vecor();
 
     while (window.isOpen())
     {
@@ -18,7 +22,10 @@ int main()
                 window.close();
         }
 
-        App.drawing_function(window);
+        Player.move(App.getDeltaTime().asSeconds());
+        //std::cout << App.getDeltaTime().asSeconds() << "\n";
+
+        App.drawing_function(window, Player.draw());
     }
 
     return 0;

@@ -16,13 +16,17 @@ int MyApplication::getScreenHeight() const {
     return screenHeight;
 }
 
-void MyApplication::drawing_function(sf::RenderWindow &window) {
+void MyApplication::drawing_function(sf::RenderWindow &window, sf::CircleShape player) {
     window.clear();
-    //window.draw(all_circles[0]);
-    window.draw(player.draw());
+    window.draw(player);
+    //window.draw(player.draw());
     window.display();
 }
 
 void MyApplication::add_to_vecor(sf::CircleShape shape) {
     all_circles.push_back(shape);
+}
+
+sf::Time MyApplication::getDeltaTime() {
+    return delta_clock.restart();
 }
