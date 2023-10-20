@@ -19,12 +19,12 @@ private:
     float y = 100;
     float speed_x = 0;
     float speed_y = 0;
-    float acceleration = 1000;
-    float friction = 700;
+    float speed_limit = 450;
+    float acceleration = 4600;
+    float friction = 2800;
 
     sf::CircleShape player_shape = sf::CircleShape::CircleShape(50.f);
-    //shape.setFillColor(sf::Color::Green);
 
 };
 
-#endif // APPLICATION_H
+#endif

@@ -19,7 +19,6 @@ int MyApplication::getScreenHeight() const {
 void MyApplication::drawing_function(sf::RenderWindow &window, sf::CircleShape player) {
     window.clear();
     window.draw(player);
-    //window.draw(player.draw());
     window.display();
 }
 

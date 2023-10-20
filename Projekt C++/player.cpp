@@ -23,18 +23,20 @@ void Player::move(float dt) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		speed_y += acceleration * dt;
 
-	if (speed_x > 0)
-		speed_x -= friction * dt;
-
-	else if (speed_x < 0)
-		speed_x += friction * dt;
-
-	if (speed_y > 0)
-		speed_y -= friction * dt;
-
-	else if (speed_y < 0)
-		speed_y += friction * dt;
-
 	x += speed_x * dt;
 	y += speed_y * dt;
+
+	if (speed_x > speed_limit)
+		speed_x = speed_limit;
+	else if (speed_x < -speed_limit)
+		speed_x = -speed_limit;
+
+	if (speed_y > speed_limit)
+		speed_y = speed_limit;
+	else if (speed_y < -speed_limit)
+		speed_y = -speed_limit;
+
+	speed_x -= (speed_x > 0 ? friction : (speed_x < 0 ? -friction : 0)) * dt;
+	speed_y -= (speed_y > 0 ? friction : (speed_y < 0 ? -friction : 0)) * dt;
+
 }

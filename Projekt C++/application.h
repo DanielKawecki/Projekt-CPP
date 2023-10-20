@@ -27,11 +27,10 @@ private:
 
     std::vector<sf::CircleShape> all_circles;
 
-    //sf::Time delta_time;
     sf::Clock delta_clock;
 
     Player player = Player::Player();
 
 };
 
-#endif // APPLICATION_H
+#endif 

@@ -11,7 +11,6 @@ int main()
     sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
 
     App.getDeltaTime();
-    //App.add_to_vecor();
 
     while (window.isOpen())
     {
@@ -23,7 +22,6 @@ int main()
         }
 
         Player.move(App.getDeltaTime().asSeconds());
-        //std::cout << App.getDeltaTime().asSeconds() << "\n";
 
         App.drawing_function(window, Player.draw());
     }
