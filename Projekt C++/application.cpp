@@ -2,14 +2,11 @@
 #include <iostream>
 #include <vector>
 #include "application.h"
+#include "player.h"
     
-MyApplication::MyApplication() {
+MyApplication::MyApplication() {}
 
-}
-
-MyApplication::~MyApplication() {
-    
-}
+MyApplication::~MyApplication() {}
 
 int MyApplication::getScreenWidth() const {
     return screenWidth;
@@ -21,7 +18,8 @@ int MyApplication::getScreenHeight() const {
 
 void MyApplication::drawing_function(sf::RenderWindow &window) {
     window.clear();
-    window.draw(all_circles[0]);
+    //window.draw(all_circles[0]);
+    window.draw(player.draw());
     window.display();
 }
 

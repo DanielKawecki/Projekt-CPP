@@ -6,11 +6,8 @@ int main()
     MyApplication App;
 
     sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
-    
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
 
-    App.add_to_vecor(shape);
+    //App.add_to_vecor(shape);
 
     while (window.isOpen())
     {

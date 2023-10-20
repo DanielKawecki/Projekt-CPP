@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include "player.h"
 
 #ifndef APPLICATION_H
 #define APPLICATION_H
@@ -23,6 +24,8 @@ private:
     int screenHeight = 720;
 
     std::vector<sf::CircleShape> all_circles;
+
+    Player player = Player::Player();
 
 };
 
