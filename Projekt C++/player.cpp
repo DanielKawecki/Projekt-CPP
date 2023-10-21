@@ -1,12 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include "player.h"
+#include <cmath>
+#include <cstdlib>
 
 Player::Player() {}
 
 Player::~Player() {}
 
-sf::CircleShape Player::draw() {
+sf::RectangleShape Player::draw() {
+	player_shape.setOrigin(40.f, 40.f);
 	player_shape.setPosition(sf::Vector2f(x, y));
+	player_shape.setRotation(angle);
 	return player_shape;
 }
 
@@ -38,5 +42,8 @@ void Player::move(float dt) {
 
 	speed_x -= (speed_x > 0 ? friction : (speed_x < 0 ? -friction : 0)) * dt;
 	speed_y -= (speed_y > 0 ? friction : (speed_y < 0 ? -friction : 0)) * dt;
+}
 
+void Player::look(sf::RenderWindow &window) {
+	angle = atan2((sf::Mouse::getPosition(window).y - y), (sf::Mouse::getPosition(window).x - x)) * 180 / M_PI;
 }

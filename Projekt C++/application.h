@@ -15,7 +15,7 @@ public:
     int getScreenWidth() const;
     int getScreenHeight() const;
 
-    void drawing_function(sf::RenderWindow &window, sf::CircleShape player);
+    void drawing_function(sf::RenderWindow &window, sf::RectangleShape player);
     void add_to_vecor(sf::CircleShape shape);
 
     sf::Time getDeltaTime();
@@ -29,7 +29,7 @@ private:
 
     sf::Clock delta_clock;
 
-    Player player = Player::Player();
+    //Player player = Player::Player();
 
 };
 

@@ -22,6 +22,7 @@ int main()
         }
 
         Player.move(App.getDeltaTime().asSeconds());
+        Player.look(window);
 
         App.drawing_function(window, Player.draw());
     }

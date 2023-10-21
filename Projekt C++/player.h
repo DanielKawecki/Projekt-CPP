@@ -1,4 +1,10 @@
 #include <SFML/Graphics.hpp>
+#include <cmath>
+
+#ifndef M_PI
+#define M_PI (3.14159265358979323846)
+#endif
+
 
 #ifndef PLAYER_H
 #define PLAYER_H
@@ -10,9 +16,11 @@ public:
 
     ~Player();
 
-    sf::CircleShape draw();
+    sf::RectangleShape draw();
 
     void move(float dt);
+
+    void look(sf::RenderWindow &window);
 
 private:
     float x = 100;
@@ -23,7 +31,9 @@ private:
     float acceleration = 4600;
     float friction = 2800;
 
-    sf::CircleShape player_shape = sf::CircleShape::CircleShape(50.f);
+    float angle = 0;
+
+    sf::RectangleShape player_shape = sf::RectangleShape(sf::Vector2f(80.f, 80.f));
 
 };
 
