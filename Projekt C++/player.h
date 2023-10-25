@@ -18,9 +18,13 @@ public:
 
     sf::RectangleShape draw();
 
+    void setup();
+
     void move(float dt);
 
     void look(sf::RenderWindow &window);
+
+    void shoot();
 
 private:
     float x = 100;

@@ -8,10 +8,13 @@ Player::Player() {}
 Player::~Player() {}
 
 sf::RectangleShape Player::draw() {
-	player_shape.setOrigin(40.f, 40.f);
 	player_shape.setPosition(sf::Vector2f(x, y));
 	player_shape.setRotation(angle);
 	return player_shape;
+}
+
+void Player::setup() {
+	player_shape.setOrigin(40.f, 40.f);
 }
 
 void Player::move(float dt) {
@@ -47,3 +50,5 @@ void Player::move(float dt) {
 void Player::look(sf::RenderWindow &window) {
 	angle = atan2((sf::Mouse::getPosition(window).y - y), (sf::Mouse::getPosition(window).x - x)) * 180 / M_PI;
 }
+
+void Player::shoot() {}

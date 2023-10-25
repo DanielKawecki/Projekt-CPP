@@ -8,6 +8,8 @@ int main()
     MyApplication App;
     Player Player;
 
+    Player.setup();
+
     sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
 
     App.getDeltaTime();
