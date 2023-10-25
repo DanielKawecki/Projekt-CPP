@@ -17,6 +17,8 @@ public:
     int getScreenHeight() const;
 
     void drawing_function(sf::RenderWindow &window, sf::RectangleShape player);
+    void update_all_bullets();
+
     void add_to_vecor(Bullet bullet);
 
     sf::Time getDeltaTime();

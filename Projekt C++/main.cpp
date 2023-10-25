@@ -29,8 +29,7 @@ int main()
         Player.move(App.getDeltaTime().asSeconds());
         Player.look(window);
 
-
-
+        App.update_all_bullets();
         App.drawing_function(window, Player.draw());
     }
 

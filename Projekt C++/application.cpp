@@ -28,6 +28,12 @@ void MyApplication::drawing_function(sf::RenderWindow &window, sf::RectangleShap
     window.display();
 }
 
+void MyApplication::update_all_bullets() {
+    for (size_t i = 0; i < all_bullets.size(); i++) {
+        all_bullets[i].update(getDeltaTime().asSeconds());
+    }
+}
+
 void MyApplication::add_to_vecor(Bullet bullet) {
     all_bullets.push_back(bullet);
 }
