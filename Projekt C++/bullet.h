@@ -1,19 +1,28 @@
+#include <SFML/Graphics.hpp>
+#include <cmath>
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef M_PI
+#define M_PI (3.14159265358979323846)
+#endif
+
+#ifndef BULLET_H
+#define BULLET_H
 
 class Bullet {
 public:
 	Bullet(float speed_x_, float speed_y_, float angle_, int damage);
-
+	
 	~Bullet();
+
+	void update(float dt);
+
+	sf::RectangleShape draw();
 
 private:
 	float x = 0;
 	float y = 0;
-	float angle = 0;
-	float speed_x;
-	float speed_y;
+	float speed = 500;
+	float angle;
 	int damage;
 
 	sf::RectangleShape bulllet_shape;

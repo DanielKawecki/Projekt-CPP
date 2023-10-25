@@ -3,6 +3,7 @@
 #include <vector>
 #include "application.h"
 #include "player.h"
+#include "bullet.h"
     
 MyApplication::MyApplication() {}
 
@@ -19,11 +20,16 @@ int MyApplication::getScreenHeight() const {
 void MyApplication::drawing_function(sf::RenderWindow &window, sf::RectangleShape player) {
     window.clear();
     window.draw(player);
+
+    for (size_t i = 0; i < all_bullets.size(); i++) {
+        window.draw(all_bullets[i].draw());
+    }
+
     window.display();
 }
 
-void MyApplication::add_to_vecor(sf::CircleShape shape) {
-    all_circles.push_back(shape);
+void MyApplication::add_to_vecor(Bullet bullet) {
+    all_bullets.push_back(bullet);
 }
 
 sf::Time MyApplication::getDeltaTime() {

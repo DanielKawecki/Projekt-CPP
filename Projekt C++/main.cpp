@@ -2,11 +2,14 @@
 #include <iostream>
 #include "application.h"
 #include "player.h"
+#include "bullet.h"
 
 int main()
 {
     MyApplication App;
     Player Player;
+    Bullet bull = Bullet(100, 100, 45, 0);
+    App.add_to_vecor(bull);
 
     Player.setup();
 
@@ -25,6 +28,8 @@ int main()
 
         Player.move(App.getDeltaTime().asSeconds());
         Player.look(window);
+
+
 
         App.drawing_function(window, Player.draw());
     }

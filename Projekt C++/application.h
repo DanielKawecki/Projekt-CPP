@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "player.h"
+#include "bullet.h"
 
 #ifndef APPLICATION_H
 #define APPLICATION_H
@@ -16,7 +17,7 @@ public:
     int getScreenHeight() const;
 
     void drawing_function(sf::RenderWindow &window, sf::RectangleShape player);
-    void add_to_vecor(sf::CircleShape shape);
+    void add_to_vecor(Bullet bullet);
 
     sf::Time getDeltaTime();
 
@@ -25,11 +26,9 @@ private:
     int screenWidth = 1280;
     int screenHeight = 720;
 
-    std::vector<sf::CircleShape> all_circles;
+    std::vector<Bullet> all_bullets;
 
     sf::Clock delta_clock;
-
-    //Player player = Player::Player();
 
 };
 
