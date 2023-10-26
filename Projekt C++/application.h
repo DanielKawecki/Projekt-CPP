@@ -17,11 +17,12 @@ public:
     int getScreenHeight() const;
 
     void drawing_function(sf::RenderWindow &window, sf::RectangleShape player);
-    void update_all_bullets();
+    void update_all_bullets(float dt);
 
     void add_to_vecor(Bullet bullet);
 
-    sf::Time getDeltaTime();
+    void setDeltaTime();
+    float getDeltaTime();
 
 private:
 
@@ -31,6 +32,7 @@ private:
     std::vector<Bullet> all_bullets;
 
     sf::Clock delta_clock;
+    sf::Time delta_time;
 
 };
 

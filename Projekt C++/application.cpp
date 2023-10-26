@@ -21,23 +21,29 @@ void MyApplication::drawing_function(sf::RenderWindow &window, sf::RectangleShap
     window.clear();
     window.draw(player);
 
-    for (size_t i = 0; i < all_bullets.size(); i++) {
+    /*for (size_t i = 0; i < all_bullets.size(); i++) {
         window.draw(all_bullets[i].draw());
-    }
+    }*/
+    window.draw(all_bullets[0].draw());
 
     window.display();
 }
 
-void MyApplication::update_all_bullets() {
-    for (size_t i = 0; i < all_bullets.size(); i++) {
+void MyApplication::update_all_bullets(float dt) {
+    /*for (size_t i = 0; i < all_bullets.size(); i++) {
         all_bullets[i].update(getDeltaTime().asSeconds());
-    }
+    }*/
+    all_bullets[0].update(dt);
 }
 
 void MyApplication::add_to_vecor(Bullet bullet) {
     all_bullets.push_back(bullet);
 }
 
-sf::Time MyApplication::getDeltaTime() {
-    return delta_clock.restart();
+void MyApplication::setDeltaTime() {
+    delta_time = delta_clock.restart();
+}
+
+float MyApplication::getDeltaTime() {
+    return delta_time.asSeconds();
 }

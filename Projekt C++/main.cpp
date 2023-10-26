@@ -8,14 +8,14 @@ int main()
 {
     MyApplication App;
     Player Player;
-    Bullet bull = Bullet(100, 100, 45, 0);
+    Bullet bull = Bullet(100, 100, 30.f, 0);
     App.add_to_vecor(bull);
 
     Player.setup();
 
     sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
 
-    App.getDeltaTime();
+    //App.getDeltaTime();
 
     while (window.isOpen())
     {
@@ -26,10 +26,12 @@ int main()
                 window.close();
         }
 
-        Player.move(App.getDeltaTime().asSeconds());
+        App.setDeltaTime();
+
+        App.update_all_bullets(App.getDeltaTime());
+        Player.move(App.getDeltaTime());
         Player.look(window);
 
-        App.update_all_bullets();
         App.drawing_function(window, Player.draw());
     }
 
