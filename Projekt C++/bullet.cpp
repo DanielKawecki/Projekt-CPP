@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include "bullet.h"
+#include "application.h"
 
 Bullet::Bullet(float x_, float y_, float angle_, int damage_) {
 	x = x_;
@@ -18,6 +19,14 @@ Bullet::~Bullet() {}
 void Bullet::update(float dt) {
 	x = x + (speed * sin((angle + 90.f) * M_PI / 180.f) * dt);
 	y = y + (speed * -cos((angle + 90.f) * M_PI / 180.f) * dt);
+}
+
+float Bullet::getX() const {
+	return x;
+}
+
+float Bullet::getY() const {
+	return y;
 }
 
 sf::RectangleShape Bullet::draw() {

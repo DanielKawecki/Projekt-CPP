@@ -16,6 +16,9 @@ public:
 
 	void update(float dt);
 
+	float getX() const;
+	float getY() const;
+
 	sf::RectangleShape draw();
 
 private:

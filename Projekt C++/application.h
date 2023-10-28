@@ -20,6 +20,7 @@ public:
     void update_all_bullets(float dt);
 
     void createBullet(float x_, float y_, float angle_, int damage_);
+    void monitorBullet();
 
     void setDeltaTime();
     float getDeltaTime();
