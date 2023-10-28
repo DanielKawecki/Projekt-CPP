@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include "player.h"
+//#include "player.h"
 #include "bullet.h"
 
 #ifndef APPLICATION_H

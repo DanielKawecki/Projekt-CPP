@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include "bullet.h"
+#include "application.h"
 #include <cmath>
 
 #ifndef M_PI
@@ -11,8 +13,23 @@
 
 
 class Player {
+private:
+    float x = 100;
+    float y = 100;
+    float speed_x = 0;
+    float speed_y = 0;
+    float speed_limit = 450;
+    float acceleration = 4600;
+    float friction = 2800;
+
+    float angle = 0.f;
+
+    MyApplication& App;
+
+    sf::RectangleShape player_shape = sf::RectangleShape(sf::Vector2f(80.f, 80.f));
+
 public:
-    Player();
+    Player(MyApplication& App_);
 
     ~Player();
 
@@ -24,21 +41,7 @@ public:
 
     void look(sf::RenderWindow &window);
 
-    void shoot();
-
-private:
-    float x = 100;
-    float y = 100;
-    float speed_x = 0;
-    float speed_y = 0;
-    float speed_limit = 450;
-    float acceleration = 4600;
-    float friction = 2800;
-
-    float angle = 0;
-
-    sf::RectangleShape player_shape = sf::RectangleShape(sf::Vector2f(80.f, 80.f));
-
+    Bullet shoot();
 };
 
 #endif

@@ -7,15 +7,13 @@
 int main()
 {
     MyApplication App;
-    Player Player;
-    Bullet bull = Bullet(100, 100, 30.f, 0);
-    App.add_to_vecor(bull);
+    Player Player(App);
+    //Bullet bull = Bullet(100, 100, 30.f, 0);
+    //App.add_to_vecor(bull);
 
     Player.setup();
 
     sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
-
-    //App.getDeltaTime();
 
     while (window.isOpen())
     {

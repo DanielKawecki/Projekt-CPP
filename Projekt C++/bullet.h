@@ -10,7 +10,7 @@
 
 class Bullet {
 public:
-	Bullet(float speed_x_, float speed_y_, float angle_, int damage);
+	Bullet(float x_, float y_, float angle_, int damage);
 	
 	~Bullet();
 

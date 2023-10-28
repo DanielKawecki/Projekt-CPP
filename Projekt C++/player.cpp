@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include "player.h"
 #include "bullet.h"
+#include "application.h"
 #include <cmath>
 #include <cstdlib>
 
-Player::Player() {}
+Player::Player(MyApplication& App_) : App(App_) {}
 
 Player::~Player() {}
 
@@ -49,7 +50,9 @@ void Player::move(float dt) {
 }
 
 void Player::look(sf::RenderWindow &window) {
-	angle = atan2((sf::Mouse::getPosition(window).y - y), (sf::Mouse::getPosition(window).x - x)) * 180 / M_PI;
+	angle = atan2((sf::Mouse::getPosition(window).y - y), (sf::Mouse::getPosition(window).x - x)) * 180.f / M_PI;
 }
 
-void Player::shoot() {}
+Bullet Player::shoot() {
+	return Bullet::Bullet(x, y, angle, 0);
+}
