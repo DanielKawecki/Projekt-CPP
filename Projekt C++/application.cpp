@@ -36,7 +36,8 @@ void MyApplication::update_all_bullets(float dt) {
     //all_bullets[0].update(dt);
 }
 
-void MyApplication::add_to_vecor(Bullet bullet) {
+void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) {
+    Bullet bullet(x_, y_, angle_, damage_);
     all_bullets.push_back(bullet);
 }
 

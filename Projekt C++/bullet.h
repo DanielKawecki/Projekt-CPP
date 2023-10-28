@@ -21,7 +21,7 @@ public:
 private:
 	float x = 0;
 	float y = 0;
-	float speed = 400;
+	float speed = 1200;
 	float angle;
 	int damage;
 

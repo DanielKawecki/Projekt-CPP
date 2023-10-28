@@ -19,7 +19,7 @@ public:
     void drawing_function(sf::RenderWindow &window, sf::RectangleShape player);
     void update_all_bullets(float dt);
 
-    void add_to_vecor(Bullet bullet);
+    void createBullet(float x_, float y_, float angle_, int damage_);
 
     void setDeltaTime();
     float getDeltaTime();

@@ -41,7 +41,7 @@ public:
 
     void look(sf::RenderWindow &window);
 
-    Bullet shoot();
+    void shoot();
 };
 
 #endif

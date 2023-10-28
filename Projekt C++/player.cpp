@@ -47,12 +47,15 @@ void Player::move(float dt) {
 
 	speed_x -= (speed_x > 0 ? friction : (speed_x < 0 ? -friction : 0)) * dt;
 	speed_y -= (speed_y > 0 ? friction : (speed_y < 0 ? -friction : 0)) * dt;
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		shoot();
 }
 
 void Player::look(sf::RenderWindow &window) {
 	angle = atan2((sf::Mouse::getPosition(window).y - y), (sf::Mouse::getPosition(window).x - x)) * 180.f / M_PI;
 }
 
-Bullet Player::shoot() {
-	return Bullet::Bullet(x, y, angle, 0);
+void Player::shoot() {
+	App.createBullet(x, y, angle, 0);
 }
