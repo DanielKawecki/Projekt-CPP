@@ -33,9 +33,9 @@ void MyApplication::update_all_bullets(float dt) {
     for (size_t i = 0; i < all_bullets.size(); i++) {
         all_bullets[i].update(dt);
 
-        if (all_bullets[i].getX() > screenWidth - 200 || all_bullets[i].getX() < 200)
+        if (all_bullets[i].getX() > screenWidth - 50 || all_bullets[i].getX() < 50)
             all_bullets.erase(all_bullets.begin() + i);
-        else if (all_bullets[i].getY() > screenHeight - 200 || all_bullets[i].getY() < 200)
+        else if (all_bullets[i].getY() > screenHeight - 50 || all_bullets[i].getY() < 50)
             all_bullets.erase(all_bullets.begin() + i);
     }
     //all_bullets[0].update(dt);
