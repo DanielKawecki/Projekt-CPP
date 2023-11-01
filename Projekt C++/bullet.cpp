@@ -9,7 +9,7 @@ Bullet::Bullet(float x_, float y_, float angle_, int damage_) {
 	angle = angle_;
 	damage = damage_;
 
-	bulllet_shape.setSize(sf::Vector2f(40, 5));
+	bulllet_shape.setSize(sf::Vector2f(80, 5));
 	bulllet_shape.setOrigin(sf::Vector2f(20, 2.5));
 	bulllet_shape.rotate(angle_);
 }

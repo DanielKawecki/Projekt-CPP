@@ -24,6 +24,10 @@ private:
 
     float angle = 0.f;
 
+    float firerate = 500;
+    sf::Clock shot_clock;
+    sf::Time shot_cooldown = sf::seconds(10.f);
+
     MyApplication& App;
 
     sf::RectangleShape player_shape = sf::RectangleShape(sf::Vector2f(80.f, 80.f));
@@ -42,6 +46,7 @@ public:
     void look(sf::RenderWindow &window);
 
     void shoot();
+
 };
 
 #endif

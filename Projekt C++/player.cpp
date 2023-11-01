@@ -5,7 +5,9 @@
 #include <cmath>
 #include <cstdlib>
 
-Player::Player(MyApplication& App_) : App(App_) {}
+Player::Player(MyApplication& App_) : App(App_) {
+	shot_cooldown = sf::seconds(60.f) / firerate;
+}
 
 Player::~Player() {}
 
@@ -57,5 +59,8 @@ void Player::look(sf::RenderWindow &window) {
 }
 
 void Player::shoot() {
-	App.createBullet(x, y, angle, 0);
+	if (shot_clock.getElapsedTime() >= shot_cooldown) {
+		App.createBullet(x, y, angle, 0);
+		shot_clock.restart();
+	}
 }

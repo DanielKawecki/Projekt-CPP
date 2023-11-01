@@ -24,7 +24,6 @@ void MyApplication::drawing_function(sf::RenderWindow &window, sf::RectangleShap
     for (size_t i = 0; i < all_bullets.size(); i++) {
         window.draw(all_bullets[i].draw());
     }
-    //window.draw(all_bullets[0].draw());
 
     window.display();
 }
@@ -38,7 +37,6 @@ void MyApplication::update_all_bullets(float dt) {
         else if (all_bullets[i].getY() > screenHeight - 50 || all_bullets[i].getY() < 50)
             all_bullets.erase(all_bullets.begin() + i);
     }
-    //all_bullets[0].update(dt);
 }
 
 void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) {

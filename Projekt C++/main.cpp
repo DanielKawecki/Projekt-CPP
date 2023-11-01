@@ -8,8 +8,6 @@ int main()
 {
     MyApplication App;
     Player Player(App);
-    //Bullet bull = Bullet(100, 100, 30.f, 0);
-    //App.add_to_vecor(bull);
 
     Player.setup();
 
