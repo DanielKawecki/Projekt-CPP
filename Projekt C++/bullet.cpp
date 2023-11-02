@@ -3,15 +3,16 @@
 #include "bullet.h"
 #include "application.h"
 
-Bullet::Bullet(float x_, float y_, float angle_, int damage_) {
+Bullet::Bullet(float x_, float y_, float angle_, int damage_, sf::Texture& bullet_texture) {
 	x = x_;
 	y = y_;
 	angle = angle_;
 	damage = damage_;
 
-	bulllet_shape.setSize(sf::Vector2f(80, 5));
-	bulllet_shape.setOrigin(sf::Vector2f(20, 2.5));
-	bulllet_shape.rotate(angle_);
+	bullet_sprite.setTexture(bullet_texture);
+	//bullet_sprite.setSize(sf::Vector2f(80, 5));
+	bullet_sprite.setOrigin(sf::Vector2f(20, 2.5));
+	bullet_sprite.rotate(angle_);
 }
 
 Bullet::~Bullet() {}
@@ -29,7 +30,7 @@ float Bullet::getY() const {
 	return y;
 }
 
-sf::RectangleShape Bullet::draw() {
-	bulllet_shape.setPosition(sf::Vector2f(x, y));
-	return bulllet_shape;
+sf::Sprite Bullet::getSprite() {
+	bullet_sprite.setPosition(sf::Vector2f(x, y));
+	return bullet_sprite;
 }

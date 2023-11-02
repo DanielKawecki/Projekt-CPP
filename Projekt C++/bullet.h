@@ -10,7 +10,7 @@
 
 class Bullet {
 public:
-	Bullet(float x_, float y_, float angle_, int damage);
+	Bullet(float x_, float y_, float angle_, int damage, sf::Texture& bullet_texture);
 	
 	~Bullet();
 
@@ -19,7 +19,7 @@ public:
 	float getX() const;
 	float getY() const;
 
-	sf::RectangleShape draw();
+	sf::Sprite getSprite();
 
 private:
 	float x = 0;
@@ -28,7 +28,8 @@ private:
 	float angle;
 	int damage;
 
-	sf::RectangleShape bulllet_shape;
+	//sf::RectangleShape bulllet_shape;
+	sf::Sprite bullet_sprite;
 
 };
 

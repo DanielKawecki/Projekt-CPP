@@ -38,5 +38,24 @@
     <ClInclude Include="bullet.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Projekt C++.rc">
+      <Filter>Pliki zasobów</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Pliki zasobów</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bullet.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="spriteSheet.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
 </Project>

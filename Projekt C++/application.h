@@ -34,6 +34,9 @@ private:
     sf::Clock delta_clock;
     sf::Time delta_time;
 
+    sf::Texture bullet_texture;
+    sf::Texture player_texture;
+
 };
 
 #endif 

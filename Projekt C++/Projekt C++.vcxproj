@@ -148,6 +148,15 @@
     <ClInclude Include="application.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Projekt C++.rc" />
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bullet.png" />
+    <Image Include="spriteSheet.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

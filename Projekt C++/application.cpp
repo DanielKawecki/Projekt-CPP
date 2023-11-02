@@ -5,7 +5,10 @@
 #include "player.h"
 #include "bullet.h"
     
-MyApplication::MyApplication() {}
+MyApplication::MyApplication() {
+    if (!bullet_texture.loadFromFile("bullet.png")) {}
+    if (!player_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 0, 26, 19))) {}
+}
 
 MyApplication::~MyApplication() {}
 
@@ -22,7 +25,7 @@ void MyApplication::drawing_function(sf::RenderWindow &window, sf::RectangleShap
     window.draw(player);
 
     for (size_t i = 0; i < all_bullets.size(); i++) {
-        window.draw(all_bullets[i].draw());
+        window.draw(all_bullets[i].getSprite());
     }
 
     window.display();
@@ -40,7 +43,7 @@ void MyApplication::update_all_bullets(float dt) {
 }
 
 void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) {
-    Bullet bullet(x_, y_, angle_, damage_);
+    Bullet bullet(x_, y_, angle_, damage_, bullet_texture);
     all_bullets.push_back(bullet);
 }
 
