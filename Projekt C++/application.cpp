@@ -20,13 +20,13 @@ int MyApplication::getScreenHeight() const {
     return screenHeight;
 }
 
-void MyApplication::drawing_function(sf::RenderWindow &window, sf::RectangleShape player) {
+void MyApplication::drawing_function(sf::RenderWindow &window, sf::Sprite player) {
     window.clear();
-    window.draw(player);
 
     for (size_t i = 0; i < all_bullets.size(); i++) {
         window.draw(all_bullets[i].getSprite());
     }
+    window.draw(player);
 
     window.display();
 }
@@ -47,14 +47,14 @@ void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) 
     all_bullets.push_back(bullet);
 }
 
-void MyApplication::monitorBullet() {
-
-}
-
 void MyApplication::setDeltaTime() {
     delta_time = delta_clock.restart();
 }
 
-float MyApplication::getDeltaTime() {
+float MyApplication::getDeltaTime() const {
     return delta_time.asSeconds();
+}
+
+sf::Texture& MyApplication::getPlayerSprite() {
+    return player_texture;
 }

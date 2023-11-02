@@ -28,7 +28,6 @@ private:
 	float angle;
 	int damage;
 
-	//sf::RectangleShape bulllet_shape;
 	sf::Sprite bullet_sprite;
 
 };

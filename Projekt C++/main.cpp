@@ -9,8 +9,6 @@ int main()
     MyApplication App;
     Player Player(App);
 
-    Player.setup();
-
     sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
 
     while (window.isOpen())

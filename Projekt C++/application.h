@@ -15,14 +15,15 @@ public:
     int getScreenWidth() const;
     int getScreenHeight() const;
 
-    void drawing_function(sf::RenderWindow &window, sf::RectangleShape player);
+    void drawing_function(sf::RenderWindow &window, sf::Sprite player);
     void update_all_bullets(float dt);
 
     void createBullet(float x_, float y_, float angle_, int damage_);
-    void monitorBullet();
 
     void setDeltaTime();
-    float getDeltaTime();
+    float getDeltaTime() const;
+
+    sf::Texture& getPlayerSprite();
 
 private:
 

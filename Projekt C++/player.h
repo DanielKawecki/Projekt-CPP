@@ -31,15 +31,14 @@ private:
     MyApplication& App;
 
     sf::RectangleShape player_shape = sf::RectangleShape(sf::Vector2f(80.f, 80.f));
+    sf::Sprite player_sprite;
 
 public:
     Player(MyApplication& App_);
 
     ~Player();
 
-    sf::RectangleShape draw();
-
-    void setup();
+    sf::Sprite draw();
 
     void move(float dt);
 
