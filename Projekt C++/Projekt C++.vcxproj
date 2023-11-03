@@ -143,10 +143,12 @@
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="enemy.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

@@ -3,11 +3,13 @@
 #include "application.h"
 #include "player.h"
 #include "bullet.h"
+#include "enemy.h"
 
 int main()
 {
     MyApplication App;
     Player Player(App);
+    App.createEnemy();
 
     sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
 

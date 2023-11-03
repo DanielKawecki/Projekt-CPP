@@ -4,6 +4,7 @@
 #include "application.h"
 #include "player.h"
 #include "bullet.h"
+#include "enemy.h"
     
 MyApplication::MyApplication() {
     if (!bullet_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 150, 80, 5))) {}
@@ -34,6 +35,11 @@ void MyApplication::drawing_function(sf::RenderWindow &window, sf::Sprite player
     for (size_t i = 0; i < all_bullets.size(); i++) {
         window.draw(all_bullets[i].getSprite());
     }
+    
+    for (size_t i = 0; i < all_enemies.size(); i++) {
+        window.draw(all_enemies[i].getSprite());
+    }
+
     window.draw(player_legs);
     window.draw(player);
 
@@ -54,6 +60,11 @@ void MyApplication::update_all_bullets(float dt) {
 void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) {
     Bullet bullet(x_, y_, angle_, damage_, bullet_texture);
     all_bullets.push_back(bullet);
+}
+
+void MyApplication::createEnemy() {
+    Enemy enemy(500.f, 250.f, player_texture);
+    all_enemies.push_back(enemy);
 }
 
 void MyApplication::setDeltaTime() {
