@@ -21,11 +21,22 @@ sf::Sprite Player::draw() {
 	return player_sprite;
 }
 
+sf::Sprite Player::getLegsSprite() {
+	legs_sprite.setPosition(x, y);
+	legs_sprite.setRotation(angle);
+	legs_sprite.setOrigin(16.f, 16.f);
+	
+	sf::Sprite scaled_legs_sprite = legs_sprite;
+	scaled_legs_sprite.scale(3.f, 3.f);
+
+	return scaled_legs_sprite;
+}
+
 void Player::move(float dt) {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
 		speed_x -= acceleration * dt;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
 		speed_x += acceleration * dt;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -49,6 +60,19 @@ void Player::move(float dt) {
 
 	speed_x -= (speed_x > 0 ? friction : (speed_x < 0 ? -friction : 0)) * dt;
 	speed_y -= (speed_y > 0 ? friction : (speed_y < 0 ? -friction : 0)) * dt;
+
+	if (abs(speed_x) > 10.0 || abs(speed_y) > 10.0)
+		is_moving = true;
+	else
+		is_moving = false;
+
+	if (is_moving && animation_clock.getElapsedTime().asMilliseconds() >= animation_speed) {
+		frame_count = (frame_count + 1) % 14; // 14 is a size of leg_frames vector. It's static number so I guess no problem
+		legs_sprite.setTexture(App.getLegSprite(frame_count));
+		animation_clock.restart();
+	}
+	else if(!is_moving)
+		legs_sprite.setTexture(App.getLegSprite(7));
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		shoot();

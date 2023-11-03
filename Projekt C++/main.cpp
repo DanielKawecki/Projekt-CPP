@@ -26,7 +26,7 @@ int main()
         Player.move(App.getDeltaTime());
         Player.look(window);
 
-        App.drawing_function(window, Player.draw());
+        App.drawing_function(window, Player.draw(), Player.getLegsSprite());
     }
 
     return 0;

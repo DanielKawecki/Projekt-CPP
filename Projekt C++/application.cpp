@@ -6,8 +6,16 @@
 #include "bullet.h"
     
 MyApplication::MyApplication() {
-    if (!bullet_texture.loadFromFile("bullet.png")) {}
+    if (!bullet_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 150, 80, 5))) {}
     if (!player_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 0, 26, 19))) {}
+    for (int i = 0; i <= (32 * 6); i = i + 32) {
+        leg_texture.loadFromFile("spriteSheet.png", sf::IntRect(100, i, 32, 32));
+        leg_frames.push_back(leg_texture);
+    }
+    for (int i = 0; i <= (32 * 6); i = i + 32) {
+        leg_texture.loadFromFile("spriteSheet.png", sf::IntRect(132, i, 32, 32));
+        leg_frames.push_back(leg_texture);
+    }
 }
 
 MyApplication::~MyApplication() {}
@@ -20,12 +28,13 @@ int MyApplication::getScreenHeight() const {
     return screenHeight;
 }
 
-void MyApplication::drawing_function(sf::RenderWindow &window, sf::Sprite player) {
-    window.clear();
+void MyApplication::drawing_function(sf::RenderWindow &window, sf::Sprite player, sf::Sprite player_legs) {
+    window.clear(sf::Color(120, 120, 120, 125));
 
     for (size_t i = 0; i < all_bullets.size(); i++) {
         window.draw(all_bullets[i].getSprite());
     }
+    window.draw(player_legs);
     window.draw(player);
 
     window.display();
@@ -57,4 +66,8 @@ float MyApplication::getDeltaTime() const {
 
 sf::Texture& MyApplication::getPlayerSprite() {
     return player_texture;
+}
+
+sf::Texture& MyApplication::getLegSprite(int index) {
+    return leg_frames[index];
 }

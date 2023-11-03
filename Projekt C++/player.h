@@ -28,10 +28,16 @@ private:
     sf::Clock shot_clock;
     sf::Time shot_cooldown = sf::seconds(10.f);
 
+    sf::Clock animation_clock;
+    int animation_speed = 45;
+    int frame_count = 0;
+    bool is_moving = false;
+
     MyApplication& App;
 
     sf::RectangleShape player_shape = sf::RectangleShape(sf::Vector2f(80.f, 80.f));
     sf::Sprite player_sprite;
+    sf::Sprite legs_sprite;
 
 public:
     Player(MyApplication& App_);
@@ -39,6 +45,7 @@ public:
     ~Player();
 
     sf::Sprite draw();
+    sf::Sprite getLegsSprite();
 
     void move(float dt);
 
