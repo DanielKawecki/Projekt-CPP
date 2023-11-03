@@ -22,6 +22,7 @@ private:
     sf::Texture bullet_texture;
     sf::Texture player_texture;
     sf::Texture leg_texture;
+    sf::Texture body_texture;
     std::vector<sf::Texture> leg_frames;
 
 public:
@@ -33,9 +34,11 @@ public:
     int getScreenHeight() const;
 
     void drawing_function(sf::RenderWindow &window, sf::Sprite player, sf::Sprite player_legs);
+    
     void update_all_bullets(float dt);
-
     void createBullet(float x_, float y_, float angle_, int damage_);
+    
+    void updateAllEnemies();
     void createEnemy();
 
     void setDeltaTime();
