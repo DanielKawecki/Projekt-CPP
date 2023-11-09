@@ -28,3 +28,11 @@ bool Enemy::checkCollision(float bullet_x, float bullet_y) {
 sf::Sprite Enemy::getSprite() {
 	return enemy_sprite;
 }
+
+float Enemy::getX() const {
+	return x;
+}
+
+float Enemy::getY() const {
+	return y;
+}

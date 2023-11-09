@@ -30,6 +30,9 @@
     <ClCompile Include="enemy.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="body.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h">
@@ -47,14 +50,9 @@
     <ClInclude Include="enemy.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Projekt C++.rc">
-      <Filter>Pliki zasobów</Filter>
-    </ResourceCompile>
-    <ResourceCompile Include="Resource.rc">
-      <Filter>Pliki zasobów</Filter>
-    </ResourceCompile>
+    <ClInclude Include="body.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="bullet.png">

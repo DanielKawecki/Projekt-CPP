@@ -24,11 +24,12 @@ int main()
 
         App.setDeltaTime();
 
-        App.update_all_bullets(App.getDeltaTime());
+        App.updateAllBullets(App.getDeltaTime());
+        App.updateAllEnemies();
         Player.move(App.getDeltaTime());
         Player.look(window);
 
-        App.drawing_function(window, Player.draw(), Player.getLegsSprite());
+        App.drawingFunction(window, Player.draw(), Player.getLegsSprite());
     }
 
     return 0;

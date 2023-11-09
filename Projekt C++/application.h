@@ -3,6 +3,7 @@
 #include <vector>
 #include "bullet.h"
 #include "enemy.h"
+#include "body.h"
 
 #ifndef APPLICATION_H
 #define APPLICATION_H
@@ -15,6 +16,7 @@ private:
 
     std::vector<Bullet> all_bullets;
     std::vector<Enemy> all_enemies;
+    std::vector<Body> all_bodies;
 
     sf::Clock delta_clock;
     sf::Time delta_time;
@@ -33,13 +35,15 @@ public:
     int getScreenWidth() const;
     int getScreenHeight() const;
 
-    void drawing_function(sf::RenderWindow &window, sf::Sprite player, sf::Sprite player_legs);
+    void drawingFunction(sf::RenderWindow &window, sf::Sprite player, sf::Sprite player_legs);
     
-    void update_all_bullets(float dt);
+    void updateAllBullets(float dt);
     void createBullet(float x_, float y_, float angle_, int damage_);
     
     void updateAllEnemies();
     void createEnemy();
+    
+    void updateAllBodies();
 
     void setDeltaTime();
     float getDeltaTime() const;

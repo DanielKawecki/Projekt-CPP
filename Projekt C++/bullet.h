@@ -18,6 +18,7 @@ public:
 
 	float getX() const;
 	float getY() const;
+	float getAngle() const;
 
 	sf::Sprite getSprite();
 

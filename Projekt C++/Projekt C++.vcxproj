@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="body.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
@@ -147,14 +148,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
+    <ClInclude Include="body.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Projekt C++.rc" />
-    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="bullet.png" />

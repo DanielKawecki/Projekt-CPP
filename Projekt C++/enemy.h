@@ -22,6 +22,9 @@ public:
 
 	sf::Sprite getSprite();
 
+	float getX() const;
+	float getY() const;
+
 };
 
 #endif

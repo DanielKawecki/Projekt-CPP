@@ -29,6 +29,10 @@ float Bullet::getY() const {
 	return y;
 }
 
+float Bullet::getAngle() const {
+	return angle;
+}
+
 sf::Sprite Bullet::getSprite() {
 	bullet_sprite.setPosition(sf::Vector2f(x, y));
 	return bullet_sprite;
