@@ -106,9 +106,11 @@ void MyApplication::createEnemy() {
 }
 
 void MyApplication::updateAllBodies() {
-    for (auto it = all_bodies.begin(); it != all_bodies.end(); ++it)
+    for (auto it = all_bodies.begin(); it != all_bodies.end(); )
         if (it->checkExixtTime())
             it = all_bodies.erase(it);
+        else
+            ++it;
 }
 
 void MyApplication::setDeltaTime() {

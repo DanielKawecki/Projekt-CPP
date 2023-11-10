@@ -26,6 +26,7 @@ int main()
 
         App.updateAllBullets(App.getDeltaTime());
         App.updateAllEnemies();
+        App.updateAllBodies();
         Player.move(App.getDeltaTime());
         Player.look(window);
 
