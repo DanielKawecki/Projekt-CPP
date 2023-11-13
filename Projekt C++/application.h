@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+//#include "player.h"
 #include "bullet.h"
 #include "enemy.h"
 #include "body.h"
@@ -40,8 +41,8 @@ public:
     void updateAllBullets(float dt);
     void createBullet(float x_, float y_, float angle_, int damage_);
     
-    void updateAllEnemies();
-    void createEnemy();
+    void updateAllEnemies(float player_x, float player_y, float dt);
+    void createEnemy(float x, float y);
     
     void updateAllBodies();
 

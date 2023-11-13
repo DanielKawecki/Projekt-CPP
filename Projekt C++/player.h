@@ -53,6 +53,9 @@ public:
 
     void shoot();
 
+    float getX() const;
+    float getY() const;
+
 };
 
 #endif

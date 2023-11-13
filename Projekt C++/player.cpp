@@ -67,7 +67,7 @@ void Player::move(float dt) {
 		is_moving = false;
 
 	if (is_moving && animation_clock.getElapsedTime().asMilliseconds() >= animation_speed) {
-		frame_count = (frame_count + 1) % 14; // 14 is a size of leg_frames vector. It's static number so I guess no problem
+		frame_count = (frame_count + 1) % 14;
 		legs_sprite.setTexture(App.getLegSprite(frame_count));
 		animation_clock.restart();
 	}
@@ -87,4 +87,12 @@ void Player::shoot() {
 		App.createBullet(x, y, angle, 0);
 		shot_clock.restart();
 	}
+}
+
+float Player::getX() const {
+	return x;
+}
+
+float Player::getY() const {
+	return y;
 }

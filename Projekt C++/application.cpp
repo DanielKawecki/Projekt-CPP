@@ -53,20 +53,6 @@ void MyApplication::drawingFunction(sf::RenderWindow &window, sf::Sprite player,
 }
 
 void MyApplication::updateAllBullets(float dt) {
-    /*for (size_t i = 0; i < all_bullets.size(); i++) {
-        all_bullets[i].update(dt);
-
-        if (all_bullets[i].getX() > screenWidth - 50 || all_bullets[i].getX() < 50)
-            all_bullets.erase(all_bullets.begin() + i);
-        else if (all_bullets[i].getY() > screenHeight - 50 || all_bullets[i].getY() < 50)
-            all_bullets.erase(all_bullets.begin() + i);
-
-        for (size_t j = 0; j < all_enemies.size(); j++) {
-            if (all_enemies[j].checkCollision(all_bullets[i].getX(), all_bullets[i].getY()))
-                all_enemies[j].die(body_texture);
-        }
-    }*/
-
     for (auto it = all_bullets.begin(); it != all_bullets.end(); ) {
         it->update(dt);
 
@@ -85,7 +71,12 @@ void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) 
     all_bullets.push_back(bullet);
 }
 
-void MyApplication::updateAllEnemies() {
+void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
+    for (auto& enemy : all_enemies) {
+        enemy.seekPlayer(player_x, player_y);
+        enemy.update(all_enemies, dt);
+    }
+    
     for (auto it = all_bullets.begin(); it != all_bullets.end(); ++it) {
         for (auto jt = all_enemies.begin(); jt != all_enemies.end(); ) {
             if (jt->checkCollision(it->getX(), it->getY())) {
@@ -100,8 +91,8 @@ void MyApplication::updateAllEnemies() {
     }
 }
 
-void MyApplication::createEnemy() {
-    Enemy enemy(500.f, 250.f, player_texture);
+void MyApplication::createEnemy(float x, float y) {
+    Enemy enemy(x, y, player_texture);
     all_enemies.push_back(enemy);
 }
 
