@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include "enemy.h"
 
-
 Enemy::Enemy(float x_, float y_, sf::Texture& enemy_texture) {
 	x = x_;
 	y = y_;

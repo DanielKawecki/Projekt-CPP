@@ -142,6 +142,7 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="body.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="hudText.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="enemy.cpp" />
@@ -151,12 +152,16 @@
     <ClInclude Include="body.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="hudText.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="bullet.png" />
     <Image Include="spriteSheet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\..\..\Downloads\minecraft\pixelFont.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

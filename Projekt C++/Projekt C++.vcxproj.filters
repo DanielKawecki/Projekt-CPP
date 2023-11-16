@@ -33,6 +33,9 @@
     <ClCompile Include="body.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="hudText.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h">
@@ -53,6 +56,9 @@
     <ClInclude Include="body.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="hudText.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="bullet.png">
@@ -61,5 +67,10 @@
     <Image Include="spriteSheet.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\..\..\Downloads\minecraft\pixelFont.ttf">
+      <Filter>Pliki zasobów</Filter>
+    </Font>
   </ItemGroup>
 </Project>

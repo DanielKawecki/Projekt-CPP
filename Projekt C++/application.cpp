@@ -19,6 +19,11 @@ MyApplication::MyApplication() {
         leg_texture.loadFromFile("spriteSheet.png", sf::IntRect(132, i, 32, 32));
         leg_frames.push_back(leg_texture);
     }
+    if (!pixel_font.loadFromFile("pixelFont.ttf")) {
+        //std::cout << "Failed to load font" << "\n";
+    }
+    HUDText text("0 fps", pixel_font, 28, sf::Color::Black, sf::Vector2f(10.f, 10.f));
+    all_texts.push_back(text);
 }
 
 MyApplication::~MyApplication() {}
@@ -48,6 +53,10 @@ void MyApplication::drawingFunction(sf::RenderWindow &window, sf::Sprite player,
 
     window.draw(player_legs);
     window.draw(player);
+
+    for (size_t i = 0; i < all_texts.size(); i++) {
+        window.draw(all_texts[i].getText());
+    }
 
     window.display();
 }
@@ -102,6 +111,14 @@ void MyApplication::updateAllBodies() {
             it = all_bodies.erase(it);
         else
             ++it;
+}
+
+void MyApplication::updateText() {
+    if (fps_clock.getElapsedTime().asSeconds() >= 1.f) {
+        fps = static_cast<int>(std::round(1 / getDeltaTime()));
+        all_texts[0].setContent(std::to_string(fps) + " fps");
+        fps_clock.restart();
+    }
 }
 
 void MyApplication::setDeltaTime() {

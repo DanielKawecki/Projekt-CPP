@@ -23,12 +23,15 @@ int main()
                 window.close();
         }
 
+        //window.setFramerateLimit(120);
+
         App.setDeltaTime();
 
         App.updateAllBullets(App.getDeltaTime());
         App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
         App.updateAllBodies();
         Player.move(App.getDeltaTime());
+        App.updateText();
         Player.look(window);
 
         App.drawingFunction(window, Player.draw(), Player.getLegsSprite());

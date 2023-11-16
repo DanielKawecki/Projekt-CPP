@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-//#include "player.h"
+#include "hudText.h"
 #include "bullet.h"
 #include "enemy.h"
 #include "body.h"
@@ -18,15 +18,20 @@ private:
     std::vector<Bullet> all_bullets;
     std::vector<Enemy> all_enemies;
     std::vector<Body> all_bodies;
+    std::vector<HUDText> all_texts;
 
     sf::Clock delta_clock;
     sf::Time delta_time;
+    sf::Clock fps_clock;
 
     sf::Texture bullet_texture;
     sf::Texture player_texture;
     sf::Texture leg_texture;
     sf::Texture body_texture;
     std::vector<sf::Texture> leg_frames;
+    sf::Font pixel_font;
+
+    int fps = 0.f;
 
 public:
     MyApplication();
@@ -45,6 +50,8 @@ public:
     void createEnemy(float x, float y);
     
     void updateAllBodies();
+
+    void updateText();
 
     void setDeltaTime();
     float getDeltaTime() const;
