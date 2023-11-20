@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <random>
 #include "application.h"
 #include "player.h"
 #include "bullet.h"
@@ -22,8 +23,11 @@ MyApplication::MyApplication() {
     if (!pixel_font.loadFromFile("pixelFont.ttf")) {
         //std::cout << "Failed to load font" << "\n";
     }
-    HUDText text("0 fps", pixel_font, 28, sf::Color::Black, sf::Vector2f(10.f, 10.f));
-    all_texts.push_back(text);
+    HUDText fps("0 fps", pixel_font, 28, sf::Color::Black, sf::Vector2f(10.f, 10.f));
+    all_texts.push_back(fps);
+
+    HUDText round("round 1", pixel_font, 28, sf::Color::Black, sf::Vector2f(screenWidth / 2, 10.f));
+    all_texts.push_back(round);
 }
 
 MyApplication::~MyApplication() {}
@@ -91,6 +95,9 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
             if (jt->checkCollision(it->getX(), it->getY())) {
                 Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
                 all_bodies.push_back(body);
+                enemies_alive -= 1;
+                if (enemies_alive == 0)
+                    timer_set = false;
                 jt = all_enemies.erase(jt);
             }
             else {
@@ -103,6 +110,7 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
 void MyApplication::createEnemy(float x, float y) {
     Enemy enemy(x, y, player_texture);
     all_enemies.push_back(enemy);
+    enemies_alive += 1;
 }
 
 void MyApplication::updateAllBodies() {
@@ -118,6 +126,21 @@ void MyApplication::updateText() {
         fps = static_cast<int>(std::round(1 / getDeltaTime()));
         all_texts[0].setContent(std::to_string(fps) + " fps");
         fps_clock.restart();
+    }
+}
+
+void MyApplication::setBreakTimer() {
+    if (!timer_set) {
+        break_clock.restart();
+        timer_set = true;
+    }    
+}
+
+void MyApplication::spawn() {
+    if (spawn_clock.getElapsedTime().asSeconds() >= 1.f && enemies_alive < enemies_cap) {
+        all_texts[1].setContent("alive " + std::to_string(enemies_alive));
+        createEnemy((rand() % 100) + screenWidth + 50, (rand() % 720));
+        spawn_clock.restart();
     }
 }
 
