@@ -19,11 +19,11 @@ MyApplication::MyApplication() {
         leg_texture.loadFromFile("spriteSheet.png", sf::IntRect(132, i, 32, 32));
         leg_frames.push_back(leg_texture);
     }
-    if (!pixel_font.loadFromFile("pixelFont.ttf")) {
-        //std::cout << "Failed to load font" << "\n";
-    }
+    if (!pixel_font.loadFromFile("pixelFont.ttf")) {}
     HUDText text("0 fps", pixel_font, 28, sf::Color::Black, sf::Vector2f(10.f, 10.f));
     all_texts.push_back(text);
+    HUDText text2("0pts", pixel_font, 28, sf::Color::Black, sf::Vector2f(screenWidth-100.f, 10.f));
+    all_texts.push_back(text2);
 }
 
 MyApplication::~MyApplication() {}
@@ -90,6 +90,7 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
         for (auto jt = all_enemies.begin(); jt != all_enemies.end(); ) {
             if (jt->checkCollision(it->getX(), it->getY())) {
                 Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
+                updatePoints();
                 all_bodies.push_back(body);
                 jt = all_enemies.erase(jt);
             }
@@ -113,12 +114,17 @@ void MyApplication::updateAllBodies() {
             ++it;
 }
 
-void MyApplication::updateText() {
+void MyApplication::updateFPS() {
     if (fps_clock.getElapsedTime().asSeconds() >= 1.f) {
         fps = static_cast<int>(std::round(1 / getDeltaTime()));
         all_texts[0].setContent(std::to_string(fps) + " fps");
         fps_clock.restart();
     }
+}
+
+void MyApplication::updatePoints() {
+    points += 100;
+    all_texts[1].setContent(std::to_string(points) + "pts");
 }
 
 void MyApplication::setDeltaTime() {

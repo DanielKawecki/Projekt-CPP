@@ -31,7 +31,7 @@ int main()
         App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
         App.updateAllBodies();
         Player.move(App.getDeltaTime());
-        App.updateText();
+        App.updateFPS();
         Player.look(window);
 
         App.drawingFunction(window, Player.draw(), Player.getLegsSprite());

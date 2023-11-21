@@ -15,6 +15,8 @@ private:
     int screenWidth = 1280;
     int screenHeight = 720;
 
+    int points = 0;
+
     std::vector<Bullet> all_bullets;
     std::vector<Enemy> all_enemies;
     std::vector<Body> all_bodies;
@@ -51,7 +53,9 @@ public:
     
     void updateAllBodies();
 
-    void updateText();
+    void updateFPS();
+
+    void updatePoints();
 
     void setDeltaTime();
     float getDeltaTime() const;
