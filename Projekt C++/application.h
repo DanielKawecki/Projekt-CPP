@@ -25,6 +25,8 @@ private:
     sf::Clock delta_clock;
     sf::Time delta_time;
     sf::Clock fps_clock;
+    sf::Clock break_clock;
+    sf::Clock spawn_clock;
 
     sf::Texture bullet_texture;
     sf::Texture player_texture;
@@ -34,6 +36,11 @@ private:
     sf::Font pixel_font;
 
     int fps = 0.f;
+
+    int enemies_cap = 3;
+    int enemies_alive = 0;
+    int round = 0;
+    bool timer_set = false;
 
 public:
     MyApplication();
@@ -56,6 +63,10 @@ public:
     void updateFPS();
 
     void updatePoints();
+
+    void setBreakTimer();
+
+    void spawn();
 
     void setDeltaTime();
     float getDeltaTime() const;

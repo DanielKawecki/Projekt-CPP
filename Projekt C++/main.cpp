@@ -9,8 +9,8 @@ int main()
 {
     MyApplication App;
     Player Player(App);
-    App.createEnemy(900.f, 100.f);
-    App.createEnemy(700.f, 600.f);
+    //App.createEnemy(900.f, 100.f);
+    //App.createEnemy(700.f, 600.f);
 
     sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
 
@@ -27,6 +27,7 @@ int main()
 
         App.setDeltaTime();
 
+        App.spawn();
         App.updateAllBullets(App.getDeltaTime());
         App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
         App.updateAllBodies();
