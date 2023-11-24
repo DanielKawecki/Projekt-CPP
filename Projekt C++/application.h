@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <unordered_map>
 #include <vector>
 #include "hudText.h"
 #include "bullet.h"
@@ -14,6 +15,8 @@ private:
 
     int screenWidth = 1280;
     int screenHeight = 720;
+
+    //sf::View view
 
     int points = 0;
 
@@ -35,12 +38,16 @@ private:
     std::vector<sf::Texture> leg_frames;
     sf::Font pixel_font;
 
+    std::unordered_map<std::string, sf::Texture> all_textures;
+
     int fps = 0.f;
 
-    int enemies_cap = 3;
+    int enemies_cap = 6;
     int enemies_alive = 0;
     int round = 0;
     bool timer_set = false;
+
+    //void loadTexture(const std::string& filename);
 
 public:
     MyApplication();
@@ -73,6 +80,10 @@ public:
 
     sf::Texture& getPlayerSprite();
     sf::Texture& getLegSprite(int index);
+
+    //void loadTexturesFromDirectory(const std::string& directory);
+
+    //sf::Texture& getTexture(const std::string& filename);
 
 };
 

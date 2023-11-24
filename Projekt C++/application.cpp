@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+//#include <filesystem>
 #include "application.h"
 #include "player.h"
 #include "bullet.h"
@@ -142,8 +143,25 @@ void MyApplication::setBreakTimer() {
 
 void MyApplication::spawn() {
     if (spawn_clock.getElapsedTime().asSeconds() >= 1.f && enemies_alive < enemies_cap) {
-        all_texts[1].setContent("alive " + std::to_string(enemies_alive));
-        createEnemy((rand() % 100) + screenWidth + 50, (rand() % 720));
+        //all_texts[1].setContent("alive " + std::to_string(enemies_alive));
+
+        switch (rand() % 4) {
+        case 0:
+            createEnemy((rand() % 100) + screenWidth + 50, (rand() % 720));
+        
+        case 1:
+            createEnemy((rand() % 100) - 50, (rand() % 720));
+
+        case 2:
+            createEnemy((rand() % 1280), (rand() % 100) + screenHeight + 50);
+
+        case 3:
+            createEnemy((rand() % 1280), (rand() % 100) - 50);
+
+        default:
+            break;
+        }
+        
         spawn_clock.restart();
     }
 }
@@ -163,3 +181,9 @@ sf::Texture& MyApplication::getPlayerSprite() {
 sf::Texture& MyApplication::getLegSprite(int index) {
     return leg_frames[index];
 }
+
+//void MyApplication::loadTexturesFromDirectory(const std::string& directory) {}
+
+//void MyApplication::loadTexture(const std::string& filename) {}
+
+//sf::Texture& MyApplication::getTexture(const std::string& filename) {}
