@@ -16,7 +16,8 @@ private:
     int screenWidth = 1280;
     int screenHeight = 720;
 
-    //sf::View view
+    sf::RenderWindow window;
+    sf::View view;
 
     int points = 0;
 
@@ -57,7 +58,7 @@ public:
     int getScreenWidth() const;
     int getScreenHeight() const;
 
-    void drawingFunction(sf::RenderWindow &window, sf::Sprite player, sf::Sprite player_legs);
+    void drawingFunction(sf::Sprite player, sf::Sprite player_legs);
     
     void updateAllBullets(float dt);
     void createBullet(float x_, float y_, float angle_, int damage_);
@@ -84,6 +85,10 @@ public:
     //void loadTexturesFromDirectory(const std::string& directory);
 
     //sf::Texture& getTexture(const std::string& filename);
+
+    sf::RenderWindow& getWindow();
+
+    void updateView(float player_x, float player_y);
 
 };
 

@@ -9,7 +9,12 @@
 #include "enemy.h"
 #include "body.h"
     
-MyApplication::MyApplication() {
+MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight), "SFML works!") {
+
+    view.setSize(screenWidth, screenHeight);
+    view.setCenter(0.f, 0.f);
+    window.setView(view);
+
     if (!bullet_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 150, 80, 5))) {}
     if (!player_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 0, 26, 19))) {}
     if (!body_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 50, 70, 50))) {}
@@ -39,7 +44,7 @@ int MyApplication::getScreenHeight() const {
     return screenHeight;
 }
 
-void MyApplication::drawingFunction(sf::RenderWindow &window, sf::Sprite player, sf::Sprite player_legs) {
+void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
     window.clear(sf::Color(120, 120, 120, 125));
 
     for (size_t i = 0; i < all_bodies.size(); i++) {
@@ -187,3 +192,12 @@ sf::Texture& MyApplication::getLegSprite(int index) {
 //void MyApplication::loadTexture(const std::string& filename) {}
 
 //sf::Texture& MyApplication::getTexture(const std::string& filename) {}
+
+sf::RenderWindow& MyApplication::getWindow() {
+    return window;
+}
+
+void MyApplication::updateView(float player_x, float player_y) {
+    view.setCenter(player_x, player_y);
+    window.setView(view);
+}

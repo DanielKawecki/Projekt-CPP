@@ -12,30 +12,31 @@ int main()
     //App.createEnemy(900.f, 100.f);
     //App.createEnemy(700.f, 600.f);
 
-    sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
+    //sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
 
-    while (window.isOpen())
+    while (App.getWindow().isOpen())
     {
         sf::Event event;
-        while (window.pollEvent(event))
+        while (App.getWindow().pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                window.close();
+                App.getWindow().close();
         }
 
         //window.setFramerateLimit(120);
 
         App.setDeltaTime();
 
-        App.spawn();
+        //App.spawn();
         App.updateAllBullets(App.getDeltaTime());
         App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
         App.updateAllBodies();
         Player.move(App.getDeltaTime());
+        App.updateView(Player.getX(), Player.getY());
         App.updateFPS();
-        Player.look(window);
+        Player.look(App.getWindow());
 
-        App.drawingFunction(window, Player.draw(), Player.getLegsSprite());
+        App.drawingFunction(Player.draw(), Player.getLegsSprite());
     }
 
     return 0;
