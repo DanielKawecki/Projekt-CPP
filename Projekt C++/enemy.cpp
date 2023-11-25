@@ -73,3 +73,8 @@ float Enemy::getX() const {
 float Enemy::getY() const {
 	return y;
 }
+
+int Enemy::getHealth(int damage) {
+	health -= damage;
+	return health;
+}

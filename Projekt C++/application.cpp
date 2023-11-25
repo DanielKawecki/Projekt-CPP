@@ -30,8 +30,8 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
     HUDText fps("0 fps", pixel_font, 28, sf::Color::Black, sf::Vector2f(10.f, 10.f));
     all_texts.push_back(fps);
 
-    HUDText round("round 1", pixel_font, 28, sf::Color::Black, sf::Vector2f(screenWidth / 2, 10.f));
-    all_texts.push_back(round);
+    HUDText points("0PTS", pixel_font, 28, sf::Color::Black, sf::Vector2f(screenWidth / 2, 10.f));
+    all_texts.push_back(points);
 }
 
 MyApplication::~MyApplication() {}
@@ -100,13 +100,18 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
     for (auto it = all_bullets.begin(); it != all_bullets.end(); ++it) {
         for (auto jt = all_enemies.begin(); jt != all_enemies.end(); ) {
             if (jt->checkCollision(it->getX(), it->getY())) {
-                Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
-                updatePoints();
-                all_bodies.push_back(body);
-                enemies_alive -= 1;
+
+                if (jt->getHealth(20) <= 0) {
+                    Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
+                    updatePoints();
+                    all_bodies.push_back(body);
+                    enemies_alive -= 1;
+                    jt = all_enemies.erase(jt);
+                }
+                
                 if (enemies_alive == 0)
                     timer_set = false;
-                jt = all_enemies.erase(jt);
+                
             }
             else {
                 ++jt;
@@ -139,7 +144,7 @@ void MyApplication::updateFPS() {
 
 void MyApplication::updatePoints() {
     points += 100;
-    all_texts[1].setContent(std::to_string(points) + "pts");
+    all_texts[1].setContent(std::to_string(points) + "PTS");
 }
 
 void MyApplication::setBreakTimer() {

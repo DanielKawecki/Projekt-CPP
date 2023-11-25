@@ -17,7 +17,8 @@ private:
 	float x_speed = 0.f;
 	float y_speed = 0.f;
 
-	float speed = 300.f;
+	float speed = 100.f;
+	int health = 100;
 
 	sf::Sprite enemy_sprite;
 
@@ -37,6 +38,8 @@ public:
 
 	float getX() const;
 	float getY() const;
+
+	int getHealth(int damege);
 
 };
 
