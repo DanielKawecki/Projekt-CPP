@@ -62,6 +62,9 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
     window.draw(player_legs);
     window.draw(player);
 
+    view.setCenter(screenWidth / 2, screenHeight / 2);
+    window.setView(view);
+
     for (size_t i = 0; i < all_texts.size(); i++) {
         window.draw(all_texts[i].getText());
     }
@@ -195,6 +198,10 @@ sf::Texture& MyApplication::getLegSprite(int index) {
 
 sf::RenderWindow& MyApplication::getWindow() {
     return window;
+}
+
+sf::View& MyApplication::getView() {
+    return view;
 }
 
 void MyApplication::updateView(float player_x, float player_y) {

@@ -78,8 +78,10 @@ void Player::move(float dt) {
 		shoot();
 }
 
-void Player::look(sf::RenderWindow &window) {
-	angle = atan2((sf::Mouse::getPosition(window).y - y), (sf::Mouse::getPosition(window).x - x)) * 180.f / M_PI;
+void Player::look(sf::RenderWindow& window, sf::View& view) {
+	sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+	sf::Vector2f world_mouse_position = window.mapPixelToCoords(mouse_position, view);
+	angle = atan2((world_mouse_position.y - y), (world_mouse_position.x - x)) * 180.f / M_PI;
 }
 
 void Player::shoot() {

@@ -49,7 +49,7 @@ public:
 
     void move(float dt);
 
-    void look(sf::RenderWindow &window);
+    void look(sf::RenderWindow& window, sf::View& view);
 
     void shoot();
 

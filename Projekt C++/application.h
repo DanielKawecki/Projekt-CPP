@@ -87,6 +87,7 @@ public:
     //sf::Texture& getTexture(const std::string& filename);
 
     sf::RenderWindow& getWindow();
+    sf::View& getView();
 
     void updateView(float player_x, float player_y);
 

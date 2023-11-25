@@ -34,7 +34,7 @@ int main()
         Player.move(App.getDeltaTime());
         App.updateView(Player.getX(), Player.getY());
         App.updateFPS();
-        Player.look(App.getWindow());
+        Player.look(App.getWindow(), App.getView());
 
         App.drawingFunction(Player.draw(), Player.getLegsSprite());
     }
