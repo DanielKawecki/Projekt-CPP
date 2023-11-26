@@ -6,6 +6,7 @@
 #include "bullet.h"
 #include "enemy.h"
 #include "body.h"
+#include "tile.h"
 
 #ifndef APPLICATION_H
 #define APPLICATION_H
@@ -25,6 +26,7 @@ private:
     std::vector<Enemy> all_enemies;
     std::vector<Body> all_bodies;
     std::vector<HUDText> all_texts;
+    std::vector<Tile> all_tiles;
 
     sf::Clock delta_clock;
     sf::Time delta_time;
@@ -32,6 +34,7 @@ private:
     sf::Clock break_clock;
     sf::Clock spawn_clock;
 
+    sf::Texture ground_texture;
     sf::Texture bullet_texture;
     sf::Texture player_texture;
     sf::Texture leg_texture;
@@ -81,6 +84,7 @@ public:
 
     sf::Texture& getPlayerSprite();
     sf::Texture& getLegSprite(int index);
+    sf::Texture& getGroundSpirte();
 
     //void loadTexturesFromDirectory(const std::string& directory);
 
@@ -90,6 +94,8 @@ public:
     sf::View& getView();
 
     void updateView(float player_x, float player_y);
+
+    void createTile(float x_, float y_);
 
 };
 

@@ -15,6 +15,9 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
     view.setCenter(0.f, 0.f);
     window.setView(view);
 
+    if (!ground_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 200, 16, 16))) {}
+    
+
     if (!bullet_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 150, 80, 5))) {}
     if (!player_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 0, 26, 19))) {}
     if (!body_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 50, 70, 50))) {}
@@ -46,15 +49,19 @@ int MyApplication::getScreenHeight() const {
 
 void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
     window.clear(sf::Color(120, 120, 120, 125));
+    
+    for (size_t i = 0; i < all_tiles.size(); i++) {
+        window.draw(all_tiles[i].getSprite());
+    }
 
     for (size_t i = 0; i < all_bodies.size(); i++) {
         window.draw(all_bodies[i].getSprite());
     }
-    
+
     for (size_t i = 0; i < all_bullets.size(); i++) {
         window.draw(all_bullets[i].getSprite());
     }
-    
+
     for (size_t i = 0; i < all_enemies.size(); i++) {
         window.draw(all_enemies[i].getSprite());
     }
@@ -195,6 +202,10 @@ sf::Texture& MyApplication::getLegSprite(int index) {
     return leg_frames[index];
 }
 
+sf::Texture& MyApplication::getGroundSpirte() {
+    return ground_texture;
+}
+
 //void MyApplication::loadTexturesFromDirectory(const std::string& directory) {}
 
 //void MyApplication::loadTexture(const std::string& filename) {}
@@ -212,4 +223,9 @@ sf::View& MyApplication::getView() {
 void MyApplication::updateView(float player_x, float player_y) {
     view.setCenter(player_x, player_y);
     window.setView(view);
+}
+
+void MyApplication::createTile(float x_, float y_) {
+    Tile tile(x_, y_, ground_texture);
+    all_tiles.push_back(tile);
 }

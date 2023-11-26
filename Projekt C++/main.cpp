@@ -11,6 +11,11 @@ int main()
     Player Player(App);
     App.createEnemy(900.f, 100.f);
     //App.createEnemy(700.f, 600.f);
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            App.createTile(i*48, j*48);
+        }
+    }
 
     //sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
 
@@ -35,7 +40,7 @@ int main()
         App.updateView(Player.getX(), Player.getY());
         App.updateFPS();
         Player.look(App.getWindow(), App.getView());
-
+        
         App.drawingFunction(Player.draw(), Player.getLegsSprite());
     }
 
