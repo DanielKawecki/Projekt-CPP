@@ -10,7 +10,7 @@ Bullet::Bullet(float x_, float y_, float angle_, int damage_, sf::Texture& bulle
 	damage = damage_;
 
 	bullet_sprite.setTexture(bullet_texture);
-	bullet_sprite.setOrigin(sf::Vector2f(20, 2.5));
+	bullet_sprite.setOrigin(sf::Vector2f(70, 2.5));
 	bullet_sprite.rotate(angle_);
 }
 

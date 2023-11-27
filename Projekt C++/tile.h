@@ -10,7 +10,7 @@ private:
 
 	bool wall = false;
 
-	sf::Vector2i size = sf::Vector2i(48, 48);
+	int size = 64;
 
 	sf::Sprite tile_sprite;
 
@@ -18,6 +18,12 @@ public:
 	Tile(float x_, float y_, sf::Texture& tile_texture, bool is_wall);
 
 	sf::Sprite getSprite();
+
+	bool checkCollision(float bullet_x, float bullet_y) const;
+
+	float getX();
+	float getY();
+	bool isWall() const;
 
 };
 

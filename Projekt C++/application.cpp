@@ -99,16 +99,47 @@ void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) 
     all_bullets.push_back(bullet);
 }
 
+//void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
+//    for (auto& enemy : all_enemies) {
+//        enemy.seekPlayer(player_x, player_y);
+//        enemy.update(all_enemies, dt);
+//    }
+//    
+//    for (auto it = all_bullets.begin(); it != all_bullets.end(); ++it) {
+//        for (auto jt = all_enemies.begin(); jt != all_enemies.end(); ) {
+//            if (jt->checkCollision(it->getX(), it->getY())) {
+//
+//                if (jt->getHealth(20) <= 0) {
+//                    Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
+//                    updatePoints();
+//                    all_bodies.push_back(body);
+//                    enemies_alive -= 1;
+//                    jt = all_enemies.erase(jt);
+//                }
+//                
+//                if (enemies_alive == 0)
+//                    timer_set = false;
+//                
+//            }
+//            else {
+//                ++jt;
+//            }
+//        }
+//    }
+//}
+
 void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
     for (auto& enemy : all_enemies) {
         enemy.seekPlayer(player_x, player_y);
         enemy.update(all_enemies, dt);
     }
-    
-    for (auto it = all_bullets.begin(); it != all_bullets.end(); ++it) {
+
+    for (auto it = all_bullets.begin(); it != all_bullets.end(); ) {
+        bool bulletRemoved = false;  // Flag to track whether the bullet is removed
+
+        // Check for collisions with enemies
         for (auto jt = all_enemies.begin(); jt != all_enemies.end(); ) {
             if (jt->checkCollision(it->getX(), it->getY())) {
-
                 if (jt->getHealth(20) <= 0) {
                     Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
                     updatePoints();
@@ -116,17 +147,38 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
                     enemies_alive -= 1;
                     jt = all_enemies.erase(jt);
                 }
-                
-                if (enemies_alive == 0)
-                    timer_set = false;
-                
+
+                // Erase the bullet and set the flag
+                it = all_bullets.erase(it);
+                bulletRemoved = true;
+                break;  // Exit the inner loop since the bullet is removed
             }
             else {
                 ++jt;
             }
         }
+
+        // If the bullet is not removed, check for collisions with walls
+        if (!bulletRemoved) {
+            for (const auto& tile : all_tiles) {
+                // Assuming each tile has a function like checkCollision for bullets
+                if (tile.checkCollision(it->getX(), it->getY()) && tile.isWall()) {
+                    //std::cout << "Collision" << "\n";
+                    // Erase the bullet and set the flag
+                    it = all_bullets.erase(it);
+                    bulletRemoved = true;
+                    break;  // Exit the loop since the bullet is removed
+                }
+            }
+        }
+
+        // If the flag is not set, the outer loop will increment `it` to move to the next bullet
+        if (!bulletRemoved) {
+            ++it;
+        }
     }
 }
+
 
 void MyApplication::createEnemy(float x, float y) {
     Enemy enemy(x, y, player_texture);
@@ -228,7 +280,7 @@ void MyApplication::updateView(float player_x, float player_y) {
 
 void MyApplication::createTile(float x_, float y_, bool is_wall) {
     if (is_wall) {
-        Tile tile(x_, y_, column_side_texture, false);
+        Tile tile(x_, y_, column_side_texture, is_wall);
         all_tiles.push_back(tile);
     }
 

@@ -15,3 +15,19 @@ Tile::Tile(float x_, float y_, sf::Texture& tile_texture_, bool is_wall) {
 sf::Sprite Tile::getSprite() {
 	return tile_sprite;
 }
+
+bool Tile::checkCollision(float bullet_x, float bullet_y) const {
+	return (bullet_x > x && bullet_x < (x + size) && bullet_y > y && bullet_y < (y + size));
+}
+
+float Tile::getX() {
+	return x;
+}
+
+float Tile::getY() {
+	return y;
+}
+
+bool Tile::isWall() const{
+	return wall;
+}
