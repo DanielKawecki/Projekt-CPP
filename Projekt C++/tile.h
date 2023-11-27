@@ -8,12 +8,14 @@ private:
 	float x;
 	float y;
 
+	bool wall = false;
+
 	sf::Vector2i size = sf::Vector2i(48, 48);
 
 	sf::Sprite tile_sprite;
 
 public:
-	Tile(float x_, float y_, sf::Texture& tile_texture);
+	Tile(float x_, float y_, sf::Texture& tile_texture, bool is_wall);
 
 	sf::Sprite getSprite();
 

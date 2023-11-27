@@ -15,8 +15,9 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
     view.setCenter(0.f, 0.f);
     window.setView(view);
 
-    if (!ground_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 200, 16, 16))) {}
-    
+    if (!ground_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 170, 32, 32))) {}
+    if (!column_side_texture.loadFromFile("spriteSheet.png", sf::IntRect(32, 170, 32, 32))) {}
+    if (!column_top_texture.loadFromFile("spriteSheet.png", sf::IntRect(64, 170, 32, 32))) {}
 
     if (!bullet_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 150, 80, 5))) {}
     if (!player_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 0, 26, 19))) {}
@@ -30,10 +31,10 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
         leg_frames.push_back(leg_texture);
     }
     if (!pixel_font.loadFromFile("pixelFont.ttf")) {}
-    HUDText fps("0 fps", pixel_font, 28, sf::Color::Black, sf::Vector2f(10.f, 10.f));
+    HUDText fps("0 fps", pixel_font, 28, sf::Color::White, sf::Vector2f(10.f, 10.f));
     all_texts.push_back(fps);
 
-    HUDText points("0PTS", pixel_font, 28, sf::Color::Black, sf::Vector2f(screenWidth / 2, 10.f));
+    HUDText points("0PTS", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 150.f, 10.f));
     all_texts.push_back(points);
 }
 
@@ -48,7 +49,7 @@ int MyApplication::getScreenHeight() const {
 }
 
 void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
-    window.clear(sf::Color(120, 120, 120, 125));
+    window.clear(sf::Color(26, 26, 26, 255));
     
     for (size_t i = 0; i < all_tiles.size(); i++) {
         window.draw(all_tiles[i].getSprite());
@@ -225,7 +226,14 @@ void MyApplication::updateView(float player_x, float player_y) {
     window.setView(view);
 }
 
-void MyApplication::createTile(float x_, float y_) {
-    Tile tile(x_, y_, ground_texture);
-    all_tiles.push_back(tile);
+void MyApplication::createTile(float x_, float y_, bool is_wall) {
+    if (is_wall) {
+        Tile tile(x_, y_, column_side_texture, false);
+        all_tiles.push_back(tile);
+    }
+
+    else {
+        Tile tile(x_, y_, ground_texture, false);
+        all_tiles.push_back(tile);
+    }
 }

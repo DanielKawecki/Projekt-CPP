@@ -35,6 +35,9 @@ private:
     sf::Clock spawn_clock;
 
     sf::Texture ground_texture;
+    sf::Texture column_side_texture;
+    sf::Texture column_top_texture;
+
     sf::Texture bullet_texture;
     sf::Texture player_texture;
     sf::Texture leg_texture;
@@ -95,7 +98,7 @@ public:
 
     void updateView(float player_x, float player_y);
 
-    void createTile(float x_, float y_);
+    void createTile(float x_, float y_, bool is_wall);
 
 };
 

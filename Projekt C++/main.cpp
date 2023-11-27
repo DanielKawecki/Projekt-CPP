@@ -13,7 +13,10 @@ int main()
     //App.createEnemy(700.f, 600.f);
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
-            App.createTile(i*48, j*48);
+            if (i == 5 && j == 5)
+                App.createTile(i * 64, j * 64, true);
+            else
+                App.createTile(i * 64, j * 64, false);
         }
     }
 
