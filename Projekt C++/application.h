@@ -27,6 +27,7 @@ private:
     std::vector<Body> all_bodies;
     std::vector<HUDText> all_texts;
     std::vector<Tile> all_tiles;
+    std::vector<std::string> map_layout;
 
     sf::Clock delta_clock;
     sf::Time delta_time;
@@ -99,6 +100,12 @@ public:
     void updateView(float player_x, float player_y);
 
     void createTile(float x_, float y_, bool is_wall);
+
+    std::vector<Tile>& getTileVector();
+
+    void setupMap();
+
+    bool mapCollision(float player_x, float player_y);
 
 };
 

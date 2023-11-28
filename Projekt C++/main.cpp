@@ -11,14 +11,16 @@ int main()
     Player Player(App);
     App.createEnemy(900.f, 100.f);
     //App.createEnemy(700.f, 600.f);
-    for (int i = 0; i < 10; i++) {
+    /*for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
             if (i == 5 && j == 5)
                 App.createTile(i * 64, j * 64, true);
             else
                 App.createTile(i * 64, j * 64, false);
         }
-    }
+    }*/
+    //App.createTile(500, 200, true);
+    App.setupMap();
 
     //sf::RenderWindow window(sf::VideoMode(App.getScreenWidth(), App.getScreenHeight()), "SFML works!");
 
@@ -39,7 +41,7 @@ int main()
         App.updateAllBullets(App.getDeltaTime());
         App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
         App.updateAllBodies();
-        Player.move(App.getDeltaTime());
+        Player.move(App.getDeltaTime(), App.getTileVector());
         App.updateView(Player.getX(), Player.getY());
         App.updateFPS();
         Player.look(App.getWindow(), App.getView());

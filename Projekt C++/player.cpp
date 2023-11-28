@@ -2,6 +2,7 @@
 #include "player.h"
 #include "bullet.h"
 #include "application.h"
+#include "tile.h"
 #include <cmath>
 #include <cstdlib>
 
@@ -32,7 +33,7 @@ sf::Sprite Player::getLegsSprite() {
 	return scaled_legs_sprite;
 }
 
-void Player::move(float dt) {
+void Player::move(float dt, std::vector<Tile>& all_tiles) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
 		speed_x -= acceleration * dt;
 
@@ -45,8 +46,31 @@ void Player::move(float dt) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		speed_y += acceleration * dt;
 
-	x += speed_x * dt;
-	y += speed_y * dt;
+	if (!App.mapCollision(x + speed_x * dt, y + speed_y * dt)) {
+		x += speed_x * dt;
+		y += speed_y * dt;
+	}
+
+	else if (!App.mapCollision(x + speed_x * dt, y)) {
+		x += speed_x * dt;
+	}
+
+	else if (!App.mapCollision(x, y + speed_y * dt)) {
+		y += speed_y * dt;
+	}
+
+	/*for (auto& tile : all_tiles) {
+		if (tile.isWall() && !tile.checkCollision(x + speed_x * dt, y + speed_y * dt)) {
+			x += speed_x * dt;
+			y += speed_y * dt;
+		}
+		
+		else if (tile.isWall() && !tile.checkCollision(x + speed_x * dt, y)) 
+			x += speed_x * dt;
+
+		else if (tile.isWall() && !tile.checkCollision(x, y + speed_y * dt))
+			y += speed_y * dt;
+	}*/
 
 	if (speed_x > speed_limit)
 		speed_x = speed_limit;

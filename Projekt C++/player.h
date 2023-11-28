@@ -14,8 +14,8 @@
 
 class Player {
 private:
-    float x = 100;
-    float y = 100;
+    float x = 200;
+    float y = 200;
     float speed_x = 0;
     float speed_y = 0;
     float speed_limit = 450;
@@ -47,7 +47,7 @@ public:
     sf::Sprite draw();
     sf::Sprite getLegsSprite();
 
-    void move(float dt);
+    void move(float dt, std::vector<Tile>& all_tiles);
 
     void look(sf::RenderWindow& window, sf::View& view);
 

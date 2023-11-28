@@ -289,3 +289,40 @@ void MyApplication::createTile(float x_, float y_, bool is_wall) {
         all_tiles.push_back(tile);
     }
 }
+
+std::vector<Tile>& MyApplication::getTileVector() {
+    return all_tiles;
+}
+
+void MyApplication::setupMap() {
+    map_layout = {
+        "####################",
+        "#        #         #",
+        "#        #         #",
+        "#                  #",
+        "#        #         #",
+        "#        #         #",
+        "####################"
+    };
+
+    // Assuming each tile has a size of 64x64
+    const float tileSize = 64.0f;
+
+    for (size_t i = 0; i < map_layout.size(); ++i) {
+        for (size_t j = 0; j < map_layout[i].size(); ++j) {
+            if (map_layout[i][j] == '#') {
+                // Create a tile at the position (j * tileSize, i * tileSize)
+                createTile(j * tileSize, i * tileSize, true);
+            }
+        }
+    }
+}
+
+bool MyApplication::mapCollision(float player_x, float player_y) {
+    for (auto& tile : all_tiles) {
+        if (tile.isWall() && tile.checkCollision(player_x, player_y))
+            return true;
+    }
+
+    return false;
+}
