@@ -10,7 +10,7 @@ private:
 
 	bool wall = false;
 
-	int size = 64;
+	float size = 65;
 
 	sf::Sprite tile_sprite;
 
