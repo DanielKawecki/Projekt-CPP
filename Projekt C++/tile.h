@@ -9,10 +9,14 @@ private:
 	float y;
 
 	bool wall = false;
-
 	float size = 65;
 
 	sf::Sprite tile_sprite;
+
+	Tile* parent;
+	float g = 0.f;
+	float h = 0.f;
+	float f = 0.f;
 
 public:
 	Tile(float x_, float y_, sf::Texture& tile_texture, bool is_wall);
@@ -24,6 +28,8 @@ public:
 	float getX();
 	float getY();
 	bool isWall() const;
+	std::vector<float> getCosts();
+	void setCosts(float g_, float h_, float f_);
 
 };
 

@@ -31,3 +31,13 @@ float Tile::getY() {
 bool Tile::isWall() const{
 	return wall;
 }
+
+std::vector<float> Tile::getCosts() {
+	return { g, h, f };
+}
+
+void Tile::setCosts(float g_, float h_, float f_) {
+	g = g_;
+	h = h_;
+	f = f_;
+}

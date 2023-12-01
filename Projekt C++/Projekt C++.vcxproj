@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="AStar.cpp" />
     <ClCompile Include="body.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="hudText.cpp" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
+    <ClInclude Include="AStar.h" />
     <ClInclude Include="body.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="enemy.h" />
