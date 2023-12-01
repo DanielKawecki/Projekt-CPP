@@ -99,35 +99,6 @@ void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) 
     all_bullets.push_back(bullet);
 }
 
-//void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
-//    for (auto& enemy : all_enemies) {
-//        enemy.seekPlayer(player_x, player_y);
-//        enemy.update(all_enemies, dt);
-//    }
-//    
-//    for (auto it = all_bullets.begin(); it != all_bullets.end(); ++it) {
-//        for (auto jt = all_enemies.begin(); jt != all_enemies.end(); ) {
-//            if (jt->checkCollision(it->getX(), it->getY())) {
-//
-//                if (jt->getHealth(20) <= 0) {
-//                    Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
-//                    updatePoints();
-//                    all_bodies.push_back(body);
-//                    enemies_alive -= 1;
-//                    jt = all_enemies.erase(jt);
-//                }
-//                
-//                if (enemies_alive == 0)
-//                    timer_set = false;
-//                
-//            }
-//            else {
-//                ++jt;
-//            }
-//        }
-//    }
-//}
-
 void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
     for (auto& enemy : all_enemies) {
         enemy.seekPlayer(player_x, player_y);
@@ -135,9 +106,9 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
     }
 
     for (auto it = all_bullets.begin(); it != all_bullets.end(); ) {
-        bool bulletRemoved = false;  // Flag to track whether the bullet is removed
+        bool bulletRemoved = false;  
+        it->update(dt);
 
-        // Check for collisions with enemies
         for (auto jt = all_enemies.begin(); jt != all_enemies.end(); ) {
             if (jt->checkCollision(it->getX(), it->getY())) {
                 if (jt->getHealth(20) <= 0) {
@@ -148,31 +119,25 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
                     jt = all_enemies.erase(jt);
                 }
 
-                // Erase the bullet and set the flag
                 it = all_bullets.erase(it);
                 bulletRemoved = true;
-                break;  // Exit the inner loop since the bullet is removed
+                break;  
             }
             else {
                 ++jt;
             }
         }
 
-        // If the bullet is not removed, check for collisions with walls
         if (!bulletRemoved) {
             for (const auto& tile : all_tiles) {
-                // Assuming each tile has a function like checkCollision for bullets
                 if (tile.checkCollision(it->getX(), it->getY()) && tile.isWall()) {
-                    //std::cout << "Collision" << "\n";
-                    // Erase the bullet and set the flag
                     it = all_bullets.erase(it);
                     bulletRemoved = true;
-                    break;  // Exit the loop since the bullet is removed
+                    break;  
                 }
             }
         }
 
-        // If the flag is not set, the outer loop will increment `it` to move to the next bullet
         if (!bulletRemoved) {
             ++it;
         }
@@ -299,21 +264,40 @@ void MyApplication::setupMap() {
         "####################",
         "#        #         #",
         "#        #         #",
-        "#                  #",
+        "#   ##       ##    #",
+        "#        #         #",
+        "#        #         #",
+        "#### ######### #####",
+        "#        #         #",
+        "#        #         #",
+        "#   ##       ##    #",
         "#        #         #",
         "#        #         #",
         "####################"
     };
 
-    // Assuming each tile has a size of 64x64
     const float tileSize = 64.0f;
+    a_star_tiles.resize(map_layout.size(), std::vector<Tile>(map_layout[0].size(), Tile(0.0f, 0.0f, ground_texture, false)));
+
 
     for (size_t i = 0; i < map_layout.size(); ++i) {
         for (size_t j = 0; j < map_layout[i].size(); ++j) {
             if (map_layout[i][j] == '#') {
-                // Create a tile at the position (j * tileSize, i * tileSize)
                 createTile(j * tileSize, i * tileSize, true);
             }
+            else
+                createTile(j * tileSize, i * tileSize, false);
+
+            for (int di = -1; di <= 1; ++di) {
+                for (int dj = -1; dj <= 1; ++dj) {
+                    int ni = static_cast<int>(i) + di;
+                    int nj = static_cast<int>(j) + dj;
+                    if (ni >= 0 && ni < a_star_tiles.size() && nj >= 0 && nj < a_star_tiles[i].size() && !a_star_tiles[ni][nj].isWall()) {
+                        a_star_tiles[i][j].addNeighbor(&a_star_tiles[ni][nj]);
+                    }
+                }
+            }
+
         }
     }
 }

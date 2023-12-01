@@ -28,6 +28,7 @@ private:
     std::vector<HUDText> all_texts;
     std::vector<Tile> all_tiles;
     std::vector<std::string> map_layout;
+    std::vector<std::vector<Tile>> a_star_tiles;
 
     sf::Clock delta_clock;
     sf::Time delta_time;
