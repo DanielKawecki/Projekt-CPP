@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 #ifndef TILE_H
 #define TILE_H
@@ -12,7 +13,8 @@ private:
 	float size = 65;
 
 	sf::Sprite tile_sprite;
-
+	std::vector<Tile*> neighbors;
+	
 	Tile* parent;
 	float g = 0.f;
 	float h = 0.f;
@@ -30,6 +32,10 @@ public:
 	bool isWall() const;
 	std::vector<float> getCosts();
 	void setCosts(float g_, float h_, float f_);
+	void addNeighbor(Tile* neighbor);
+	Tile* getParent();
+	std::vector<Tile*> getNeighbors();
+	void setParent(Tile* parent_);
 
 };
 

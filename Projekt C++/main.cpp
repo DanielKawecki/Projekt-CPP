@@ -4,6 +4,7 @@
 #include "player.h"
 #include "bullet.h"
 #include "enemy.h"
+#include "AStar.h"
 
 int main()
 {
@@ -11,6 +12,13 @@ int main()
     Player Player(App);
     //App.createEnemy(900.f, 100.f);
     App.setupMap();
+    AStar AStar(App.getAStarTiles());
+    std::vector<Tile*> path = AStar.findPath(App.getTile(1, 1), App.getTile(2, 3));
+    std::cout << "Path: ";
+    for (Tile* tile : path) {
+        std::cout << tile->getX() << tile->getY() << " ";
+    }
+
 
     while (App.getWindow().isOpen())
     {

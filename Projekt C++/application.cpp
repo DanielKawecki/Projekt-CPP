@@ -276,18 +276,21 @@ void MyApplication::setupMap() {
         "####################"
     };
 
-    const float tileSize = 64.0f;
+    const float tile_size = 64.0f;
     a_star_tiles.resize(map_layout.size(), std::vector<Tile>(map_layout[0].size(), Tile(0.0f, 0.0f, ground_texture, false)));
 
 
     for (size_t i = 0; i < map_layout.size(); ++i) {
         for (size_t j = 0; j < map_layout[i].size(); ++j) {
             if (map_layout[i][j] == '#') {
-                createTile(j * tileSize, i * tileSize, true);
+                createTile(j * tile_size, i * tile_size, true);
+                a_star_tiles[i][j] = Tile(j * tile_size, i * tile_size, column_side_texture, true);
             }
-            else
-                createTile(j * tileSize, i * tileSize, false);
-
+            else {
+                createTile(j * tile_size, i * tile_size, false);
+                a_star_tiles[i][j] = Tile(j * tile_size, i * tile_size, ground_texture, false);
+            }
+                
             for (int di = -1; di <= 1; ++di) {
                 for (int dj = -1; dj <= 1; ++dj) {
                     int ni = static_cast<int>(i) + di;
@@ -309,4 +312,12 @@ bool MyApplication::mapCollision(float player_x, float player_y) {
     }
 
     return false;
+}
+
+std::vector<std::vector<Tile>>& MyApplication::getAStarTiles() {
+    return a_star_tiles;
+}
+
+Tile* MyApplication::getTile(int row, int column) {
+    return &a_star_tiles[row][column];
 }

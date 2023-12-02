@@ -6,6 +6,7 @@ Tile::Tile(float x_, float y_, sf::Texture& tile_texture_, bool is_wall) {
 	y = y_;
 
 	wall = is_wall;
+	parent = nullptr;
 
 	tile_sprite.setTexture(tile_texture_);
 	tile_sprite.setPosition(x_, y_);
@@ -40,4 +41,20 @@ void Tile::setCosts(float g_, float h_, float f_) {
 	g = g_;
 	h = h_;
 	f = f_;
+}
+
+void Tile::addNeighbor(Tile* neighbor) {
+	neighbors.push_back(neighbor);
+}
+
+Tile* Tile::getParent() {
+	return parent;
+}
+
+std::vector<Tile*> Tile::getNeighbors() {
+	return neighbors;
+}
+
+void Tile::setParent(Tile* parent_) {
+	parent = parent_;
 }
