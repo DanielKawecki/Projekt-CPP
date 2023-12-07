@@ -319,5 +319,5 @@ std::vector<std::vector<Tile>>& MyApplication::getAStarTiles() {
 }
 
 Tile* MyApplication::getTile(int row, int column) {
-    return &a_star_tiles[row][column];
+    return &a_star_tiles[column][row];
 }

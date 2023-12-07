@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "enemy.h"
+#include "BFS.h"
 
 Enemy::Enemy(float x_, float y_, sf::Texture& enemy_texture) {
 	x = x_;

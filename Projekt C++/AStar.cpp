@@ -27,13 +27,15 @@ std::vector<Tile*> AStar::findPath(Tile* start, Tile* finish) {
 
 		for (Tile* neighbor : current->getNeighbors()) {
 			float tentativeG = current->getCosts()[0] + distance(current, neighbor);
-			std::cout << tentativeG << "\n";
 
+			//std::cout << "tentative: " << tentativeG << " neighbor: " << neighbor->getCosts()[0] << "\n";
 			if (tentativeG < neighbor->getCosts()[0]) {
+				
 				neighbor->setParent(current);
 				neighbor->setCosts(tentativeG, distance(neighbor, finish), tentativeG + distance(neighbor, finish));
 
 				if (!openSetContains(openSet, neighbor)) {
+					std::cout << "push" << "\n";
 					openSet.push(neighbor);
 				}
 			}

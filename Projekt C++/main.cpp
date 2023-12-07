@@ -4,7 +4,7 @@
 #include "player.h"
 #include "bullet.h"
 #include "enemy.h"
-#include "AStar.h"
+#include "BFS.h"
 
 int main()
 {
@@ -12,11 +12,11 @@ int main()
     Player Player(App);
     //App.createEnemy(900.f, 100.f);
     App.setupMap();
-    AStar AStar(App.getAStarTiles());
-    std::vector<Tile*> path = AStar.findPath(App.getTile(1, 1), App.getTile(2, 3));
-    std::cout << "Path: ";
+    BFS bfs(App.getAStarTiles());
+    std::vector<Tile*> path = bfs.findPath(App.getTile(1, 1), App.getTile(11, 1));
+    std::cout << "Path: \n";
     for (Tile* tile : path) {
-        std::cout << tile->getX() << tile->getY() << " ";
+        std::cout << tile->getX()/64 << " " << tile->getY()/64 << "\n";
     }
 
 

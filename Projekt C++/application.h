@@ -109,6 +109,7 @@ public:
     bool mapCollision(float player_x, float player_y);
 
     std::vector<std::vector<Tile>>& getAStarTiles();
+
     Tile* getTile(int row, int column);
 
 };

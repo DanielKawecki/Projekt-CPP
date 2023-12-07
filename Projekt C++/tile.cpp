@@ -33,16 +33,6 @@ bool Tile::isWall() const{
 	return wall;
 }
 
-std::vector<float> Tile::getCosts() {
-	return { g, h, f };
-}
-
-void Tile::setCosts(float g_, float h_, float f_) {
-	g = g_;
-	h = h_;
-	f = f_;
-}
-
 void Tile::addNeighbor(Tile* neighbor) {
 	neighbors.push_back(neighbor);
 }
@@ -57,4 +47,8 @@ std::vector<Tile*> Tile::getNeighbors() {
 
 void Tile::setParent(Tile* parent_) {
 	parent = parent_;
+}
+
+void Tile::setAsMarked() {
+	tile_sprite.setColor(sf::Color::Black);
 }
