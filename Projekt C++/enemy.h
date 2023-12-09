@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "BFS.h"
 
 #ifndef ENEMY_H
 #define ENEMY_H
@@ -22,15 +23,18 @@ private:
 
 	sf::Sprite enemy_sprite;
 
+	BFS bfs;
+
 public:
 
-	Enemy(float x_, float y_, sf::Texture& enemy_texture);
+	Enemy(float x_, float y_, sf::Texture& enemy_texture, std::vector<std::vector<Tile>>& tile);
 
 	void die(sf::Texture& body_texture);
 
 	bool checkCollision(float bullet_x, float bullet_y);
 
-	void seekPlayer(float player_x, float player_y);
+	//void seekPlayer(float player_x, float player_y);
+	void seekPlayer(Tile* start, Tile* finish);
 
 	void update(std::vector<Enemy>& all_enemies, float dt);
 

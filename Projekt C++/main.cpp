@@ -10,15 +10,8 @@ int main()
 {
     MyApplication App;
     Player Player(App);
-    //App.createEnemy(900.f, 100.f);
+    App.createEnemy(900.f, 100.f);
     App.setupMap();
-    BFS bfs(App.getAStarTiles());
-    std::vector<Tile*> path = bfs.findPath(App.getTile(1, 1), App.getTile(11, 1));
-    std::cout << "Path: \n";
-    for (Tile* tile : path) {
-        std::cout << tile->getX()/64 << " " << tile->getY()/64 << "\n";
-    }
-
 
     while (App.getWindow().isOpen())
     {
@@ -34,7 +27,7 @@ int main()
         App.setDeltaTime();
 
         //App.spawn();
-        //App.updateAllBullets(App.getDeltaTime());
+        App.updateAllBullets(App.getDeltaTime());
         App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
         App.updateAllBodies();
         Player.move(App.getDeltaTime(), App.getTileVector());

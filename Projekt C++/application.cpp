@@ -101,7 +101,9 @@ void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) 
 
 void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
     for (auto& enemy : all_enemies) {
-        enemy.seekPlayer(player_x, player_y);
+        Tile* player_tile = getTile((int)floor(player_x/64), (int)floor(player_y/64));
+        Tile* enemy_tile = getTile((int)floor(enemy.getX() / 64), (int)floor(enemy.getY() / 64));
+        enemy.seekPlayer(enemy_tile, player_tile);
         enemy.update(all_enemies, dt);
     }
 
@@ -146,7 +148,7 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
 
 
 void MyApplication::createEnemy(float x, float y) {
-    Enemy enemy(x, y, player_texture);
+    Enemy enemy(x, y, player_texture, getAStarTiles());
     all_enemies.push_back(enemy);
     enemies_alive += 1;
 }

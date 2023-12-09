@@ -3,7 +3,7 @@
 #include "enemy.h"
 #include "BFS.h"
 
-Enemy::Enemy(float x_, float y_, sf::Texture& enemy_texture) {
+Enemy::Enemy(float x_, float y_, sf::Texture& enemy_texture, std::vector<std::vector<Tile>>& tiles) : bfs(tiles) {
 	x = x_;
 	y = y_;
 
@@ -26,8 +26,13 @@ bool Enemy::checkCollision(float bullet_x, float bullet_y) {
 	return (bullet_x < (x + 20) && bullet_x >(x - 20) && bullet_y < (y + 20) && bullet_y >(y - 20));
 }
 
-void Enemy::seekPlayer(float player_x, float player_y) {
-	angle = atan2((player_y - y), (player_x - x)) * (180.f / M_PI);
+//void Enemy::seekPlayer(float player_x, float player_y) {
+//	angle = atan2((player_y - y), (player_x - x)) * (180.f / M_PI);
+//}
+
+void Enemy::seekPlayer(Tile* start, Tile* finish) {
+	std::vector<Tile*> path = bfs.findPath(start, finish);
+	angle = atan2((path[1]->getY() + 32 - y), (path[1]->getX() + 32 - x)) * (180.f / M_PI);
 }
 
 void Enemy::update(std::vector<Enemy>& all_enemies, float dt) {

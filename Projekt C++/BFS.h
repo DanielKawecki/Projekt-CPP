@@ -17,7 +17,9 @@ public:
 	BFS(std::vector<std::vector<Tile>>& tiles_);
 
 	std::vector<Tile*> findPath(Tile* start, Tile* finish);
-};
 
+	void clearData();
+
+};
 
 #endif

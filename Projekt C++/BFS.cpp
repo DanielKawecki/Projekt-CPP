@@ -5,10 +5,13 @@ BFS::BFS(std::vector<std::vector<Tile>>& tiles_) : tiles(tiles_) {}
 
 std::vector<Tile*> BFS::findPath(Tile* start, Tile* finish) {
 
+	//clearData();
+
 	openSet.push(start);
 	closeSet.insert(start);
 
 	while (!openSet.empty()) {
+
 		Tile* current = openSet.front();
 		openSet.pop();
 
@@ -32,4 +35,10 @@ std::vector<Tile*> BFS::findPath(Tile* start, Tile* finish) {
 
 	std::reverse(path.begin(), path.end());
 	return path;
+}
+
+void BFS::clearData() {
+	openSet = std::queue<Tile*>();
+	closeSet.clear();
+	path.clear();
 }
