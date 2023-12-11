@@ -10,8 +10,15 @@ int main()
 {
     MyApplication App;
     Player Player(App);
-    App.createEnemy(900.f, 100.f);
+    App.createEnemy(300.f, 100.f);
     App.setupMap();
+
+    /*BFS bfs(App.getAStarTiles());
+    std::vector<Tile*> path = bfs.findPath(App.getTile(1, 1), App.getTile(2, 3));
+    std::cout << "Path 1:" << "\n";
+    for (Tile* tile : path) {
+        std::cout << tile->getX()/64 << " " << tile->getY()/64 << std::endl;
+    }*/
 
     while (App.getWindow().isOpen())
     {

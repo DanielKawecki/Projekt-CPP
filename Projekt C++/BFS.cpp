@@ -1,11 +1,12 @@
 #include "BFS.h"
 #include "tile.h"
+#include <iostream>
 
 BFS::BFS(std::vector<std::vector<Tile>>& tiles_) : tiles(tiles_) {}
 
 std::vector<Tile*> BFS::findPath(Tile* start, Tile* finish) {
 
-	//clearData();
+	start->setParent(nullptr);
 
 	openSet.push(start);
 	closeSet.insert(start);
@@ -16,6 +17,7 @@ std::vector<Tile*> BFS::findPath(Tile* start, Tile* finish) {
 		openSet.pop();
 
 		if (current == finish) {
+			
 			while (current != nullptr) {
 				path.push_back(current);
 				current = current->getParent();
@@ -24,10 +26,9 @@ std::vector<Tile*> BFS::findPath(Tile* start, Tile* finish) {
 		}
 
 		for (Tile* neighbor : current->getNeighbors()) {
-			if (closeSet.find(neighbor) == closeSet.end()) {
+			if (closeSet.find(neighbor) == closeSet.end() && !neighbor->isWall()) {
 				neighbor->setParent(current);
-				if (!neighbor->isWall())
-					openSet.push(neighbor);
+				openSet.push(neighbor);
 				closeSet.insert(neighbor);
 			}
 		}

@@ -21,20 +21,21 @@ private:
 	float speed = 100.f;
 	int health = 100;
 
-	sf::Sprite enemy_sprite;
+	Tile* start;
+	Tile* finish;
 
-	BFS bfs;
+	sf::Sprite enemy_sprite;
 
 public:
 
-	Enemy(float x_, float y_, sf::Texture& enemy_texture, std::vector<std::vector<Tile>>& tile);
+	Enemy(float x_, float y_, sf::Texture& enemy_texture);
 
 	void die(sf::Texture& body_texture);
 
 	bool checkCollision(float bullet_x, float bullet_y);
 
 	//void seekPlayer(float player_x, float player_y);
-	void seekPlayer(Tile* start, Tile* finish);
+	void seekPlayer(Tile* start, Tile* finish, std::vector<std::vector<Tile>>& tiles);
 
 	void update(std::vector<Enemy>& all_enemies, float dt);
 

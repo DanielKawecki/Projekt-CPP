@@ -22,6 +22,9 @@ private:
 
     int points = 0;
 
+    /*Tile* player_tile;
+    Tile* enemy_tile;*/
+
     std::vector<Bullet> all_bullets;
     std::vector<Enemy> all_enemies;
     std::vector<Body> all_bodies;

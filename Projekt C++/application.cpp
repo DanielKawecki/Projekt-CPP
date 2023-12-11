@@ -101,9 +101,11 @@ void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) 
 
 void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
     for (auto& enemy : all_enemies) {
+
         Tile* player_tile = getTile((int)floor(player_x/64), (int)floor(player_y/64));
         Tile* enemy_tile = getTile((int)floor(enemy.getX() / 64), (int)floor(enemy.getY() / 64));
-        enemy.seekPlayer(enemy_tile, player_tile);
+        
+        enemy.seekPlayer(enemy_tile, player_tile, getAStarTiles());
         enemy.update(all_enemies, dt);
     }
 
@@ -148,7 +150,7 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
 
 
 void MyApplication::createEnemy(float x, float y) {
-    Enemy enemy(x, y, player_texture, getAStarTiles());
+    Enemy enemy(x, y, player_texture);
     all_enemies.push_back(enemy);
     enemies_alive += 1;
 }
@@ -294,13 +296,16 @@ void MyApplication::setupMap() {
             }
                 
             for (int di = -1; di <= 1; ++di) {
-                for (int dj = -1; dj <= 1; ++dj) {
-                    int ni = static_cast<int>(i) + di;
-                    int nj = static_cast<int>(j) + dj;
-                    if (ni >= 0 && ni < a_star_tiles.size() && nj >= 0 && nj < a_star_tiles[i].size() && !a_star_tiles[ni][nj].isWall()) {
-                        a_star_tiles[i][j].addNeighbor(&a_star_tiles[ni][nj]);
+                for (int dj = -1; dj <= 1; ++dj) 
+                    //if (di != 0 || dj != 0)
+                    if (di * di + dj * dj == 1)
+                    {
+                        int ni = static_cast<int>(i) + di;
+                        int nj = static_cast<int>(j) + dj;
+                        if (ni >= 0 && ni < a_star_tiles.size() && nj >= 0 && nj < a_star_tiles[i].size() && !a_star_tiles[ni][nj].isWall()) {
+                            a_star_tiles[i][j].addNeighbor(&a_star_tiles[ni][nj]);
+                        }
                     }
-                }
             }
 
         }

@@ -3,7 +3,7 @@
 #include "enemy.h"
 #include "BFS.h"
 
-Enemy::Enemy(float x_, float y_, sf::Texture& enemy_texture, std::vector<std::vector<Tile>>& tiles) : bfs(tiles) {
+Enemy::Enemy(float x_, float y_, sf::Texture& enemy_texture) {
 	x = x_;
 	y = y_;
 
@@ -30,9 +30,23 @@ bool Enemy::checkCollision(float bullet_x, float bullet_y) {
 //	angle = atan2((player_y - y), (player_x - x)) * (180.f / M_PI);
 //}
 
-void Enemy::seekPlayer(Tile* start, Tile* finish) {
-	std::vector<Tile*> path = bfs.findPath(start, finish);
-	angle = atan2((path[1]->getY() + 32 - y), (path[1]->getX() + 32 - x)) * (180.f / M_PI);
+void Enemy::seekPlayer(Tile* start_, Tile* finish_, std::vector<std::vector<Tile>>& tiles) {
+	
+	if (start_ != start || finish_ != finish) {
+		start = start_;
+		finish = finish_;
+
+		BFS bfs(tiles);
+		std::vector<Tile*> path = bfs.findPath(start, finish);
+
+	/*	std::cout << "Path 1:" << "\n";
+		for (Tile* tile : path) {
+			std::cout << tile->getX() / 64 << " " << tile->getY() / 64 << std::endl;
+		}*/
+
+		if (path.size() >= 2)
+			angle = atan2((path[1]->getY() + 32 - y), (path[1]->getX() + 32 - x)) * (180.f / M_PI);
+	}
 }
 
 void Enemy::update(std::vector<Enemy>& all_enemies, float dt) {
