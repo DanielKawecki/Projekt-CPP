@@ -9,11 +9,12 @@ private:
 	sf::Vector2f position;
 
 public:
-	HUDText(const std::string& content, const sf::Font& font, unsigned int characterSize, const sf::Color& color, const sf::Vector2f& position);
+	HUDText(const std::string& content, const sf::Font& font, unsigned int characterSize, const sf::Color& color, const sf::Vector2f& position, bool setCenter);
 
 	void setContent(const std::string& content);
 
 	sf::Text getText();
+
 };
 
 #endif 

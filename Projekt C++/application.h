@@ -21,9 +21,10 @@ private:
     sf::View view;
 
     int points = 0;
+    bool pause = false;
 
-    /*Tile* player_tile;
-    Tile* enemy_tile;*/
+    Tile* player_tile = nullptr;
+    Tile* enemy_tile = nullptr;
 
     std::vector<Bullet> all_bullets;
     std::vector<Enemy> all_enemies;
@@ -114,6 +115,10 @@ public:
     std::vector<std::vector<Tile>>& getAStarTiles();
 
     Tile* getTile(int row, int column);
+
+    bool isPause();
+
+    void setPause();
 
 };
 

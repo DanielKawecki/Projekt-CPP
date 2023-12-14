@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include "BFS.h"
 
-#ifndef ENEMY_H
-#define ENEMY_H
-
 #ifndef M_PI
 #define M_PI (3.14159265358979323846)
 #endif
+
+#ifndef ENEMY_H
+#define ENEMY_H
 
 class Enemy {
 private:
@@ -18,11 +18,12 @@ private:
 	float x_speed = 0.f;
 	float y_speed = 0.f;
 
-	float speed = 100.f;
-	int health = 100;
+	float speed = 200.f;
+	int health = 50;
 
-	Tile* start;
-	Tile* finish;
+	Tile* start = nullptr;
+	Tile* finish = nullptr;
+	std::vector<Tile*> path;
 
 	sf::Sprite enemy_sprite;
 
@@ -34,7 +35,6 @@ public:
 
 	bool checkCollision(float bullet_x, float bullet_y);
 
-	//void seekPlayer(float player_x, float player_y);
 	void seekPlayer(Tile* start, Tile* finish, std::vector<std::vector<Tile>>& tiles);
 
 	void update(std::vector<Enemy>& all_enemies, float dt);

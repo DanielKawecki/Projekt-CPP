@@ -59,19 +59,6 @@ void Player::move(float dt, std::vector<Tile>& all_tiles) {
 		y += speed_y * dt;
 	}
 
-	/*for (auto& tile : all_tiles) {
-		if (tile.isWall() && !tile.checkCollision(x + speed_x * dt, y + speed_y * dt)) {
-			x += speed_x * dt;
-			y += speed_y * dt;
-		}
-		
-		else if (tile.isWall() && !tile.checkCollision(x + speed_x * dt, y)) 
-			x += speed_x * dt;
-
-		else if (tile.isWall() && !tile.checkCollision(x, y + speed_y * dt))
-			y += speed_y * dt;
-	}*/
-
 	if (speed_x > speed_limit)
 		speed_x = speed_limit;
 	else if (speed_x < -speed_limit)

@@ -31,10 +31,10 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
         leg_frames.push_back(leg_texture);
     }
     if (!pixel_font.loadFromFile("pixelFont.ttf")) {}
-    HUDText fps("0 fps", pixel_font, 28, sf::Color::White, sf::Vector2f(10.f, 10.f));
+    HUDText fps("0 fps", pixel_font, 28, sf::Color::White, sf::Vector2f(10.f, 10.f), false);
     all_texts.push_back(fps);
 
-    HUDText points("0PTS", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 150.f, 10.f));
+    HUDText points("0PTS", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 150.f, 10.f), false);
     all_texts.push_back(points);
 }
 
@@ -73,6 +73,18 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
     view.setCenter(screenWidth / 2, screenHeight / 2);
     window.setView(view);
 
+    if (pause) {
+        
+        sf::RectangleShape pauseOverlay;
+        pauseOverlay.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
+        pauseOverlay.setFillColor(sf::Color(0, 0, 0, 150));
+
+        window.draw(pauseOverlay);
+
+        HUDText pause_text("GAME PAUSED", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth/2, (screenHeight/2)-40), true);
+        window.draw(pause_text.getText());
+    }
+
     for (size_t i = 0; i < all_texts.size(); i++) {
         window.draw(all_texts[i].getText());
     }
@@ -100,10 +112,12 @@ void MyApplication::createBullet(float x_, float y_, float angle_, int damage_) 
 }
 
 void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
+
+    player_tile = getTile((int)floor(player_x/64), (int)floor(player_y/64));
+
     for (auto& enemy : all_enemies) {
 
-        Tile* player_tile = getTile((int)floor(player_x/64), (int)floor(player_y/64));
-        Tile* enemy_tile = getTile((int)floor(enemy.getX() / 64), (int)floor(enemy.getY() / 64));
+        enemy_tile = getTile((int)floor(enemy.getX() / 64), (int)floor(enemy.getY() / 64));
         
         enemy.seekPlayer(enemy_tile, player_tile, getAStarTiles());
         enemy.update(all_enemies, dt);
@@ -185,7 +199,6 @@ void MyApplication::setBreakTimer() {
 
 void MyApplication::spawn() {
     if (spawn_clock.getElapsedTime().asSeconds() >= 1.f && enemies_alive < enemies_cap) {
-        //all_texts[1].setContent("alive " + std::to_string(enemies_alive));
 
         switch (rand() % 4) {
         case 0:
@@ -297,7 +310,6 @@ void MyApplication::setupMap() {
                 
             for (int di = -1; di <= 1; ++di) {
                 for (int dj = -1; dj <= 1; ++dj) 
-                    //if (di != 0 || dj != 0)
                     if (di * di + dj * dj == 1)
                     {
                         int ni = static_cast<int>(i) + di;
@@ -327,4 +339,19 @@ std::vector<std::vector<Tile>>& MyApplication::getAStarTiles() {
 
 Tile* MyApplication::getTile(int row, int column) {
     return &a_star_tiles[column][row];
+}
+
+bool MyApplication::isPause() {
+    return pause;
+}
+
+void MyApplication::setPause() {
+    static bool prev_escape = false;
+    bool current_escape = sf::Keyboard::isKeyPressed(sf::Keyboard::Escape);
+
+    if (current_escape && !prev_escape) {
+        pause = !pause;
+    }
+
+    prev_escape = current_escape;
 }

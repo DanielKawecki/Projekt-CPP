@@ -8,9 +8,10 @@ class Tile {
 private:
 	float x;
 	float y;
+	float size = 65;
 
 	bool wall = false;
-	float size = 65;
+	bool spawn = false;
 
 	sf::Sprite tile_sprite;
 	std::vector<Tile*> neighbors;

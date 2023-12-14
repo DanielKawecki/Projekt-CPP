@@ -26,10 +26,6 @@ bool Enemy::checkCollision(float bullet_x, float bullet_y) {
 	return (bullet_x < (x + 20) && bullet_x >(x - 20) && bullet_y < (y + 20) && bullet_y >(y - 20));
 }
 
-//void Enemy::seekPlayer(float player_x, float player_y) {
-//	angle = atan2((player_y - y), (player_x - x)) * (180.f / M_PI);
-//}
-
 void Enemy::seekPlayer(Tile* start_, Tile* finish_, std::vector<std::vector<Tile>>& tiles) {
 	
 	if (start_ != start || finish_ != finish) {
@@ -37,12 +33,7 @@ void Enemy::seekPlayer(Tile* start_, Tile* finish_, std::vector<std::vector<Tile
 		finish = finish_;
 
 		BFS bfs(tiles);
-		std::vector<Tile*> path = bfs.findPath(start, finish);
-
-	/*	std::cout << "Path 1:" << "\n";
-		for (Tile* tile : path) {
-			std::cout << tile->getX() / 64 << " " << tile->getY() / 64 << std::endl;
-		}*/
+		path = bfs.findPath(start, finish);
 
 		if (path.size() >= 2)
 			angle = atan2((path[1]->getY() + 32 - y), (path[1]->getX() + 32 - x)) * (180.f / M_PI);
@@ -66,8 +57,6 @@ void Enemy::update(std::vector<Enemy>& all_enemies, float dt) {
 	if (separationMagnitude > 0.f) {
 		separation /= separationMagnitude;
 	}
-
-	//std::cout << separation.x << "\t" << separation.y << "\n";
 
 	x_speed = speed * cos(angle * M_PI / 180.f);
 	y_speed = speed * sin(angle * M_PI / 180.f);
