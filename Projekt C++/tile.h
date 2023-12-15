@@ -19,7 +19,7 @@ private:
 	Tile* parent;
 
 public:
-	Tile(float x_, float y_, sf::Texture& tile_texture, bool is_wall);
+	Tile(float x_, float y_, sf::Texture& tile_texture, bool is_wall, bool is_spawn);
 
 	sf::Sprite getSprite();
 
@@ -28,6 +28,7 @@ public:
 	float getX();
 	float getY();
 	bool isWall() const;
+	bool isSpawn() const;
 	void addNeighbor(Tile* neighbor);
 	Tile* getParent();
 	std::vector<Tile*> getNeighbors();

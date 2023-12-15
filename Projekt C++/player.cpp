@@ -109,3 +109,7 @@ float Player::getX() const {
 float Player::getY() const {
 	return y;
 }
+
+void Player::checkEnemies(std::vector<Enemy> all_enemies) {
+
+}

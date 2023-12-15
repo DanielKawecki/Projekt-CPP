@@ -56,6 +56,8 @@ public:
     float getX() const;
     float getY() const;
 
+    void checkEnemies(std::vector<Enemy> all_enemies);
+
 };
 
 #endif

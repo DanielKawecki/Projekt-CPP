@@ -10,9 +10,10 @@ int main()
 {
     MyApplication App;
     Player Player(App);
-    App.createEnemy(300.f, 100.f);
-    App.createEnemy(400.f, 500.f);
+    //App.createEnemy(300.f, 100.f);
+    //App.createEnemy(400.f, 500.f);
     App.setupMap();
+    App.setupOverlay();
 
     while (App.getWindow().isOpen())
     {
@@ -29,8 +30,7 @@ int main()
         App.updateView(Player.getX(), Player.getY());
 
         if (!App.isPause()) {
-            //App.spawn();
-            App.updateAllBullets(App.getDeltaTime());
+            App.spawn();
             App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
             App.updateAllBodies();
             Player.move(App.getDeltaTime(), App.getTileVector());

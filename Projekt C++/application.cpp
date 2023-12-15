@@ -74,10 +74,6 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
     window.setView(view);
 
     if (pause) {
-        
-        sf::RectangleShape pauseOverlay;
-        pauseOverlay.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
-        pauseOverlay.setFillColor(sf::Color(0, 0, 0, 150));
 
         window.draw(pauseOverlay);
 
@@ -200,22 +196,8 @@ void MyApplication::setBreakTimer() {
 void MyApplication::spawn() {
     if (spawn_clock.getElapsedTime().asSeconds() >= 1.f && enemies_alive < enemies_cap) {
 
-        switch (rand() % 4) {
-        case 0:
-            createEnemy((rand() % 100) + screenWidth + 50, (rand() % 720));
-        
-        case 1:
-            createEnemy((rand() % 100) - 50, (rand() % 720));
-
-        case 2:
-            createEnemy((rand() % 1280), (rand() % 100) + screenHeight + 50);
-
-        case 3:
-            createEnemy((rand() % 1280), (rand() % 100) - 50);
-
-        default:
-            break;
-        }
+        float choice = rand() % all_spawnpoints.size();
+        createEnemy(all_spawnpoints[choice].x, all_spawnpoints[choice].y);
         
         spawn_clock.restart();
     }
@@ -260,14 +242,14 @@ void MyApplication::updateView(float player_x, float player_y) {
     window.setView(view);
 }
 
-void MyApplication::createTile(float x_, float y_, bool is_wall) {
+void MyApplication::createTile(float x_, float y_, bool is_wall, bool is_spawn) {
     if (is_wall) {
-        Tile tile(x_, y_, column_side_texture, is_wall);
+        Tile tile(x_, y_, column_side_texture, is_wall, is_spawn);
         all_tiles.push_back(tile);
     }
 
     else {
-        Tile tile(x_, y_, ground_texture, false);
+        Tile tile(x_, y_, ground_texture, false, false);
         all_tiles.push_back(tile);
     }
 }
@@ -279,7 +261,7 @@ std::vector<Tile>& MyApplication::getTileVector() {
 void MyApplication::setupMap() {
     map_layout = {
         "####################",
-        "#        #         #",
+        "#s       #        s#",
         "#        #         #",
         "#   ##       ##    #",
         "#        #         #",
@@ -289,23 +271,28 @@ void MyApplication::setupMap() {
         "#        #         #",
         "#   ##       ##    #",
         "#        #         #",
-        "#        #         #",
+        "#s       #        s#",
         "####################"
     };
 
     const float tile_size = 64.0f;
-    a_star_tiles.resize(map_layout.size(), std::vector<Tile>(map_layout[0].size(), Tile(0.0f, 0.0f, ground_texture, false)));
+    a_star_tiles.resize(map_layout.size(), std::vector<Tile>(map_layout[0].size(), Tile(0.0f, 0.0f, ground_texture, false, false)));
 
 
     for (size_t i = 0; i < map_layout.size(); ++i) {
         for (size_t j = 0; j < map_layout[i].size(); ++j) {
             if (map_layout[i][j] == '#') {
-                createTile(j * tile_size, i * tile_size, true);
-                a_star_tiles[i][j] = Tile(j * tile_size, i * tile_size, column_side_texture, true);
+                createTile(j * tile_size, i * tile_size, true, false);
+                a_star_tiles[i][j] = Tile(j * tile_size, i * tile_size, column_side_texture, true, false);
+            }
+            else if (map_layout[i][j] == 's') {
+                createTile(j * tile_size, i * tile_size, false, true);
+                a_star_tiles[i][j] = Tile(j * tile_size, i * tile_size, ground_texture, false, true);
+                all_spawnpoints.push_back(sf::Vector2f(j * tile_size, i * tile_size));
             }
             else {
-                createTile(j * tile_size, i * tile_size, false);
-                a_star_tiles[i][j] = Tile(j * tile_size, i * tile_size, ground_texture, false);
+                createTile(j * tile_size, i * tile_size, false, false);
+                a_star_tiles[i][j] = Tile(j * tile_size, i * tile_size, ground_texture, false, false);
             }
                 
             for (int di = -1; di <= 1; ++di) {
@@ -354,4 +341,9 @@ void MyApplication::setPause() {
     }
 
     prev_escape = current_escape;
+}
+
+void MyApplication::setupOverlay() {
+    pauseOverlay.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
+    pauseOverlay.setFillColor(sf::Color(0, 0, 0, 150));
 }

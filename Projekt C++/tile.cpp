@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include "tile.h"
 
-Tile::Tile(float x_, float y_, sf::Texture& tile_texture_, bool is_wall) {
+Tile::Tile(float x_, float y_, sf::Texture& tile_texture_, bool is_wall, bool is_spawn) {
 	x = x_;
 	y = y_;
 
 	wall = is_wall;
+	spawn = is_spawn;
 	parent = nullptr;
 
 	tile_sprite.setTexture(tile_texture_);
@@ -29,8 +30,12 @@ float Tile::getY() {
 	return y;
 }
 
-bool Tile::isWall() const{
+bool Tile::isWall() const {
 	return wall;
+}
+
+bool Tile::isSpawn() const {
+	return spawn;
 }
 
 void Tile::addNeighbor(Tile* neighbor) {

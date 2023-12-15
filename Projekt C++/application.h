@@ -22,6 +22,7 @@ private:
 
     int points = 0;
     bool pause = false;
+    sf::RectangleShape pauseOverlay;
 
     Tile* player_tile = nullptr;
     Tile* enemy_tile = nullptr;
@@ -33,6 +34,7 @@ private:
     std::vector<Tile> all_tiles;
     std::vector<std::string> map_layout;
     std::vector<std::vector<Tile>> a_star_tiles;
+    std::vector<sf::Vector2f> all_spawnpoints;
 
     sf::Clock delta_clock;
     sf::Time delta_time;
@@ -104,7 +106,7 @@ public:
 
     void updateView(float player_x, float player_y);
 
-    void createTile(float x_, float y_, bool is_wall);
+    void createTile(float x_, float y_, bool is_wall, bool is_spawn);
 
     std::vector<Tile>& getTileVector();
 
@@ -119,6 +121,8 @@ public:
     bool isPause();
 
     void setPause();
+
+    void setupOverlay();
 
 };
 
