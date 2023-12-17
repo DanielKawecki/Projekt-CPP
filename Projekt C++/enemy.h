@@ -14,12 +14,13 @@ private:
 	float x;
 	float y;
 	float angle = 180.f;
+	float half_size = 20.f;
 
 	float x_speed = 0.f;
 	float y_speed = 0.f;
 
 	float speed = 200.f;
-	int health = 50;
+	int health = 30;
 
 	Tile* start = nullptr;
 	Tile* finish = nullptr;
@@ -45,6 +46,8 @@ public:
 	float getY() const;
 
 	int getHealth(int damege);
+
+	bool checkCollision(float player_x, float player_y) const;
 
 };
 

@@ -87,3 +87,7 @@ int Enemy::getHealth(int damage) {
 	health -= damage;
 	return health;
 }
+
+bool Enemy::checkCollision(float player_x, float player_y) const {
+	return (player_x > (x - half_size) && player_x < (x + half_size) && player_y > (y - half_size) && player_y < (y + half_size));
+}

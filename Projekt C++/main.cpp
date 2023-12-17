@@ -33,12 +33,14 @@ int main()
             App.spawn();
             App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
             App.updateAllBodies();
-            Player.move(App.getDeltaTime(), App.getTileVector());
+            Player.move(App.getDeltaTime(), App.getTileVector(), App.getEnemiesVector());
             Player.look(App.getWindow(), App.getView());
+            Player.checkEnemies();
         }
         
         App.setPause();
         App.updateFPS();
+        App.updateHealth(Player.getHealth());
         
         App.drawingFunction(Player.draw(), Player.getLegsSprite());
     }

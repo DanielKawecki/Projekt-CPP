@@ -33,7 +33,7 @@ sf::Sprite Player::getLegsSprite() {
 	return scaled_legs_sprite;
 }
 
-void Player::move(float dt, std::vector<Tile>& all_tiles) {
+void Player::move(float dt, std::vector<Tile>& all_tiles, std::vector<Enemy>& all_enemies) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
 		speed_x -= acceleration * dt;
 
@@ -46,16 +46,19 @@ void Player::move(float dt, std::vector<Tile>& all_tiles) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		speed_y += acceleration * dt;
 
-	if (!App.mapCollision(x + speed_x * dt, y + speed_y * dt)) {
+	float new_pos_x = x + speed_x * dt;
+	float new_pos_y = y + speed_y * dt;
+
+	if (!App.mapCollision(new_pos_x, new_pos_y) && !App.enemyCollision(new_pos_x, new_pos_y)) {
 		x += speed_x * dt;
 		y += speed_y * dt;
 	}
 
-	else if (!App.mapCollision(x + speed_x * dt, y)) {
+	else if (!App.mapCollision(new_pos_x, y) && !App.enemyCollision(new_pos_x, y)) {
 		x += speed_x * dt;
 	}
 
-	else if (!App.mapCollision(x, y + speed_y * dt)) {
+	else if (!App.mapCollision(x, new_pos_y) && !App.enemyCollision(x, new_pos_y)) {
 		y += speed_y * dt;
 	}
 
@@ -110,6 +113,14 @@ float Player::getY() const {
 	return y;
 }
 
-void Player::checkEnemies(std::vector<Enemy> all_enemies) {
+void Player::checkEnemies() {
+	if (App.enemyCollision(x, y) && damage_clock.getElapsedTime() >= damage_cooldown && health > 0) {
+		health -= 5;
+		damage_clock.restart();
+		std::cout << health << std::endl;
+	}
+}
 
+int Player::getHealth() const {
+	return health;
 }

@@ -114,6 +114,8 @@ public:
 
     bool mapCollision(float player_x, float player_y);
 
+    bool enemyCollision(float player_x, float player_y);
+
     std::vector<std::vector<Tile>>& getAStarTiles();
 
     Tile* getTile(int row, int column);
@@ -123,6 +125,10 @@ public:
     void setPause();
 
     void setupOverlay();
+
+    std::vector<Enemy>& getEnemiesVector();
+
+    void updateHealth(int health);
 
 };
 

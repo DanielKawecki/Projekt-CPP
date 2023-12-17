@@ -22,6 +22,10 @@ private:
     float acceleration = 4600;
     float friction = 2800;
 
+    sf::Clock damage_clock;
+    sf::Time damage_cooldown = sf::seconds(0.2);
+    int health = 100;
+
     float angle = 0.f;
 
     float firerate = 500;
@@ -47,7 +51,7 @@ public:
     sf::Sprite draw();
     sf::Sprite getLegsSprite();
 
-    void move(float dt, std::vector<Tile>& all_tiles);
+    void move(float dt, std::vector<Tile>& all_tiles, std::vector<Enemy>& all_enemies);
 
     void look(sf::RenderWindow& window, sf::View& view);
 
@@ -56,7 +60,9 @@ public:
     float getX() const;
     float getY() const;
 
-    void checkEnemies(std::vector<Enemy> all_enemies);
+    void checkEnemies();
+
+    int getHealth() const;
 
 };
 

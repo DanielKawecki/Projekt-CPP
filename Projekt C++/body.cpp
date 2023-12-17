@@ -18,7 +18,7 @@ sf::Sprite Body::getSprite() {
 
 bool Body::checkExixtTime() {
 	exist_time = exist_clock.getElapsedTime();
-	if (exist_time.asSeconds() > 2.f)
+	if (exist_time.asSeconds() > 3.f)
 		return true;
 	else
 		return false;

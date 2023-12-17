@@ -36,6 +36,9 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
 
     HUDText points("0PTS", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 150.f, 10.f), false);
     all_texts.push_back(points);
+
+    HUDText health("100HP", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 150.f, 40.f), false);
+    all_texts.push_back(health);
 }
 
 MyApplication::~MyApplication() {}
@@ -320,6 +323,15 @@ bool MyApplication::mapCollision(float player_x, float player_y) {
     return false;
 }
 
+bool MyApplication::enemyCollision(float player_x, float player_y) {
+    for (auto& enemy : all_enemies) {
+        if (enemy.checkCollision(player_x, player_y))
+            return true;
+    }
+
+    return false;
+}
+
 std::vector<std::vector<Tile>>& MyApplication::getAStarTiles() {
     return a_star_tiles;
 }
@@ -346,4 +358,12 @@ void MyApplication::setPause() {
 void MyApplication::setupOverlay() {
     pauseOverlay.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
     pauseOverlay.setFillColor(sf::Color(0, 0, 0, 150));
+}
+
+std::vector<Enemy>& MyApplication::getEnemiesVector() {
+    return all_enemies;
+}
+
+void MyApplication::updateHealth(int health) {
+    all_texts[2].setContent(std::to_string(health) + "HP");
 }
