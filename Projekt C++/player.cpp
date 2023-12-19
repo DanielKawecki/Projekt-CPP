@@ -7,6 +7,9 @@
 #include <cstdlib>
 
 Player::Player(MyApplication& App_) : App(App_) {
+	x = initial_x;
+	y = initial_y;
+
 	shot_cooldown = sf::seconds(60.f) / firerate;
 
 	player_sprite.setTexture(App.getPlayerSprite());
@@ -117,10 +120,18 @@ void Player::checkEnemies() {
 	if (App.enemyCollision(x, y) && damage_clock.getElapsedTime() >= damage_cooldown && health > 0) {
 		health -= 5;
 		damage_clock.restart();
-		std::cout << health << std::endl;
 	}
 }
 
 int Player::getHealth() const {
 	return health;
+}
+
+void Player::setHealth(int health_) {
+	health = health_;
+}
+
+void Player::resetPos() {
+	x = initial_x;
+	y = initial_y;
 }

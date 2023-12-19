@@ -84,6 +84,16 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
         window.draw(pause_text.getText());
     }
 
+    if (game_over) {
+        window.draw(pauseOverlay);
+
+        HUDText game_over_text("GAME OVER", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 40), true);
+        HUDText reset_text("Press SPACE to start again", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) + 10), true);
+        
+        window.draw(game_over_text.getText());
+        window.draw(reset_text.getText());
+    }
+
     for (size_t i = 0; i < all_texts.size(); i++) {
         window.draw(all_texts[i].getText());
     }
@@ -366,4 +376,36 @@ std::vector<Enemy>& MyApplication::getEnemiesVector() {
 
 void MyApplication::updateHealth(int health) {
     all_texts[2].setContent(std::to_string(health) + "HP");
+
+    if (health == 0)
+        game_over = true;
+}
+
+bool MyApplication::isGameOver() {
+    return game_over;
+}
+
+void MyApplication::reset() {
+    points = 0;
+    enemies_alive = 0;
+    all_texts[1].setContent(std::to_string(0) + "PTS");
+    game_over = false;
+    
+    all_enemies.clear();
+    all_bodies.clear();
+
+}
+
+bool MyApplication::checkForReset() {
+    static bool prev_space = false;
+    bool current_space = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+
+    if (current_space && !prev_space) {
+        reset();
+        return true;
+    }
+
+   
+    prev_space = current_space;
+    return false;
 }
