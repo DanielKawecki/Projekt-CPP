@@ -33,12 +33,24 @@ int main()
             App.spawn();
             App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
             App.updateAllBodies();
-            Player.move(App.getDeltaTime(), App.getTileVector(), App.getEnemiesVector());
-            Player.look(App.getWindow(), App.getView());
+
+            if (!App.isGameOver()) {
+                Player.move(App.getDeltaTime(), App.getTileVector(), App.getEnemiesVector());
+                Player.look(App.getWindow(), App.getView());
+            }
+
             Player.checkEnemies();
         }
         
-        App.setPause();
+        if (!App.isGameOver())
+            App.setPause();
+        else {
+            if (App.checkForReset()) {
+                Player.setHealth(100);
+                Player.resetPos();
+            }
+        }
+
         App.updateFPS();
         App.updateHealth(Player.getHealth());
         

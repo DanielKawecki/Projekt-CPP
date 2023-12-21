@@ -14,8 +14,10 @@
 
 class Player {
 private:
-    float x = 200;
-    float y = 200;
+    float x;
+    float y;
+    float initial_x = 200;
+    float initial_y = 200;
     float speed_x = 0;
     float speed_y = 0;
     float speed_limit = 450;
@@ -23,7 +25,7 @@ private:
     float friction = 2800;
 
     sf::Clock damage_clock;
-    sf::Time damage_cooldown = sf::seconds(0.2);
+    sf::Time damage_cooldown = sf::seconds(0.05);
     int health = 100;
 
     float angle = 0.f;
@@ -63,6 +65,10 @@ public:
     void checkEnemies();
 
     int getHealth() const;
+
+    void setHealth(int health_);
+
+    void resetPos();
 
 };
 

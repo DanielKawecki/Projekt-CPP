@@ -21,8 +21,11 @@ private:
     sf::View view;
 
     int points = 0;
+
     bool pause = false;
     sf::RectangleShape pauseOverlay;
+
+    bool game_over = false;
 
     Tile* player_tile = nullptr;
     Tile* enemy_tile = nullptr;
@@ -130,6 +133,11 @@ public:
 
     void updateHealth(int health);
 
+    bool isGameOver();
+
+    void reset();
+
+    bool checkForReset();
 };
 
 #endif 
