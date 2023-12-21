@@ -57,7 +57,7 @@ private:
 
     int fps = 0.f;
 
-    int enemies_cap = 6;
+    int enemies_cap = 12;
     int enemies_alive = 0;
     int round = 0;
     bool timer_set = false;

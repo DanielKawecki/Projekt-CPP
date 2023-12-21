@@ -19,7 +19,7 @@ private:
 	float x_speed = 0.f;
 	float y_speed = 0.f;
 
-	float speed = 200.f;
+	float speed = 270.f;
 	int health = 30;
 
 	Tile* start = nullptr;
