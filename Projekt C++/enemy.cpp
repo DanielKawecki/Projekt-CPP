@@ -3,14 +3,14 @@
 #include "enemy.h"
 #include "BFS.h"
 
-Enemy::Enemy(float x_, float y_, sf::Texture& enemy_texture) {
+Enemy::Enemy(float x_, float y_, std::vector<sf::Texture>& enemy_frames_) : enemy_frames(enemy_frames_) {
 	x = x_;
 	y = y_;
 
-	enemy_sprite.setTexture(enemy_texture);
+	enemy_sprite.setTexture(enemy_frames[0]);
 	enemy_sprite.scale(3.f, 3.f);
 	enemy_sprite.setOrigin(13.f, 10.f);
-	enemy_sprite.setRotation(angle);
+	//enemy_sprite.setRotation(angle);
 	enemy_sprite.setPosition(x_, y_);
 }
 
@@ -37,6 +37,11 @@ void Enemy::seekPlayer(Tile* start_, Tile* finish_, std::vector<std::vector<Tile
 
 		if (path.size() >= 2)
 			angle = atan2((path[1]->getY() + 32 - y), (path[1]->getX() + 32 - x)) * (180.f / M_PI);
+
+		if (angle > -90.f && angle < 90.f)
+			enemy_sprite.setScale(3.f, 3.f);
+		else
+			enemy_sprite.setScale(-3.f, 3.f);
 	}
 }
 
@@ -67,11 +72,17 @@ void Enemy::update(std::vector<Enemy>& all_enemies, float dt) {
 	x += x_speed * dt;
 	y += y_speed * dt;
 
+	if (animation_clock.getElapsedTime().asMilliseconds() >= animation_speed) {
+		frame_count = (frame_count + 1) % 12;
+		enemy_sprite.setTexture(enemy_frames[frame_count]);
+		animation_clock.restart();
+	}
+
 }
 
 sf::Sprite Enemy::getSprite() {
 	enemy_sprite.setPosition(x, y);
-	enemy_sprite.setRotation(angle);
+	//enemy_sprite.setRotation(angle);
 	return enemy_sprite;
 }
 
@@ -90,4 +101,8 @@ int Enemy::getHealth(int damage) {
 
 bool Enemy::checkCollision(float player_x, float player_y) const {
 	return (player_x > (x - half_size) && player_x < (x + half_size) && player_y > (y - half_size) && player_y < (y + half_size));
+}
+
+void Enemy::setTexture(sf::Texture& new_texture) {
+	enemy_sprite.setTexture(new_texture);
 }

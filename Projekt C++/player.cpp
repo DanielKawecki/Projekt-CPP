@@ -14,12 +14,17 @@ Player::Player(MyApplication& App_) : App(App_) {
 
 	player_sprite.setTexture(App.getPlayerSprite());
 	player_sprite.scale(3.f, 3.f);
-	player_sprite.setOrigin(13.f, 10.f);
+	player_sprite.setOrigin(12.f, 5.f);
 }
 
 Player::~Player() {}
 
 sf::Sprite Player::draw() {
+	if (angle > -90.f && angle < 90.f)
+		player_sprite.setScale(3.f, 3.f);
+	else
+		player_sprite.setScale(3.f, -3.f);
+
 	player_sprite.setPosition(sf::Vector2f(x, y));
 	player_sprite.setRotation(angle);
 	return player_sprite;
@@ -27,11 +32,14 @@ sf::Sprite Player::draw() {
 
 sf::Sprite Player::getLegsSprite() {
 	legs_sprite.setPosition(x, y);
-	legs_sprite.setRotation(angle);
 	legs_sprite.setOrigin(16.f, 16.f);
 	
 	sf::Sprite scaled_legs_sprite = legs_sprite;
-	scaled_legs_sprite.scale(3.f, 3.f);
+	
+	if (angle > -90.f && angle < 90.f)
+		scaled_legs_sprite.setScale(3.f, 3.f);
+	else
+		scaled_legs_sprite.setScale(-3.f, 3.f);
 
 	return scaled_legs_sprite;
 }
@@ -84,12 +92,12 @@ void Player::move(float dt, std::vector<Tile>& all_tiles, std::vector<Enemy>& al
 		is_moving = false;
 
 	if (is_moving && animation_clock.getElapsedTime().asMilliseconds() >= animation_speed) {
-		frame_count = (frame_count + 1) % 14;
+		frame_count = (frame_count + 1) % 12;
 		legs_sprite.setTexture(App.getLegSprite(frame_count));
 		animation_clock.restart();
 	}
 	else if(!is_moving)
-		legs_sprite.setTexture(App.getLegSprite(7));
+		legs_sprite.setTexture(App.getLegSprite(0));
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		shoot();

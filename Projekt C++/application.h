@@ -51,9 +51,11 @@ private:
 
     sf::Texture bullet_texture;
     sf::Texture player_texture;
+    sf::Texture enemy_texture;
     sf::Texture leg_texture;
     sf::Texture body_texture;
     std::vector<sf::Texture> leg_frames;
+    std::vector<sf::Texture> enemy_frames;
     sf::Font pixel_font;
 
     std::unordered_map<std::string, sf::Texture> all_textures;

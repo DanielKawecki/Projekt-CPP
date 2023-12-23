@@ -163,6 +163,7 @@
   <ItemGroup>
     <Image Include="bullet.png" />
     <Image Include="spriteSheet.png" />
+    <Image Include="spriteSheet2.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\..\..\..\Downloads\minecraft\pixelFont.ttf" />

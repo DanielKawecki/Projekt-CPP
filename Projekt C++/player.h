@@ -35,7 +35,7 @@ private:
     sf::Time shot_cooldown = sf::seconds(10.f);
 
     sf::Clock animation_clock;
-    int animation_speed = 45;
+    int animation_speed = 65;
     int frame_count = 0;
     bool is_moving = false;
 

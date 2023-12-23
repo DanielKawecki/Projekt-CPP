@@ -79,6 +79,9 @@
     <Image Include="spriteSheet.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="spriteSheet2.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\..\..\..\Downloads\minecraft\pixelFont.ttf">

@@ -15,21 +15,24 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
     view.setCenter(0.f, 0.f);
     window.setView(view);
 
-    if (!ground_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 170, 32, 32))) {}
-    if (!column_side_texture.loadFromFile("spriteSheet.png", sf::IntRect(32, 170, 32, 32))) {}
+    if (!ground_texture.loadFromFile("spriteSheet2.png", sf::IntRect(4*32, 32, 32, 32))) {}
+    if (!column_side_texture.loadFromFile("spriteSheet2.png", sf::IntRect(4*32, 0, 32, 32))) {}
     if (!column_top_texture.loadFromFile("spriteSheet.png", sf::IntRect(64, 170, 32, 32))) {}
 
-    if (!bullet_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 150, 80, 5))) {}
-    if (!player_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 0, 26, 19))) {}
+    if (!bullet_texture.loadFromFile("spriteSheet2.png", sf::IntRect(96, 32, 32, 4))) {}
+    if (!player_texture.loadFromFile("spriteSheet2.png", sf::IntRect(3*32, 0, 30, 10))) {}
     if (!body_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 50, 70, 50))) {}
-    for (int i = 0; i <= (32 * 6); i = i + 32) {
-        leg_texture.loadFromFile("spriteSheet.png", sf::IntRect(100, i, 32, 32));
+    
+    for (int i = 0; i < (32 * 12); i = i + 32) {
+        leg_texture.loadFromFile("spriteSheet2.png", sf::IntRect(0, i, 32, 32));
         leg_frames.push_back(leg_texture);
     }
-    for (int i = 0; i <= (32 * 6); i = i + 32) {
-        leg_texture.loadFromFile("spriteSheet.png", sf::IntRect(132, i, 32, 32));
-        leg_frames.push_back(leg_texture);
+
+    for (int i = 0; i < (32 * 12); i = i + 32) {
+        enemy_texture.loadFromFile("spriteSheet2.png", sf::IntRect(32, i, 32, 32));
+        enemy_frames.push_back(enemy_texture);
     }
+
     if (!pixel_font.loadFromFile("pixelFont.ttf")) {}
     HUDText fps("0 fps", pixel_font, 28, sf::Color::White, sf::Vector2f(10.f, 10.f), false);
     all_texts.push_back(fps);
@@ -73,7 +76,7 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
     window.draw(player_legs);
     window.draw(player);
 
-    view.setCenter(screenWidth / 2, screenHeight / 2);
+    view.setCenter(screenWidth / 2.f, screenHeight / 2.f);
     window.setView(view);
 
     if (pause) {
@@ -139,9 +142,9 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
         for (auto jt = all_enemies.begin(); jt != all_enemies.end(); ) {
             if (jt->checkCollision(it->getX(), it->getY())) {
                 if (jt->getHealth(20) <= 0) {
-                    Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
+                    //Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
                     updatePoints();
-                    all_bodies.push_back(body);
+                    //all_bodies.push_back(body);
                     enemies_alive -= 1;
                     jt = all_enemies.erase(jt);
                 }
@@ -173,7 +176,7 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
 
 
 void MyApplication::createEnemy(float x, float y) {
-    Enemy enemy(x, y, player_texture);
+    Enemy enemy(x, y, enemy_frames);
     all_enemies.push_back(enemy);
     enemies_alive += 1;
 }

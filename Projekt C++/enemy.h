@@ -19,18 +19,23 @@ private:
 	float x_speed = 0.f;
 	float y_speed = 0.f;
 
-	float speed = 150.f;
-	int health = 30;
+	float speed = 220.f;
+	int health = 60;
 
 	Tile* start = nullptr;
 	Tile* finish = nullptr;
 	std::vector<Tile*> path;
 
+	sf::Clock animation_clock;
+	int animation_speed = 65;
+	int frame_count = 0;
+
 	sf::Sprite enemy_sprite;
+	std::vector<sf::Texture> enemy_frames;
 
 public:
 
-	Enemy(float x_, float y_, sf::Texture& enemy_texture);
+	Enemy(float x_, float y_, std::vector<sf::Texture>& enemy_frames_);
 
 	void die(sf::Texture& body_texture);
 
@@ -48,6 +53,8 @@ public:
 	int getHealth(int damege);
 
 	bool checkCollision(float player_x, float player_y) const;
+
+	void setTexture(sf::Texture& new_texture);
 
 };
 
