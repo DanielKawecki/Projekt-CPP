@@ -30,13 +30,14 @@ int main()
         App.updateView(Player.getX(), Player.getY());
 
         if (!App.isPause()) {
-            App.spawn();
+            //App.spawn();
             App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
             App.updateAllBodies();
 
             if (!App.isGameOver()) {
                 Player.move(App.getDeltaTime(), App.getTileVector(), App.getEnemiesVector());
                 Player.look(App.getWindow(), App.getView());
+                App.updateAmmo(Player.getAmmo());
             }
 
             Player.checkEnemies();

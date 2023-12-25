@@ -33,6 +33,15 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
         enemy_frames.push_back(enemy_texture);
     }
 
+    if (!cursor_image.loadFromFile("blank")) {}
+    cursor.loadFromPixels(cursor_image.getPixelsPtr(), cursor_image.getSize(), { 0, 0 });
+    window.setMouseCursor(cursor);
+
+    if (!cursor_texture.loadFromFile("spriteSheet2.png", sf::IntRect(74, 0, 15, 15))) {}
+    cursor_sprite.setTexture(cursor_texture);
+    cursor_sprite.setOrigin(8.f, 8.f);
+    cursor_sprite.scale(3.f, 3.f);
+
     if (!pixel_font.loadFromFile("pixelFont.ttf")) {}
     HUDText fps("0 fps", pixel_font, 28, sf::Color::White, sf::Vector2f(10.f, 10.f), false);
     all_texts.push_back(fps);
@@ -42,6 +51,12 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
 
     HUDText health("100HP", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 150.f, 40.f), false);
     all_texts.push_back(health);
+
+    HUDText ammo("240", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 60.f, screenHeight - 70.f), false);
+    all_texts.push_back(ammo);
+
+    HUDText mag("24", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 60.f, screenHeight - 40.f), false);
+    all_texts.push_back(mag);
 }
 
 MyApplication::~MyApplication() {}
@@ -100,6 +115,9 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
     for (size_t i = 0; i < all_texts.size(); i++) {
         window.draw(all_texts[i].getText());
     }
+
+    cursor_sprite.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+    window.draw(cursor_sprite);
 
     window.display();
 }
@@ -276,19 +294,19 @@ std::vector<Tile>& MyApplication::getTileVector() {
 
 void MyApplication::setupMap() {
     map_layout = {
-        "####################",
-        "#s       #        s#",
-        "#        #         #",
-        "#   ##       ##    #",
-        "#        #         #",
-        "#        #         #",
-        "#### ######### #####",
-        "#        #         #",
-        "#        #         #",
-        "#   ##       ##    #",
-        "#        #         #",
-        "#s       #        s#",
-        "####################"
+        "################################",
+        "#s         #                  s#",
+        "#                 ###          #",
+        "#      ###         #           #",
+        "#        #                     #",
+        "#        #                     #",
+        "#                ## # ##       #",
+        "## #      ########     ##      #",
+        "#  #      #     #       #      #",
+        "#  # #    #             #      #",
+        "#    #          #       #      #",
+        "#s   #    #     #       #     s#",
+        "################################"
     };
 
     const float tile_size = 64.0f;
@@ -411,4 +429,9 @@ bool MyApplication::checkForReset() {
    
     prev_space = current_space;
     return false;
+}
+
+void MyApplication::updateAmmo(std::vector<int> ammo_vecotr_) {
+    all_texts[3].setContent(std::to_string(ammo_vecotr_[1]));
+    all_texts[4].setContent(std::to_string(ammo_vecotr_[0]));
 }

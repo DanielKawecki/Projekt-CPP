@@ -99,8 +99,18 @@ void Player::move(float dt, std::vector<Tile>& all_tiles, std::vector<Enemy>& al
 	else if(!is_moving)
 		legs_sprite.setTexture(App.getLegSprite(0));
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && mag > 0 && !reloading)
 		shoot();
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && mag < mag_size) {
+		reloading = true;
+		reload_clock.restart();
+	}
+		
+	//std::cout << reload_clock.getElapsedTime().asSeconds() << std::endl;
+
+	if (reloading == true && reload_clock.getElapsedTime().asSeconds() >= reload_time)
+		reload();
 }
 
 void Player::look(sf::RenderWindow& window, sf::View& view) {
@@ -113,6 +123,7 @@ void Player::shoot() {
 	if (shot_clock.getElapsedTime() >= shot_cooldown) {
 		App.createBullet(x, y, angle, 0);
 		shot_clock.restart();
+		mag -= 1;
 	}
 }
 
@@ -142,4 +153,26 @@ void Player::setHealth(int health_) {
 void Player::resetPos() {
 	x = initial_x;
 	y = initial_y;
+}
+
+void Player::reload() {
+	int difference = mag_size - mag;
+
+	if (difference > ammo) {
+		mag += ammo;
+		ammo = 0;
+	}
+	else {
+		ammo -= difference;
+		mag = mag_size;
+	}
+	reloading = false;
+		
+}
+
+std::vector<int> Player::getAmmo() {
+	std::vector<int> ammo_vector;
+	ammo_vector.push_back(mag);
+	ammo_vector.push_back(ammo);
+	return ammo_vector;
 }

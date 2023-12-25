@@ -58,6 +58,12 @@ private:
     std::vector<sf::Texture> enemy_frames;
     sf::Font pixel_font;
 
+    sf::Image cursor_image;
+    sf::Cursor cursor;
+
+    sf::Texture cursor_texture;
+    sf::Sprite cursor_sprite;
+
     std::unordered_map<std::string, sf::Texture> all_textures;
 
     int fps = 0.f;
@@ -140,6 +146,8 @@ public:
     void reset();
 
     bool checkForReset();
+
+    void updateAmmo(std::vector<int> ammo_vecotr_);
 };
 
 #endif 
