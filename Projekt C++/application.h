@@ -125,7 +125,7 @@ public:
 
     bool mapCollision(float player_x, float player_y);
 
-    bool enemyCollision(float player_x, float player_y);
+    bool enemyCollision(sf::FloatRect player_hitbox);
 
     std::vector<std::vector<Tile>>& getAStarTiles();
 

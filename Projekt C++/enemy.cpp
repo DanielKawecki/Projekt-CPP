@@ -12,6 +12,11 @@ Enemy::Enemy(float x_, float y_, std::vector<sf::Texture>& enemy_frames_) : enem
 	enemy_sprite.setOrigin(13.f, 10.f);
 	//enemy_sprite.setRotation(angle);
 	enemy_sprite.setPosition(x_, y_);
+
+	hitbox.left = 0.f;
+	hitbox.top = 0.f;
+	hitbox.width = 40.f;
+	hitbox.height = 40.f;
 }
 
 void Enemy::die(sf::Texture& body_texture) {
@@ -105,4 +110,10 @@ bool Enemy::checkCollision(float player_x, float player_y) const {
 
 void Enemy::setTexture(sf::Texture& new_texture) {
 	enemy_sprite.setTexture(new_texture);
+}
+
+sf::FloatRect Enemy::getHitbox() {
+	hitbox.left = x - 20.f;
+	hitbox.top = y - 20.f;
+	return hitbox;
 }

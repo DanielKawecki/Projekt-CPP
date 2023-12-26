@@ -54,6 +54,8 @@ private:
     sf::Sprite player_sprite;
     sf::Sprite legs_sprite;
 
+    sf::FloatRect hitbox;
+
 public:
     Player(MyApplication& App_);
 
@@ -84,6 +86,8 @@ public:
     std::vector<int> getAmmo();
 
     sf::RectangleShape getReloadRect();
+
+    void resetAmmo();
 
 };
 

@@ -24,8 +24,6 @@ int main()
                 App.getWindow().close();
         }
 
-        //window.setFramerateLimit(120);
-
         App.setDeltaTime();
         App.updateView(Player.getX(), Player.getY());
 
@@ -49,6 +47,7 @@ int main()
             if (App.checkForReset()) {
                 Player.setHealth(100);
                 Player.resetPos();
+                Player.resetAmmo();
             }
         }
 

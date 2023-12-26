@@ -15,6 +15,10 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
     view.setCenter(0.f, 0.f);
     window.setView(view);
 
+    //sf::VideoMode::getFullscreenModes().size
+
+    //window.setFramerateLimit(60);
+
     if (!ground_texture.loadFromFile("spriteSheet2.png", sf::IntRect(4*32, 32, 32, 32))) {}
     if (!column_side_texture.loadFromFile("spriteSheet2.png", sf::IntRect(4*32, 0, 32, 32))) {}
     if (!column_top_texture.loadFromFile("spriteSheet.png", sf::IntRect(64, 170, 32, 32))) {}
@@ -356,9 +360,9 @@ bool MyApplication::mapCollision(float player_x, float player_y) {
     return false;
 }
 
-bool MyApplication::enemyCollision(float player_x, float player_y) {
+bool MyApplication::enemyCollision(sf::FloatRect player_hitbox) {
     for (auto& enemy : all_enemies) {
-        if (enemy.checkCollision(player_x, player_y))
+        if (enemy.getHitbox().intersects(player_hitbox))
             return true;
     }
 

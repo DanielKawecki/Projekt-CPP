@@ -20,6 +20,11 @@ Player::Player(MyApplication& App_) : App(App_) {
 	reload_rect.setPosition(sf::Vector2f(100.f, 100.f));
 	reload_rect.setOutlineColor(sf::Color::Black);
 	reload_rect.setOutlineThickness(2.f);
+
+	hitbox.left = 0.f;
+	hitbox.top = 0.f;
+	hitbox.width = 40.f;
+	hitbox.height = 40.f;
 }
 
 Player::~Player() {}
@@ -65,16 +70,26 @@ void Player::move(float dt, std::vector<Tile>& all_tiles, std::vector<Enemy>& al
 	float new_pos_x = x + speed_x * dt;
 	float new_pos_y = y + speed_y * dt;
 
-	if (!App.mapCollision(new_pos_x, new_pos_y) && !App.enemyCollision(new_pos_x, new_pos_y)) {
+	sf::FloatRect new_hitbox(sf::Vector2f(new_pos_x - 20, new_pos_y - 20), sf::Vector2f(20, 20));
+	//sf::FloatRect new_hitbox_x(sf::Vector2f(new_pos_x - 10, y - 10), sf::Vector2f(20, 20));
+	//sf::FloatRect new_hitbox_y(sf::Vector2f(x - 10, new_pos_y - 10), sf::Vector2f(20, 20));
+
+	if (!App.mapCollision(new_pos_x, new_pos_y) && !App.enemyCollision(new_hitbox)) {
 		x += speed_x * dt;
 		y += speed_y * dt;
 	}
 
-	else if (!App.mapCollision(new_pos_x, y) && !App.enemyCollision(new_pos_x, y)) {
+	else if (!App.mapCollision(new_pos_x, new_pos_y)) {
+		x += speed_x * dt * 0.5;
+		y += speed_y * dt * 0.5;
+	}
+
+	else if (!App.mapCollision(new_pos_x, y)) {
 		x += speed_x * dt;
 	}
 
-	else if (!App.mapCollision(x, new_pos_y) && !App.enemyCollision(x, new_pos_y)) {
+
+	else if (!App.mapCollision(x, new_pos_y)) {
 		y += speed_y * dt;
 	}
 
@@ -148,7 +163,9 @@ float Player::getY() const {
 }
 
 void Player::checkEnemies() {
-	if (App.enemyCollision(x, y) && damage_clock.getElapsedTime() >= damage_cooldown && health > 0) {
+	hitbox.left = x - 10.f;
+	hitbox.top = y - 10.f;
+	if (App.enemyCollision(hitbox) && damage_clock.getElapsedTime() >= damage_cooldown && health > 0) {
 		health -= 5;
 		damage_clock.restart();
 	}
@@ -191,4 +208,9 @@ std::vector<int> Player::getAmmo() {
 
 sf::RectangleShape Player::getReloadRect() {
 	return reload_rect;
+}
+
+void Player::resetAmmo() {
+	ammo = ammo_size;
+	mag = mag_size;
 }

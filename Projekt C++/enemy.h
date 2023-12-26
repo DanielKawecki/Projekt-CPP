@@ -33,6 +33,8 @@ private:
 	sf::Sprite enemy_sprite;
 	std::vector<sf::Texture> enemy_frames;
 
+	sf::FloatRect hitbox;
+
 public:
 
 	Enemy(float x_, float y_, std::vector<sf::Texture>& enemy_frames_);
@@ -55,6 +57,8 @@ public:
 	bool checkCollision(float player_x, float player_y) const;
 
 	void setTexture(sf::Texture& new_texture);
+
+	sf::FloatRect getHitbox();
 
 };
 
