@@ -15,6 +15,11 @@ Player::Player(MyApplication& App_) : App(App_) {
 	player_sprite.setTexture(App.getPlayerSprite());
 	player_sprite.scale(3.f, 3.f);
 	player_sprite.setOrigin(12.f, 5.f);
+
+	reload_rect.setFillColor(sf::Color::White);
+	reload_rect.setPosition(sf::Vector2f(100.f, 100.f));
+	reload_rect.setOutlineColor(sf::Color::Black);
+	reload_rect.setOutlineThickness(2.f);
 }
 
 Player::~Player() {}
@@ -105,18 +110,25 @@ void Player::move(float dt, std::vector<Tile>& all_tiles, std::vector<Enemy>& al
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && mag < mag_size) {
 		reloading = true;
 		reload_clock.restart();
+		reload_rect.setSize(sf::Vector2f(100.f, 4.f));
 	}
-		
-	//std::cout << reload_clock.getElapsedTime().asSeconds() << std::endl;
 
-	if (reloading == true && reload_clock.getElapsedTime().asSeconds() >= reload_time)
+	if (reloading == true && reload_clock.getElapsedTime().asSeconds() >= reload_time) {
 		reload();
+		reload_rect.setSize(sf::Vector2f(0.f, 0.f));
+	}
+	else if (reloading == true) {
+		float ratio = reload_clock.getElapsedTime().asSeconds() / reload_time;
+		int length = ceil(ratio * 100);
+		reload_rect.setSize(sf::Vector2f(100 - length, 4.f));
+	}
 }
 
 void Player::look(sf::RenderWindow& window, sf::View& view) {
 	sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
 	sf::Vector2f world_mouse_position = window.mapPixelToCoords(mouse_position, view);
 	angle = atan2((world_mouse_position.y - y), (world_mouse_position.x - x)) * 180.f / M_PI;
+	reload_rect.setPosition(sf::Vector2f(mouse_position.x - 50, mouse_position.y + 30));
 }
 
 void Player::shoot() {
@@ -175,4 +187,8 @@ std::vector<int> Player::getAmmo() {
 	ammo_vector.push_back(mag);
 	ammo_vector.push_back(ammo);
 	return ammo_vector;
+}
+
+sf::RectangleShape Player::getReloadRect() {
+	return reload_rect;
 }

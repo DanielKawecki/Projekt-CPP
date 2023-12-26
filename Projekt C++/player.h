@@ -41,6 +41,7 @@ private:
     bool reloading = false;
     sf::Clock reload_clock;
     float reload_time = 1.8;
+    sf::RectangleShape reload_rect;
 
     sf::Clock animation_clock;
     int animation_speed = 65;
@@ -81,6 +82,8 @@ public:
     void reload();
 
     std::vector<int> getAmmo();
+
+    sf::RectangleShape getReloadRect();
 
 };
 

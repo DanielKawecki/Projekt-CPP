@@ -68,7 +68,7 @@ private:
 
     int fps = 0.f;
 
-    int enemies_cap = 12;
+    int enemies_cap = 8;
     int enemies_alive = 0;
     int round = 0;
     bool timer_set = false;
@@ -83,7 +83,7 @@ public:
     int getScreenWidth() const;
     int getScreenHeight() const;
 
-    void drawingFunction(sf::Sprite player, sf::Sprite player_legs);
+    void drawingFunction(sf::Sprite player, sf::Sprite player_legs, sf::RectangleShape reload_rect);
     
     void updateAllBullets(float dt);
     void createBullet(float x_, float y_, float angle_, int damage_);

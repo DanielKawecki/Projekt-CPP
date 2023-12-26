@@ -69,7 +69,7 @@ int MyApplication::getScreenHeight() const {
     return screenHeight;
 }
 
-void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
+void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, sf::RectangleShape reload_rect) {
     window.clear(sf::Color(26, 26, 26, 255));
     
     for (size_t i = 0; i < all_tiles.size(); i++) {
@@ -118,6 +118,8 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs) {
 
     cursor_sprite.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
     window.draw(cursor_sprite);
+
+    window.draw(reload_rect);
 
     window.display();
 }
