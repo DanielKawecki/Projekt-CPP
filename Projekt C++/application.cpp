@@ -9,7 +9,7 @@
 #include "enemy.h"
 #include "body.h"
     
-MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight), "SFML works!") {
+MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight), "Projekt C++", sf::Style::Fullscreen, sf::ContextSettings(0, 0, 8)) {
 
     view.setSize(screenWidth, screenHeight);
     view.setCenter(0.f, 0.f);

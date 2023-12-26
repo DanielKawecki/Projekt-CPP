@@ -161,8 +161,7 @@
     <ClInclude Include="tile.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bullet.png" />
-    <Image Include="cursor.png" />
+    <Image Include="blank.png" />
     <Image Include="spriteSheet.png" />
     <Image Include="spriteSheet2.png" />
   </ItemGroup>

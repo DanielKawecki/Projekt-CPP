@@ -14,8 +14,8 @@
 class MyApplication {
 private:
 
-    int screenWidth = 1280;
-    int screenHeight = 720;
+    int screenWidth = 1440;// 1280;
+    int screenHeight = 900;// 720;
 
     sf::RenderWindow window;
     sf::View view;

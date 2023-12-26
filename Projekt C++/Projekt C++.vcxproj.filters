@@ -73,13 +73,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bullet.png">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
     <Image Include="spriteSheet.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="spriteSheet2.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="blank.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>
