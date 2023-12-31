@@ -80,8 +80,8 @@ void Player::move(float dt, std::vector<Tile>& all_tiles, std::vector<Enemy>& al
 	}
 
 	else if (!App.mapCollision(new_pos_x, new_pos_y)) {
-		x += speed_x * dt * 0.5;
-		y += speed_y * dt * 0.5;
+		x += speed_x * dt * 0.7;
+		y += speed_y * dt * 0.7;
 	}
 
 	else if (!App.mapCollision(new_pos_x, y)) {
@@ -163,8 +163,8 @@ float Player::getY() const {
 }
 
 void Player::checkEnemies() {
-	hitbox.left = x - 10.f;
-	hitbox.top = y - 10.f;
+	hitbox.left = x - 20.f;
+	hitbox.top = y - 20.f;
 	if (App.enemyCollision(hitbox) && damage_clock.getElapsedTime() >= damage_cooldown && health > 0) {
 		health -= 5;
 		damage_clock.restart();
@@ -213,4 +213,24 @@ sf::RectangleShape Player::getReloadRect() {
 void Player::resetAmmo() {
 	ammo = ammo_size;
 	mag = mag_size;
+}
+
+sf::FloatRect Player::getRect() {
+	hitbox.left = x - 20.f;
+	hitbox.top = y - 20.f;
+	return hitbox;
+}
+
+void Player::addHealth(int amount) {
+	if (health + amount > 100)
+		health = 100;
+	else 
+		health += amount;
+}
+
+void Player::addAmmo(int amount) {
+	if (ammo + amount > ammo_size)
+		ammo = ammo_size;
+	else
+		ammo += amount;
 }

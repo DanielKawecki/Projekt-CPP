@@ -36,6 +36,10 @@ int main()
                 Player.move(App.getDeltaTime(), App.getTileVector(), App.getEnemiesVector());
                 Player.look(App.getWindow(), App.getView());
                 App.updateAmmo(Player.getAmmo());
+                if (App.checkHealthRefill(Player.getRect()))
+                    Player.addHealth(20);
+                if (App.checkAmmoRefill(Player.getRect()))
+                    Player.addAmmo(30);
             }
 
             Player.checkEnemies();

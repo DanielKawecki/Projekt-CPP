@@ -9,15 +9,16 @@
 #include "enemy.h"
 #include "body.h"
     
-MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight), "Projekt C++", sf::Style::Fullscreen, sf::ContextSettings(0, 0, 8)) {
-
+MyApplication::MyApplication() : window(sf::VideoMode::getDesktopMode(), "Projekt C++", sf::Style::Fullscreen, sf::ContextSettings(0, 0, 8)) {
+    screenWidth = window.getSize().x;
+    screenHeight = window.getSize().y;
+    
     view.setSize(screenWidth, screenHeight);
     view.setCenter(0.f, 0.f);
     window.setView(view);
 
-    //sf::VideoMode::getFullscreenModes().size
-
     //window.setFramerateLimit(60);
+    std::srand(static_cast<unsigned>(std::time(nullptr)));
 
     if (!ground_texture.loadFromFile("spriteSheet2.png", sf::IntRect(4*32, 32, 32, 32))) {}
     if (!column_side_texture.loadFromFile("spriteSheet2.png", sf::IntRect(4*32, 0, 32, 32))) {}
@@ -26,6 +27,8 @@ MyApplication::MyApplication() : window(sf::VideoMode(screenWidth, screenHeight)
     if (!bullet_texture.loadFromFile("spriteSheet2.png", sf::IntRect(96, 32, 32, 4))) {}
     if (!player_texture.loadFromFile("spriteSheet2.png", sf::IntRect(3*32, 0, 30, 10))) {}
     if (!body_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 50, 70, 50))) {}
+    if (!health_pack_texture.loadFromFile("spriteSheet2.png", sf::IntRect(64, 0, 10, 10))) {}
+    if (!ammo_pack_texture.loadFromFile("spriteSheet2.png", sf::IntRect(64, 10, 10, 10))) {}
     
     for (int i = 0; i < (32 * 12); i = i + 32) {
         leg_texture.loadFromFile("spriteSheet2.png", sf::IntRect(0, i, 32, 32));
@@ -78,6 +81,14 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, s
     
     for (size_t i = 0; i < all_tiles.size(); i++) {
         window.draw(all_tiles[i].getSprite());
+    }
+
+    if (!health_refill.empty()) {
+        window.draw(health_refill[0].getSprite());
+    }
+
+    if (!ammo_refill.empty()) {
+        window.draw(ammo_refill[0].getSprite());
     }
 
     for (size_t i = 0; i < all_bodies.size(); i++) {
@@ -349,6 +360,12 @@ void MyApplication::setupMap() {
 
         }
     }
+
+    for (int i = 0; i < all_tiles.size(); ++i) {
+        if (!all_tiles[i].isWall()) {
+            refill_points_indexes.push_back(i);
+        }
+    }
 }
 
 bool MyApplication::mapCollision(float player_x, float player_y) {
@@ -441,3 +458,67 @@ void MyApplication::updateAmmo(std::vector<int> ammo_vecotr_) {
     all_texts[3].setContent(std::to_string(ammo_vecotr_[1]));
     all_texts[4].setContent(std::to_string(ammo_vecotr_[0]));
 }
+
+bool MyApplication::checkHealthRefill(sf::FloatRect player_hitbox) {
+    if (health_refill.empty() && health_cooldown.getElapsedTime().asSeconds() >= 3.f) {
+        int randomIndex = refill_points_indexes[std::rand() % refill_points_indexes.size()];
+        float x = all_tiles[randomIndex].getX();
+        float y = all_tiles[randomIndex].getY();
+        createHealthRefill(x, y);
+    }
+    else if (!health_refill.empty()) {
+        if (healthRefillCollision(player_hitbox)) {
+            health_refill.erase(health_refill.begin());
+            health_cooldown.restart();
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool MyApplication::checkAmmoRefill(sf::FloatRect player_hitbox) {
+    if (ammo_refill.empty() && ammo_cooldown.getElapsedTime().asSeconds() >= 3.f) {
+        int randomIndex = refill_points_indexes[std::rand() % refill_points_indexes.size()];
+        float x = all_tiles[randomIndex].getX();
+        float y = all_tiles[randomIndex].getY();
+        createAmmoRefill(x, y);
+    }
+    else if (!ammo_refill.empty()) {
+        if (ammoRefillCollision(player_hitbox)) {
+            ammo_refill.erase(ammo_refill.begin());
+            ammo_cooldown.restart();
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void MyApplication::createHealthRefill(float x, float y) {
+    Refill refill(x, y, health_pack_texture);
+    health_refill.push_back(refill);
+}
+
+void MyApplication::createAmmoRefill(float x, float y) {
+    Refill refill(x, y, ammo_pack_texture);
+    ammo_refill.push_back(refill);
+}
+
+bool MyApplication::healthRefillCollision(sf::FloatRect player_hitbox) {   
+    if (player_hitbox.intersects(health_refill[0].getRect())) {
+        return true;
+    }
+
+    return false;
+}
+
+bool MyApplication::ammoRefillCollision(sf::FloatRect player_hitbox) {
+    if (player_hitbox.intersects(ammo_refill[0].getRect())) {
+        return true;
+    }
+
+    return false;
+}
+
+void MyApplication::checkQuit() {}

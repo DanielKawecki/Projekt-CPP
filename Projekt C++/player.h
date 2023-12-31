@@ -25,7 +25,7 @@ private:
     float friction = 2800;
 
     sf::Clock damage_clock;
-    sf::Time damage_cooldown = sf::seconds(0.05);
+    sf::Time damage_cooldown = sf::seconds(0.1);
     int health = 100;
 
     float angle = 0.f;
@@ -88,6 +88,11 @@ public:
     sf::RectangleShape getReloadRect();
 
     void resetAmmo();
+
+    sf::FloatRect getRect();
+
+    void addHealth(int amount);
+    void addAmmo(int amount);
 
 };
 

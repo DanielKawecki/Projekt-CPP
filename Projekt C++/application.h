@@ -7,6 +7,7 @@
 #include "enemy.h"
 #include "body.h"
 #include "tile.h"
+#include "refill.h"
 
 #ifndef APPLICATION_H
 #define APPLICATION_H
@@ -14,8 +15,8 @@
 class MyApplication {
 private:
 
-    int screenWidth = 1440;// 1280;
-    int screenHeight = 900;// 720;
+    int screenWidth = 1280;
+    int screenHeight = 720;
 
     sf::RenderWindow window;
     sf::View view;
@@ -38,6 +39,9 @@ private:
     std::vector<std::string> map_layout;
     std::vector<std::vector<Tile>> a_star_tiles;
     std::vector<sf::Vector2f> all_spawnpoints;
+    std::vector<Refill> health_refill;
+    std::vector<Refill> ammo_refill;
+    std::vector<int> refill_points_indexes;
 
     sf::Clock delta_clock;
     sf::Time delta_time;
@@ -56,6 +60,8 @@ private:
     sf::Texture body_texture;
     std::vector<sf::Texture> leg_frames;
     std::vector<sf::Texture> enemy_frames;
+    sf::Texture health_pack_texture;
+    sf::Texture ammo_pack_texture;
     sf::Font pixel_font;
 
     sf::Image cursor_image;
@@ -72,6 +78,9 @@ private:
     int enemies_alive = 0;
     int round = 0;
     bool timer_set = false;
+
+    sf::Clock health_cooldown;
+    sf::Clock ammo_cooldown;
 
     //void loadTexture(const std::string& filename);
 
@@ -148,6 +157,18 @@ public:
     bool checkForReset();
 
     void updateAmmo(std::vector<int> ammo_vecotr_);
+
+    bool checkHealthRefill(sf::FloatRect player_hitbox);
+    bool checkAmmoRefill(sf::FloatRect player_hitbox);
+
+    void createHealthRefill(float x, float y);
+    void createAmmoRefill(float x, float y);
+
+    bool healthRefillCollision(sf::FloatRect player_hitbox);
+    bool ammoRefillCollision(sf::FloatRect player_hitbox);
+
+    void checkQuit();
+
 };
 
 #endif 

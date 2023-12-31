@@ -57,3 +57,14 @@ void Tile::setParent(Tile* parent_) {
 void Tile::setAsMarked() {
 	tile_sprite.setColor(sf::Color::Black);
 }
+
+bool Tile::checkRefil() {
+	if (refil_clock.getElapsedTime() >= refil_time) {
+		refil_clock.restart();
+		return true;
+	}
+		
+
+	return false;
+}
+

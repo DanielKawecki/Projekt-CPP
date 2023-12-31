@@ -147,6 +147,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="refill.cpp" />
     <ClCompile Include="tile.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="enemy.h" />
     <ClInclude Include="hudText.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="refill.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="tile.h" />
   </ItemGroup>

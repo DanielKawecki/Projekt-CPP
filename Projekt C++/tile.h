@@ -13,6 +13,9 @@ private:
 	bool wall = false;
 	bool spawn = false;
 
+	sf::Time refil_time = sf::seconds(15.f);
+	sf::Clock refil_clock;
+
 	sf::Sprite tile_sprite;
 	std::vector<Tile*> neighbors;
 	
@@ -34,6 +37,8 @@ public:
 	std::vector<Tile*> getNeighbors();
 	void setParent(Tile* parent_);
 	void setAsMarked();
+	bool checkRefil();
+	std::string checkWhatRefills();
 
 };
 
