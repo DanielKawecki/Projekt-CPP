@@ -28,7 +28,8 @@ void Enemy::die(sf::Texture& body_texture) {
 }
 
 bool Enemy::checkCollision(float bullet_x, float bullet_y) {
-	return (bullet_x < (x + 20) && bullet_x >(x - 20) && bullet_y < (y + 20) && bullet_y >(y - 20));
+	//return (bullet_x < (x + 20) && bullet_x >(x - 20) && bullet_y < (y + 20) && bullet_y >(y - 20));
+	return hitbox.contains(bullet_x, bullet_y);
 }
 
 void Enemy::seekPlayer(Tile* start_, Tile* finish_, std::vector<std::vector<Tile>>& tiles) {

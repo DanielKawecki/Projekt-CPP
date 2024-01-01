@@ -76,7 +76,7 @@ int MyApplication::getScreenHeight() const {
     return screenHeight;
 }
 
-void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, sf::RectangleShape reload_rect) {
+void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, sf::RectangleShape reload_rect, sf::Event& event) {
     window.clear(sf::Color(26, 26, 26, 255));
     
     for (size_t i = 0; i < all_tiles.size(); i++) {
@@ -113,8 +113,23 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, s
 
         window.draw(pauseOverlay);
 
-        HUDText pause_text("GAME PAUSED", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth/2, (screenHeight/2)-40), true);
+        HUDText pause_text("GAME PAUSED", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth/2, (screenHeight/2) - 40), true);
+
+        HUDText start_again_text("Start Again", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) + 20), true);
+        start_again_text.update();
+        if (start_again_text.handleEvent(event)) {
+            reset();
+        }
+
+        HUDText quit_text("Quit", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) + 60), true);
+        quit_text.update();
+        if (quit_text.handleEvent(event)) {
+            window.close();
+        }
+
         window.draw(pause_text.getText());
+        window.draw(start_again_text.getText());
+        window.draw(quit_text.getText());
     }
 
     if (game_over) {

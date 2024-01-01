@@ -92,7 +92,7 @@ public:
     int getScreenWidth() const;
     int getScreenHeight() const;
 
-    void drawingFunction(sf::Sprite player, sf::Sprite player_legs, sf::RectangleShape reload_rect);
+    void drawingFunction(sf::Sprite player, sf::Sprite player_legs, sf::RectangleShape reload_rect, sf::Event& event);
     
     void updateAllBullets(float dt);
     void createBullet(float x_, float y_, float angle_, int damage_);

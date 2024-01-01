@@ -28,7 +28,7 @@ int main()
         App.updateView(Player.getX(), Player.getY());
 
         if (!App.isPause()) {
-            App.spawn();
+            //App.spawn();
             App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
             App.updateAllBodies();
 
@@ -58,7 +58,7 @@ int main()
         App.updateFPS();
         App.updateHealth(Player.getHealth());
         
-        App.drawingFunction(Player.draw(), Player.getLegsSprite(), Player.getReloadRect());
+        App.drawingFunction(Player.draw(), Player.getLegsSprite(), Player.getReloadRect(), event);
     }
 
     return 0;
