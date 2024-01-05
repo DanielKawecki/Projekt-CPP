@@ -118,6 +118,8 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, s
         HUDText start_again_text("Start Again", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) + 20), true);
         start_again_text.update();
         if (start_again_text.handleEvent(event)) {
+            is_reset = true;
+            pause = false;
             reset();
         }
 
@@ -328,16 +330,16 @@ void MyApplication::setupMap() {
     map_layout = {
         "################################",
         "#s         #                  s#",
-        "#                 ###          #",
-        "#      ###         #           #",
-        "#        #                     #",
-        "#        #                     #",
-        "#                ## # ##       #",
-        "## #      ########     ##      #",
-        "#  #      #     #       #      #",
-        "#  # #    #             #      #",
-        "#    #          #       #      #",
-        "#s   #    #     #       #     s#",
+        "#          #      ###          #",
+        "### ###### #       #   ##   ####",
+        "#        #    #        #       #",
+        "#             #                #",
+        "#        #       ## # ##    #  #",
+        "## #     #########     ##   #  #",
+        "#  #      #     #   #   #      #",
+        "#  # #    #         #   ### # ##",
+        "#    #          #   #   #      #",
+        "#s   #    #     #             s#",
         "################################"
     };
 
@@ -456,17 +458,7 @@ void MyApplication::reset() {
 }
 
 bool MyApplication::checkForReset() {
-    static bool prev_space = false;
-    bool current_space = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
-
-    if (current_space && !prev_space) {
-        reset();
-        return true;
-    }
-
-   
-    prev_space = current_space;
-    return false;
+    return is_reset;
 }
 
 void MyApplication::updateAmmo(std::vector<int> ammo_vecotr_) {
@@ -511,12 +503,12 @@ bool MyApplication::checkAmmoRefill(sf::FloatRect player_hitbox) {
 }
 
 void MyApplication::createHealthRefill(float x, float y) {
-    Refill refill(x, y, health_pack_texture);
+    Refill refill(x+17, y+17, health_pack_texture);
     health_refill.push_back(refill);
 }
 
 void MyApplication::createAmmoRefill(float x, float y) {
-    Refill refill(x, y, ammo_pack_texture);
+    Refill refill(x+17, y+17, ammo_pack_texture);
     ammo_refill.push_back(refill);
 }
 
@@ -536,4 +528,6 @@ bool MyApplication::ammoRefillCollision(sf::FloatRect player_hitbox) {
     return false;
 }
 
-void MyApplication::checkQuit() {}
+void MyApplication::setReset(bool is_reset_) {
+    is_reset = is_reset_;
+}

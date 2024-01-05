@@ -28,7 +28,7 @@ int main()
         App.updateView(Player.getX(), Player.getY());
 
         if (!App.isPause()) {
-            //App.spawn();
+            App.spawn();
             App.updateAllEnemies(Player.getX(), Player.getY(), App.getDeltaTime());
             App.updateAllBodies();
 
@@ -43,6 +43,14 @@ int main()
             }
 
             Player.checkEnemies();
+        }
+        else {
+            if (App.checkForReset()) {
+                Player.setHealth(100);
+                Player.resetPos();
+                Player.resetAmmo();
+                App.setReset(false);
+            }
         }
         
         if (!App.isGameOver())

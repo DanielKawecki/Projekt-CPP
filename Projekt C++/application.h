@@ -23,6 +23,7 @@ private:
 
     int points = 0;
 
+    bool is_reset = false;
     bool pause = false;
     sf::RectangleShape pauseOverlay;
 
@@ -167,7 +168,7 @@ public:
     bool healthRefillCollision(sf::FloatRect player_hitbox);
     bool ammoRefillCollision(sf::FloatRect player_hitbox);
 
-    void checkQuit();
+    void setReset(bool is_reset_);
 
 };
 

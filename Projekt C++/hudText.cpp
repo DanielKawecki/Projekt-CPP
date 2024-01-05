@@ -33,7 +33,7 @@ bool HUDText::isMouseOver() {
 
 void HUDText::update() {
 	if (isMouseOver()) {
-		text.setFillColor(sf::Color::Red);
+		text.setFillColor(sf::Color::Green);
 	}
 	else {
 		text.setFillColor(sf::Color::White);
