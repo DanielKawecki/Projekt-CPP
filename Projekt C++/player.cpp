@@ -80,8 +80,8 @@ void Player::move(float dt, std::vector<Tile>& all_tiles, std::vector<Enemy>& al
 	}
 
 	else if (!App.mapCollision(new_pos_x, new_pos_y)) {
-		x += speed_x * dt * 0.7;
-		y += speed_y * dt * 0.7;
+		x += speed_x * dt * 0.6;
+		y += speed_y * dt * 0.6;
 	}
 
 	else if (!App.mapCollision(new_pos_x, y)) {

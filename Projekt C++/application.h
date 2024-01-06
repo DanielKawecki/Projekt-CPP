@@ -23,6 +23,7 @@ private:
 
     int points = 0;
 
+    bool game_started = false;
     bool is_reset = false;
     bool pause = false;
     sf::RectangleShape pauseOverlay;
@@ -93,6 +94,7 @@ public:
     int getScreenWidth() const;
     int getScreenHeight() const;
 
+    void drawStartingScreen(sf::Event& event);
     void drawingFunction(sf::Sprite player, sf::Sprite player_legs, sf::RectangleShape reload_rect, sf::Event& event);
     
     void updateAllBullets(float dt);
@@ -169,6 +171,8 @@ public:
     bool ammoRefillCollision(sf::FloatRect player_hitbox);
 
     void setReset(bool is_reset_);
+
+    bool gameStarted();
 
 };
 

@@ -76,6 +76,33 @@ int MyApplication::getScreenHeight() const {
     return screenHeight;
 }
 
+void MyApplication::drawStartingScreen(sf::Event& event) {
+    window.clear(sf::Color(26, 26, 26, 255));
+
+    HUDText title_text("Generic Basement Shooter", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 60), true);
+
+    HUDText play_text("Play Game", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2)), true);
+    play_text.update();
+    if (play_text.handleEvent(event)) {
+        game_started = true;
+    }
+
+    HUDText quit_text("Quit", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) + 40), true);
+    quit_text.update();
+    if (quit_text.handleEvent(event)) {
+        window.close();
+    }
+
+    window.draw(title_text.getText());
+    window.draw(play_text.getText());
+    window.draw(quit_text.getText());
+
+    cursor_sprite.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+    window.draw(cursor_sprite);
+
+    window.display();
+}
+
 void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, sf::RectangleShape reload_rect, sf::Event& event) {
     window.clear(sf::Color(26, 26, 26, 255));
     
@@ -119,7 +146,6 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, s
         start_again_text.update();
         if (start_again_text.handleEvent(event)) {
             is_reset = true;
-            pause = false;
             reset();
         }
 
@@ -138,10 +164,23 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, s
         window.draw(pauseOverlay);
 
         HUDText game_over_text("GAME OVER", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 40), true);
-        HUDText reset_text("Press SPACE to start again", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) + 10), true);
+
+        HUDText start_again_text("Start Again", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) + 20), true);
+        start_again_text.update();
+        if (start_again_text.handleEvent(event)) {
+            is_reset = true;
+            reset();
+        }
+
+        HUDText quit_text("Quit", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) + 60), true);
+        quit_text.update();
+        if (quit_text.handleEvent(event)) {
+            window.close();
+        }
         
         window.draw(game_over_text.getText());
-        window.draw(reset_text.getText());
+        window.draw(start_again_text.getText());
+        window.draw(quit_text.getText());
     }
 
     for (size_t i = 0; i < all_texts.size(); i++) {
@@ -530,4 +569,10 @@ bool MyApplication::ammoRefillCollision(sf::FloatRect player_hitbox) {
 
 void MyApplication::setReset(bool is_reset_) {
     is_reset = is_reset_;
+    pause = is_reset_;
+    game_over = is_reset_;
+}
+
+bool MyApplication::gameStarted() {
+    return game_started;
 }
