@@ -16,7 +16,7 @@ Enemy::Enemy(float x_, float y_, std::vector<sf::Texture>& enemy_frames_) : enem
 	hitbox.left = 0.f;
 	hitbox.top = 0.f;
 	hitbox.width = 40.f;
-	hitbox.height = 40.f;
+	hitbox.height = 60.f;
 }
 
 void Enemy::die(sf::Texture& body_texture) {

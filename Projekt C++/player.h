@@ -30,14 +30,14 @@ private:
 
     float angle = 0.f;
 
-    float firerate = 10000;
+    float firerate = 600;
     sf::Clock shot_clock;
     sf::Time shot_cooldown = sf::seconds(10.f);
 
-    int ammo = INT16_MAX;
-    int ammo_size = INT16_MAX;
-    int mag = 300;
-    int mag_size = 300;
+    int ammo = 88;
+    int ammo_size = 88;
+    int mag = 28;
+    int mag_size = 28;
     bool reloading = false;
     sf::Clock reload_clock;
     float reload_time = 1.8;

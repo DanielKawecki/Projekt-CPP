@@ -44,6 +44,7 @@ private:
     std::vector<Refill> health_refill;
     std::vector<Refill> ammo_refill;
     std::vector<int> refill_points_indexes;
+    std::vector<sf::RectangleShape> bullets_left;
 
     sf::Clock delta_clock;
     sf::Time delta_time;

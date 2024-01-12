@@ -62,8 +62,14 @@ MyApplication::MyApplication() : window(sf::VideoMode::getDesktopMode(), "Projek
     HUDText ammo("240", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 60.f, screenHeight - 70.f), false);
     all_texts.push_back(ammo);
 
-    HUDText mag("24", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 60.f, screenHeight - 40.f), false);
-    all_texts.push_back(mag);
+    //HUDText mag("24", pixel_font, 28, sf::Color::White, sf::Vector2f(screenWidth - 60.f, screenHeight - 40.f), false);
+    //all_texts.push_back(mag);
+
+    for (int i = bullets_left.size(); i < 28; i++) {
+        sf::RectangleShape bullet(sf::Vector2f(3, 16));
+        bullet.setPosition(sf::Vector2f(screenWidth - 32 - i * 6, screenHeight - 30));
+        bullets_left.push_back(bullet);
+    }
 }
 
 MyApplication::~MyApplication() {}
@@ -185,6 +191,10 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, s
 
     for (size_t i = 0; i < all_texts.size(); i++) {
         window.draw(all_texts[i].getText());
+    }
+
+    for (size_t i = 0; i < bullets_left.size(); i++) {
+        window.draw(bullets_left[i]);
     }
 
     cursor_sprite.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
@@ -500,9 +510,22 @@ bool MyApplication::checkForReset() {
     return is_reset;
 }
 
-void MyApplication::updateAmmo(std::vector<int> ammo_vecotr_) {
-    all_texts[3].setContent(std::to_string(ammo_vecotr_[1]));
-    all_texts[4].setContent(std::to_string(ammo_vecotr_[0]));
+void MyApplication::updateAmmo(std::vector<int> ammo_vector_) {
+    all_texts[3].setContent(std::to_string(ammo_vector_[1]));
+    //all_texts[4].setContent(std::to_string(ammo_vecotr_[0]));
+
+    if (ammo_vector_[0] < bullets_left.size()) {
+        for (int i = ammo_vector_[0]; i < bullets_left.size(); i++) {
+            bullets_left[i].setFillColor(sf::Color::Red);
+        }
+    }
+    else {
+        for (int i = 0; i < bullets_left.size(); i++) {
+            bullets_left[i].setFillColor(sf::Color::White);
+        }
+    }
+    
+
 }
 
 bool MyApplication::checkHealthRefill(sf::FloatRect player_hitbox) {
