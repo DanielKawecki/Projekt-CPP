@@ -52,6 +52,7 @@ private:
     sf::Clock fps_clock;
     sf::Clock break_clock;
     sf::Clock spawn_clock;
+    sf::Clock playtime;
 
     sf::Texture ground_texture;
     sf::Texture column_side_texture;
@@ -78,7 +79,7 @@ private:
 
     int fps = 0.f;
 
-    int enemies_cap = 8;
+    int enemies_cap = 6;
     int enemies_alive = 0;
     int round = 0;
     bool timer_set = false;
@@ -177,6 +178,8 @@ public:
     bool gameStarted();
 
     void checkBestScore();
+
+    void resetClocks();
 
 };
 

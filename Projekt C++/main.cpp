@@ -25,6 +25,7 @@ int main()
         if (!App.gameStarted()) {
             App.updateView(App.getScreenWidth()/2.f, App.getScreenHeight()/2.f);
             App.drawStartingScreen(event);
+            App.resetClocks();
         }
 
         else {

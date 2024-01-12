@@ -317,6 +317,8 @@ void MyApplication::setBreakTimer() {
 }
 
 void MyApplication::spawn() {
+    enemies_cap = 6 + floor(playtime.getElapsedTime().asSeconds() / 30);
+
     if (spawn_clock.getElapsedTime().asSeconds() >= 1.f && enemies_alive < enemies_cap) {
 
         float choice = rand() % all_spawnpoints.size();
@@ -612,4 +614,12 @@ void MyApplication::checkBestScore() {
             outputFile.close();
         }
     }
+}
+
+void MyApplication::resetClocks() {
+    delta_clock.restart();
+    fps_clock.restart();
+    break_clock.restart();
+    spawn_clock.restart();
+    playtime.restart();
 }
