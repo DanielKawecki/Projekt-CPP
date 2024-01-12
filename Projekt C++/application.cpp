@@ -37,7 +37,7 @@ MyApplication::MyApplication() : window(sf::VideoMode::getDesktopMode(), "Projek
 
     if (!bullet_texture.loadFromFile("spriteSheet2.png", sf::IntRect(96, 32, 32, 4))) {}
     if (!player_texture.loadFromFile("spriteSheet2.png", sf::IntRect(3*32, 0, 30, 10))) {}
-    if (!body_texture.loadFromFile("spriteSheet.png", sf::IntRect(0, 50, 70, 50))) {}
+    if (!body_texture.loadFromFile("spriteSheet2.png", sf::IntRect(64, 32, 32, 32))) {}
     if (!health_pack_texture.loadFromFile("spriteSheet2.png", sf::IntRect(64, 0, 10, 10))) {}
     if (!ammo_pack_texture.loadFromFile("spriteSheet2.png", sf::IntRect(64, 10, 10, 10))) {}
     
@@ -259,9 +259,9 @@ void MyApplication::updateAllEnemies(float player_x, float player_y, float dt) {
         for (auto jt = all_enemies.begin(); jt != all_enemies.end(); ) {
             if (jt->checkCollision(it->getX(), it->getY())) {
                 if (jt->getHealth(20) <= 0) {
-                    //Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
+                    Body body(jt->getX(), jt->getY(), it->getAngle(), body_texture);
                     updatePoints();
-                    //all_bodies.push_back(body);
+                    all_bodies.push_back(body);
                     enemies_alive -= 1;
                     jt = all_enemies.erase(jt);
                 }
@@ -315,7 +315,7 @@ void MyApplication::updateFPS() {
 }
 
 void MyApplication::updatePoints() {
-    points += 100;
+    points += 1;
     all_texts[1].setContent(std::to_string(points) + "PTS");
 }
 
@@ -530,20 +530,20 @@ bool MyApplication::checkForReset() {
 
 void MyApplication::updateAmmo(std::vector<int> ammo_vector_) {
     all_texts[3].setContent(std::to_string(ammo_vector_[1]));
-    //all_texts[4].setContent(std::to_string(ammo_vecotr_[0]));
 
     if (ammo_vector_[0] < bullets_left.size()) {
+        for (int i = 0; i < bullets_left.size(); i++) {
+            bullets_left[i].setFillColor(sf::Color::White);
+        }
         for (int i = ammo_vector_[0]; i < bullets_left.size(); i++) {
             bullets_left[i].setFillColor(sf::Color::Red);
         }
     }
-    else {
+    else if (ammo_vector_[0] == bullets_left.size()) {
         for (int i = 0; i < bullets_left.size(); i++) {
             bullets_left[i].setFillColor(sf::Color::White);
         }
     }
-    
-
 }
 
 bool MyApplication::checkHealthRefill(sf::FloatRect player_hitbox) {
