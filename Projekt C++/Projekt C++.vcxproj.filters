@@ -94,4 +94,9 @@
       <Filter>Pliki zasobów</Filter>
     </Font>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="bestScore.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

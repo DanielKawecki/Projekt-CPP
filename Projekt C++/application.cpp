@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <fstream>
 //#include <filesystem>
 #include "application.h"
 #include "player.h"
@@ -16,6 +17,16 @@ MyApplication::MyApplication() : window(sf::VideoMode::getDesktopMode(), "Projek
     view.setSize(screenWidth, screenHeight);
     view.setCenter(0.f, 0.f);
     window.setView(view);
+
+    std::ifstream inputFile(filePath);
+
+    if (inputFile.is_open()) {
+        inputFile >> highest_score;
+        inputFile.close();
+    }
+    else {
+        std::cerr << "Error: Unable to open the file.\n";
+    }
 
     //window.setFramerateLimit(60);
     std::srand(static_cast<unsigned>(std::time(nullptr)));
@@ -169,7 +180,10 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, s
     if (game_over) {
         window.draw(pauseOverlay);
 
-        HUDText game_over_text("GAME OVER", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 40), true);
+        HUDText game_over_text("GAME OVER", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 240), true);
+
+        HUDText score_text("Your Score: " + std::to_string(points), pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 180), true);
+        HUDText best_score_text("Best Score: " + std::to_string(highest_score), pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 120), true);
 
         HUDText start_again_text("Start Again", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) + 20), true);
         start_again_text.update();
@@ -185,6 +199,8 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, s
         }
         
         window.draw(game_over_text.getText());
+        window.draw(score_text.getText());
+        window.draw(best_score_text.getText());
         window.draw(start_again_text.getText());
         window.draw(quit_text.getText());
     }
@@ -311,6 +327,8 @@ void MyApplication::setBreakTimer() {
 }
 
 void MyApplication::spawn() {
+    enemies_cap = 6 + floor(playtime.getElapsedTime().asSeconds() / 30);
+
     if (spawn_clock.getElapsedTime().asSeconds() >= 1.f && enemies_alive < enemies_cap) {
 
         float choice = rand() % all_spawnpoints.size();
@@ -598,4 +616,33 @@ void MyApplication::setReset(bool is_reset_) {
 
 bool MyApplication::gameStarted() {
     return game_started;
+}
+
+void MyApplication::checkBestScore() {
+    std::ifstream inputFile(filePath);
+
+    if (inputFile.is_open()) {
+        inputFile >> highest_score;
+        inputFile.close();
+    }
+    else {
+        std::cerr << "Error: Unable to open the file.\n";
+    }
+
+    if (points > highest_score) {
+        std::ofstream outputFile(filePath);
+
+        if (outputFile.is_open()) {
+            outputFile << points;
+            outputFile.close();
+        }
+    }
+}
+
+void MyApplication::resetClocks() {
+    delta_clock.restart();
+    fps_clock.restart();
+    break_clock.restart();
+    spawn_clock.restart();
+    playtime.restart();
 }
