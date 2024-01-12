@@ -22,6 +22,8 @@ private:
     sf::View view;
 
     int points = 0;
+    int highest_score = 0;
+    const std::string filePath = "bestScore.txt";
 
     bool game_started = false;
     bool is_reset = false;
@@ -173,6 +175,8 @@ public:
     void setReset(bool is_reset_);
 
     bool gameStarted();
+
+    void checkBestScore();
 
 };
 

@@ -66,8 +66,12 @@ int main()
                     Player.resetPos();
                     Player.resetAmmo();
                     App.setReset(false);
+                    
                 }
             }
+
+            if (App.isGameOver())
+                App.checkBestScore();
 
             App.updateFPS();
             App.updateHealth(Player.getHealth());
