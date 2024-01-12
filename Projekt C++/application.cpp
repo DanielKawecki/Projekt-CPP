@@ -180,10 +180,10 @@ void MyApplication::drawingFunction(sf::Sprite player, sf::Sprite player_legs, s
     if (game_over) {
         window.draw(pauseOverlay);
 
-        HUDText game_over_text("GAME OVER", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 240), true);
+        HUDText game_over_text("GAME OVER", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 180), true);
 
-        HUDText score_text("Your Score: " + std::to_string(points), pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 180), true);
-        HUDText best_score_text("Best Score: " + std::to_string(highest_score), pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 120), true);
+        HUDText score_text("Your Score: " + std::to_string(points), pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 120), true);
+        HUDText best_score_text("Best Score: " + std::to_string(highest_score), pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 60), true);
 
         HUDText start_again_text("Start Again", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) + 20), true);
         start_again_text.update();

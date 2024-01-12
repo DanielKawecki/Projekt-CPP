@@ -17,8 +17,8 @@ Body::Body(float x_, float y_, float angle_, sf::Texture& body_texture) {
 }
 
 sf::Sprite Body::getSprite() {
-	float new_y = y - (exist_clock.getElapsedTime().asSeconds() / 0.1) * 10;
-	body_sprite.setPosition(x, new_y);
+	//float new_y = y - (exist_clock.getElapsedTime().asSeconds() / 0.1) * 10;
+	//body_sprite.setPosition(x, new_y);
 
 	int alpha = 255 * floor(100*(exist_clock.getElapsedTime().asSeconds() / 0.3));
 	body_sprite.setColor(sf::Color(255, 255, 255, alpha));
