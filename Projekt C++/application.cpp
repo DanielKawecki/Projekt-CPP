@@ -327,7 +327,7 @@ void MyApplication::setBreakTimer() {
 }
 
 void MyApplication::spawn() {
-    enemies_cap = 6 + floor(playtime.getElapsedTime().asSeconds() / 30);
+    enemies_cap = 6 + floor(points / 10);
 
     if (spawn_clock.getElapsedTime().asSeconds() >= 1.f && enemies_alive < enemies_cap) {
 
