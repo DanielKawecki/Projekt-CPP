@@ -57,12 +57,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_45EFD7CF45D84A2EB5BEE99C6EF67BCF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_4D95D81FE35D0361F097C5BB980BAC47"
         "OwnerKey" = "8:_CCC801DB6B624D4095E378126B3E5765"
         "MsmSig" = "8:_UNDEFINED"
@@ -356,26 +350,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_45EFD7CF45D84A2EB5BEE99C6EF67BCF"
-            {
-            "SourcePath" = "8:..\\Projekt C++\\bestScore.txt"
-            "TargetName" = "8:bestScore.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_1C67A7C64CA74F389EBCF8E018937725"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4D95D81FE35D0361F097C5BB980BAC47"
@@ -675,7 +649,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DK Project"
         "ProductCode" = "8:{07FAD94F-7D15-40AC-AB14-C354E81AD0FE}"
-        "PackageCode" = "8:{8B5A5E8B-AB22-49B0-90A8-3C62233CAD79}"
+        "PackageCode" = "8:{6BA520EA-470F-4E6A-A4D8-2EC24D935508}"
         "UpgradeCode" = "8:{77CC23D0-381E-4120-BDE5-6751B60146A3}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

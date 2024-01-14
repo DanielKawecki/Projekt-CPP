@@ -25,7 +25,18 @@ MyApplication::MyApplication() : window(sf::VideoMode::getDesktopMode(), "Projek
         inputFile.close();
     }
     else {
-        std::cerr << "Error: Unable to open the file.\n";
+        try {
+            std::ofstream newFile(filePath);
+            if (!newFile.is_open()) {
+                throw std::runtime_error("Unable to open file for writing.");
+            }
+            newFile << "0";
+            newFile.close();
+            highest_score = 0;
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Error: " << e.what() << std::endl;
+        }
     }
 
     //window.setFramerateLimit(60);
