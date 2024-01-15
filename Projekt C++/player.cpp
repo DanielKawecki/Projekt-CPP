@@ -103,13 +103,31 @@ void Player::move(float dt, std::vector<Tile>& all_tiles, std::vector<Enemy>& al
 	else if (speed_y < -speed_limit)
 		speed_y = -speed_limit;
 
-	speed_x -= (speed_x > 0 ? friction : (speed_x < 0 ? -friction : 0)) * dt;
-	speed_y -= (speed_y > 0 ? friction : (speed_y < 0 ? -friction : 0)) * dt;
+	//speed_x -= (speed_x > 0 ? friction : (speed_x < 0 ? -friction : 0)) * dt;
+	//speed_y -= (speed_y > 0 ? friction : (speed_y < 0 ? -friction : 0)) * dt;
+
+	// Update speed_x
+	if (speed_x > 0) {
+		speed_x -= (speed_x > friction * dt) ? friction * dt : speed_x;
+	}
+	else if (speed_x < 0) {
+		speed_x += (speed_x < -friction * dt) ? friction * dt : -speed_x;
+	}
+
+	// Update speed_y
+	if (speed_y > 0) {
+		speed_y -= (speed_y > friction * dt) ? friction * dt : speed_y;
+	}
+	else if (speed_y < 0) {
+		speed_y += (speed_y < -friction * dt) ? friction * dt : -speed_y;
+	}
 
 	if (abs(speed_x) > 10.0 || abs(speed_y) > 10.0)
 		is_moving = true;
-	else
+	else {
 		is_moving = false;
+	}
+		
 
 	if (is_moving && animation_clock.getElapsedTime().asMilliseconds() >= animation_speed) {
 		frame_count = (frame_count + 1) % 12;
@@ -137,6 +155,8 @@ void Player::move(float dt, std::vector<Tile>& all_tiles, std::vector<Enemy>& al
 		int length = ceil(ratio * 100);
 		reload_rect.setSize(sf::Vector2f(100 - length, 4.f));
 	}
+
+	//std::cout << speed_x << " " << speed_y << std::endl;
 }
 
 void Player::look(sf::RenderWindow& window, sf::View& view) {

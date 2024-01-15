@@ -39,7 +39,7 @@ MyApplication::MyApplication() : window(sf::VideoMode::getDesktopMode(), "Projek
         }
     }
 
-    //window.setFramerateLimit(60);
+    window.setFramerateLimit(240);
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
     if (!ground_texture.loadFromFile("spriteSheet2.png", sf::IntRect(4*32, 32, 32, 32))) {}
@@ -351,6 +351,7 @@ void MyApplication::spawn() {
 
 void MyApplication::setDeltaTime() {
     delta_time = delta_clock.restart();
+    //delta_time = sf::seconds(1.f/240.f);
 }
 
 float MyApplication::getDeltaTime() const {
