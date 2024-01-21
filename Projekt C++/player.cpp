@@ -14,7 +14,7 @@ Player::Player(MyApplication& App_) : App(App_) {
 
 	player_sprite.setTexture(App.getPlayerSprite());
 	player_sprite.scale(3.f, 3.f);
-	player_sprite.setOrigin(12.f, 5.f);
+	player_sprite.setOrigin(12.f, 4.f);
 
 	reload_rect.setFillColor(sf::Color::White);
 	reload_rect.setPosition(sf::Vector2f(100.f, 100.f));

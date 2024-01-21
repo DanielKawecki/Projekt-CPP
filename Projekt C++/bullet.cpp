@@ -11,7 +11,7 @@ Bullet::Bullet(float x_, float y_, float angle_, int damage_, sf::Texture& bulle
 
 	bullet_sprite.setTexture(bullet_texture);
 	bullet_sprite.scale(2.f, 2.f);
-	bullet_sprite.setOrigin(sf::Vector2f(0.f, 0.f));
+	bullet_sprite.setOrigin(sf::Vector2f(22.f, 1.f));
 	bullet_sprite.rotate(angle_);
 }
 

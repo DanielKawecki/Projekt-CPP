@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:DK Project"
+"ProjectName" = "8:Generic Shooter"
 "LanguageId" = "3:1045"
 "CodePage" = "3:1250"
 "UILanguageId" = "3:1045"
@@ -158,6 +158,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -647,9 +655,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:DK Project"
+        "ProductName" = "8:Generic Shooter"
         "ProductCode" = "8:{07FAD94F-7D15-40AC-AB14-C354E81AD0FE}"
-        "PackageCode" = "8:{6BA520EA-470F-4E6A-A4D8-2EC24D935508}"
+        "PackageCode" = "8:{71E044BF-D3B4-4E0B-9583-B27AF2866FB4}"
         "UpgradeCode" = "8:{77CC23D0-381E-4120-BDE5-6751B60146A3}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -660,7 +668,7 @@
         "Manufacturer" = "8:DK Games"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:DK Setup"
+        "Title" = "8:GS Setup"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Daniel K"
         "Keywords" = "8:"
@@ -771,7 +779,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1F81B04C1AC94713801D8DC31F50B23B"
             {
-            "Name" = "8:DK Project"
+            "Name" = "8:Generic Shooter"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -785,7 +793,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4DBCA8E9E4BD4DA8A041CBFE5351F11D"
             {
-            "Name" = "8:DK Project"
+            "Name" = "8:Generic Shooter"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

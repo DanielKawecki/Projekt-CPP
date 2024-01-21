@@ -108,7 +108,7 @@ int MyApplication::getScreenHeight() const {
 void MyApplication::drawStartingScreen(sf::Event& event) {
     window.clear(sf::Color(26, 26, 26, 255));
 
-    HUDText title_text("Generic Basement Shooter", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 60), true);
+    HUDText title_text("Generic Shooter", pixel_font, 40, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2) - 60), true);
 
     HUDText play_text("Play Game", pixel_font, 30, sf::Color::White, sf::Vector2f(screenWidth / 2, (screenHeight / 2)), true);
     play_text.update();
